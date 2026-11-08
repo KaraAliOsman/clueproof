@@ -1,0 +1,279 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0d1211; font-family: "Inter", sans-serif; color: #eeede7; }
+    #root .d-ground { position: absolute; inset: 0;
+      background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.9 0 0 0 0 0.95 0 0 0 0 0.9 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
+        radial-gradient(1500px 1000px at 28% 18%, #1b2421 0%, #111816 48%, #0a0e0d 100%); }
+    #root #d-sheet { clip-path: polygon(1030px 480px, 995px 540.6px, 925px 540.6px, 890px 480px, 925px 419.4px, 995px 419.4px); }
+    #root .layer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    #root .print { position: absolute; left: 0; top: 0; width: 1032px; height: 702px; padding: 24px; background: #f2efe7;
+      box-shadow: 0 2px 3px rgba(0,0,0,.35), 0 30px 60px -18px rgba(0,0,0,.72); }
+    #root .print img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    #root .d-head { position: absolute; left: 255px; top: 72px; font-weight: 700; font-size: 40px; letter-spacing: -0.02em; white-space: nowrap; }
+    #root .d-head .muted { color: #98a29e; font-weight: 600; margin-left: 14px; font-size: 32px; }
+    #root .d-pill { position: absolute; left: 1145px; top: 66px; width: 520px; height: 58px; border-radius: 29px; background: #eeede7; color: #121715;
+      font-weight: 700; font-size: 28px; overflow: hidden; }
+    #root .d-pill svg { position: absolute; left: 20px; top: 15px; }
+    #root .d-pill .roll { position: absolute; left: 64px; top: 0; height: 58px; }
+    #root .d-pill .roll span { display: block; height: 58px; line-height: 58px; white-space: nowrap; }
+    #root .d-dim { position: absolute; inset: 0; background: #040606; opacity: 0; }
+    #root .marker { position: absolute; left: 0; top: 0; width: 56px; height: 56px; border-radius: 50%; background: #e2383f; border: 3px solid #f2efe7;
+      color: #fff; font-weight: 900; font-size: 28px; line-height: 50px; text-align: center; box-shadow: 0 6px 14px rgba(0,0,0,.5); }
+    #root .page { position: absolute; left: 0; top: 0; width: 600px; height: 400px; background: #ede9df; color: #141816; padding: 26px 32px;
+      box-shadow: 0 2px 3px rgba(0,0,0,.4), 0 40px 70px -20px rgba(0,0,0,.8); }
+    #root .page .ph { font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 28px; letter-spacing: .06em; color: #b22a30; }
+    #root .page .pt { margin-top: 10px; font-weight: 900; font-size: 64px; letter-spacing: -0.035em; line-height: 1; }
+    #root .page .thumbs { position: absolute; left: 32px; bottom: 30px; display: flex; gap: 18px; }
+    #root .page .thumbs img { width: 196px; height: 132px; object-fit: cover; border: 7px solid #fff; box-shadow: 0 6px 12px rgba(0,0,0,.25); }
+    #root .page .tab { position: absolute; right: 32px; top: 28px; width: 18px; height: 18px; border-radius: 50%; background: #e2383f; }
+    #root .d-black { position: absolute; inset: 0; background: #050606; opacity: 0; }
+    #root .d-fade { position: absolute; inset: 0; background: #050606; opacity: 0.75; }
+    #root .close-shot { position: absolute; inset: 0; opacity: 0; }
+    #root .cprint { position: absolute; padding: 24px; background: #f2efe7; box-shadow: 0 2px 3px rgba(0,0,0,.35), 0 40px 80px -20px rgba(0,0,0,.8); }
+    #root .cprint img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    #root .cprint svg { position: absolute; left: 24px; top: 24px; overflow: visible; }
+    #root .exh { position: absolute; font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 30px; letter-spacing: .06em; color: #e2383f; white-space: nowrap; }
+    #root .ctitle { position: absolute; font-weight: 900; font-size: 116px; letter-spacing: -0.04em; line-height: 1; white-space: nowrap; }
+    #root .ctitle span { display: inline-block; }
+    #root .csub { position: absolute; font-weight: 600; font-size: 38px; color: #98a29e; white-space: nowrap; }
+  </style>
+  <div id="root" data-composition-id="desk" data-width="1920" data-height="1080">
+    <div class="d-ground"></div>
+
+    <div id="d-sheet" class="layer" style="z-index: 1">
+      <div id="d-head" class="d-head"><span id="d-h1">Summer 2025</span><span id="d-h2" class="muted">12 photos</span></div>
+      <div id="d-pill" class="d-pill">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#121715" stroke-width="2.4" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.5 15.4 6.5M8.6 13.5l6.8 4"/></svg>
+        <div id="d-roll" class="roll"><span>Shared · family</span><span>Shared · anyone with the link</span></div>
+      </div>
+      <div id="d-p01" class="print"><img src="assets/photos/S01-beach.jpg" alt="" /></div>
+      <div id="d-p02" class="print"><img src="assets/photos/S02-sunset.jpg" alt="" /></div>
+      <div id="d-p03" class="print"><img src="assets/photos/S03-ice-cream.jpg" alt="" /></div>
+      <div id="d-p04" class="print"><img src="assets/photos/S04-dog-beach.jpg" alt="" /></div>
+      <div id="d-p05" class="print"><img src="assets/photos/S05-house-number.jpg" alt="" style="object-position: 50% 0%" /></div>
+      <div id="d-p06" class="print"><img src="assets/photos/S06-license-plate.jpg" alt="" /></div>
+      <div id="d-p07" class="print"><img src="assets/photos/S07-boarding-pass.jpg" alt="" /></div>
+      <div id="d-p08" class="print"><img src="assets/photos/S08-school-crest.jpg" alt="" /></div>
+      <div id="d-p09" class="print"><img src="assets/photos/S09-seagull.jpg" alt="" /></div>
+      <div id="d-p10" class="print"><img src="assets/photos/S10-parcel-label.jpg" alt="" style="object-position: 30% 20%" /></div>
+      <div id="d-p11" class="print"><img src="assets/photos/S11-house-key.jpg" alt="" /></div>
+      <div id="d-p12" class="print"><img src="assets/photos/S12-mountain-lake.jpg" alt="" /></div>
+      <div id="d-dim" class="d-dim" style="z-index: 20"></div>
+      <svg id="d-thread" class="layer" viewBox="0 0 1920 1080" style="z-index: 40; overflow: visible" data-layout-ignore>
+        <path id="d-thread-shadow" d="" fill="none" stroke="rgba(0,0,0,.55)" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1.2" stroke-dashoffset="1.1" transform="translate(3 8)" />
+        <path id="d-thread-line" d="" fill="none" stroke="#d6262f" stroke-width="4.5" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1.2" stroke-dashoffset="1.1" />
+      </svg>
+      <div id="d-m1" class="marker" style="z-index: 50">1</div>
+      <div id="d-m2" class="marker" style="z-index: 50">2</div>
+      <div id="d-m3" class="marker" style="z-index: 50">3</div>
+      <div id="d-m4" class="marker" style="z-index: 50">4</div>
+      <div id="d-m5" class="marker" style="z-index: 50">5</div>
+      <div id="d-m6" class="marker" style="z-index: 50">6</div>
+      <div id="d-m7" class="marker" style="z-index: 50">7</div>
+      <div id="d-pgA" class="page" data-layout-allow-occlusion style="z-index: 60">
+        <div class="ph">STRANGER'S FILE</div><div class="pt">Where you live</div><div class="tab"></div>
+        <div class="thumbs"><img src="assets/photos/S05-house-number.jpg" alt="" style="object-position: 50% 0%" /><img src="assets/photos/S10-parcel-label.jpg" alt="" style="object-position: 30% 20%" /></div>
+      </div>
+      <div id="d-pgB" class="page" data-layout-allow-occlusion style="z-index: 61">
+        <div class="ph">STRANGER'S FILE</div><div class="pt">Your children</div><div class="tab"></div>
+        <div class="thumbs"><img src="assets/photos/S08-school-crest.jpg" alt="" /></div>
+      </div>
+      <div id="d-pgC" class="page" data-layout-allow-occlusion style="z-index: 62">
+        <div class="ph">STRANGER'S FILE</div><div class="pt">When you're away</div><div class="tab"></div>
+        <div class="thumbs"><img src="assets/photos/S07-boarding-pass.jpg" alt="" /><img src="assets/photos/S01-beach.jpg" alt="" /></div>
+      </div>
+      <div id="d-fade" class="d-fade" style="z-index: 70"></div>
+    </div>
+
+    <div id="d-mag" class="layer" style="opacity: 0; z-index: 2" data-layout-ignore>
+      <div id="d-q01" class="print"><img src="assets/photos/S01-beach.jpg" alt="" /></div>
+      <div id="d-q02" class="print"><img src="assets/photos/S02-sunset.jpg" alt="" /></div>
+      <div id="d-q03" class="print"><img src="assets/photos/S03-ice-cream.jpg" alt="" /></div>
+      <div id="d-q04" class="print"><img src="assets/photos/S04-dog-beach.jpg" alt="" /></div>
+      <div id="d-q05" class="print"><img src="assets/photos/S05-house-number.jpg" alt="" style="object-position: 50% 0%" /></div>
+      <div id="d-q06" class="print"><img src="assets/photos/S06-license-plate.jpg" alt="" /></div>
+      <div id="d-q07" class="print"><img src="assets/photos/S07-boarding-pass.jpg" alt="" /></div>
+      <div id="d-q08" class="print"><img src="assets/photos/S08-school-crest.jpg" alt="" /></div>
+      <div id="d-q09" class="print"><img src="assets/photos/S09-seagull.jpg" alt="" /></div>
+      <div id="d-q10" class="print"><img src="assets/photos/S10-parcel-label.jpg" alt="" style="object-position: 30% 20%" /></div>
+      <div id="d-q11" class="print"><img src="assets/photos/S11-house-key.jpg" alt="" /></div>
+      <div id="d-q12" class="print"><img src="assets/photos/S12-mountain-lake.jpg" alt="" /></div>
+    </div>
+
+    <div id="d-close" class="layer" style="opacity: 0; z-index: 3">
+      <div class="d-ground"></div>
+      <div id="d-c1" class="close-shot">
+        <div id="d-c1p" class="cprint" style="left: 300px; top: 108px; width: 588px; height: 863px">
+          <img src="assets/photos/S05-house-number.jpg" alt="" />
+          <svg width="540" height="815" viewBox="0 0 540 815"><path id="d-c1box" d="M205 -4 H297 V66 H205 Z" fill="none" stroke="#e2383f" stroke-width="5" pathLength="1" stroke-dasharray="1 1.2" stroke-dashoffset="1.1" /></svg>
+        </div>
+        <svg class="layer" viewBox="0 0 1920 1080" data-layout-ignore><path id="d-c1lead" d="M627 160 H930 V352" fill="none" stroke="#e2383f" stroke-width="3" pathLength="1" stroke-dasharray="1 1.2" stroke-dashoffset="1.1" /></svg>
+        <div id="d-c1x" class="exh" style="left: 960px; top: 336px">EXHIBIT 05 · ADR</div>
+        <div id="d-c1t" class="ctitle" style="left: 956px; top: 384px"><span>House</span> <span>number</span></div>
+        <div id="d-c1s" class="csub" style="left: 962px; top: 520px">top center</div>
+      </div>
+      <div id="d-c2" class="close-shot">
+        <div id="d-c2p" class="cprint" style="left: 990px; top: 175px; width: 748px; height: 730px">
+          <img src="assets/photos/S08-school-crest.jpg" alt="" />
+          <svg width="700" height="682" viewBox="0 0 700 682"><path id="d-c2box" d="M364 300 H514 V484 H364 Z" fill="none" stroke="#e2383f" stroke-width="5" pathLength="1" stroke-dasharray="1 1.2" stroke-dashoffset="1.1" /></svg>
+        </div>
+        <svg class="layer" viewBox="0 0 1920 1080" data-layout-ignore><path id="d-c2lead" d="M1378 592 H930" fill="none" stroke="#e2383f" stroke-width="3" pathLength="1" stroke-dasharray="1 1.2" stroke-dashoffset="1.1" /></svg>
+        <div id="d-c2x" class="exh" style="left: 204px; top: 470px">EXHIBIT 02 · SCH</div>
+        <div id="d-c2t" class="ctitle" style="left: 200px; top: 518px"><span>School</span> <span>crest</span></div>
+              </div>
+      <div id="d-c3" class="close-shot">
+        <div id="d-c3p" class="cprint" style="left: 276px; top: 110px; width: 1368px; height: 581px">
+          <img src="assets/photos/S07-boarding-pass.jpg" alt="" />
+          <svg width="1320" height="533" viewBox="0 0 1320 533"><path id="d-c3box" d="M98 68 H1301 V498 H98 Z" fill="none" stroke="#e2383f" stroke-width="5" pathLength="1" stroke-dasharray="1 1.2" stroke-dashoffset="1.1" /></svg>
+        </div>
+        <svg class="layer" viewBox="0 0 1920 1080" data-layout-ignore><path id="d-c3lead" d="M398 632 V742" fill="none" stroke="#e2383f" stroke-width="3" pathLength="1" stroke-dasharray="1 1.2" stroke-dashoffset="1.1" /></svg>
+        <div id="d-c3x" class="exh" style="left: 424px; top: 724px">EXHIBIT 03 · TKT</div>
+        <div id="d-c3t" class="ctitle" style="left: 420px; top: 770px"><span>Boarding</span> <span>pass</span></div>
+      </div>
+    </div>
+
+    <div id="d-black" class="d-black" style="z-index: 4"></div>
+    <svg id="d-lens" class="layer" viewBox="0 0 1920 1080" style="opacity: 0; z-index: 5" data-layout-ignore>
+      <g id="d-lens-g">
+        <circle cx="0" cy="0" r="168" fill="none" stroke="rgba(0,0,0,.45)" stroke-width="14" transform="translate(0 6)" />
+        <circle cx="0" cy="0" r="168" fill="none" stroke="#eeede7" stroke-width="9.6" />
+        <circle cx="0" cy="0" r="160" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.5" />
+      </g>
+    </svg>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true, defaults: { immediateRender: false } });
+      const $ = (s) => document.querySelector(s);
+      const S = 0.32; // grid scale of a 1032 x 702 print
+      const CX = [420, 780, 1140, 1500], CY = [262.5, 509.5, 756.5];
+      const ROT = [-1.6, 1.1, -0.6, 1.8, 0.9, -1.3, 1.5, -0.8, -1.9, 0.7, -1.1, 1.3];
+      const cell = (i) => ({ cx: CX[i % 4], cy: CY[Math.floor(i / 4)] });
+      const ids = Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, "0"));
+      const place = (cx, cy) => ({ x: cx - 516, y: cy - 351 });
+
+      // ---- grid state for all prints and the magnifier copies
+      ids.forEach((id, i) => {
+        const { cx, cy } = cell(i);
+        gsap.set("#d-q" + id, { ...place(cx, cy), scale: S, rotation: ROT[i], transformOrigin: "50% 50%" });
+        gsap.set("#d-p" + id, { ...place(cx, cy), scale: S, rotation: ROT[i], transformOrigin: "50% 50%", zIndex: 10 });
+      });
+
+      // ---- L1: the aperture opens on one print (0.0 - 5.0)
+      gsap.set("#d-p01", { ...place(960, 480), scale: 1, rotation: -1.2, zIndex: 12 });
+      ids.slice(1).forEach((id) => gsap.set("#d-p" + id, { opacity: 0 }));
+      gsap.set(["#d-head", "#d-pill"], { opacity: 0 });
+      gsap.set([1, 2, 3, 4, 5, 6, 7].map((n) => "#d-m" + n), { opacity: 0, scale: 0 });
+      gsap.set(["#d-c1x", "#d-c2x", "#d-c3x", "#d-c1s", "#d-c1t span", "#d-c2t span", "#d-c3t span"], { opacity: 0 });
+      const ap = { r: 70, a: 0 };
+      const hex = () => {
+        const pts = [];
+        for (let k = 0; k < 6; k++) { const t = ap.a + (k * Math.PI) / 3; pts.push(`${(960 + ap.r * Math.cos(t)).toFixed(1)}px ${(480 + ap.r * Math.sin(t)).toFixed(1)}px`); }
+        $("#d-sheet").style.clipPath = ap.r > 1400 ? "none" : `polygon(${pts.join(",")})`;
+      };
+      tl.fromTo(ap, { r: 70, a: 0 }, { r: 1500, a: 0.9, duration: 0.7, ease: "power3.inOut", onUpdate: hex }, 0);
+      tl.fromTo("#d-fade", { opacity: 0.75 }, { opacity: 0, duration: 1.6, ease: "power2.out" }, 0.2);
+      tl.fromTo("#d-p01", { scale: 1 }, { scale: 1.045, duration: 4.4, ease: "sine.inOut" }, 0.6);
+
+      // ---- L2: twelve, shared (5.0 - 13.0)
+      const c1 = cell(0);
+      tl.to("#d-p01", { ...place(c1.cx, c1.cy), scale: S, rotation: ROT[0], duration: 1.05, ease: "power3.inOut" }, 5.0);
+      tl.set("#d-p01", { zIndex: 10 }, 6.05);
+      ids.slice(1).forEach((id, k) => {
+        const i = k + 1, { cx, cy } = cell(i);
+        const t = 5.2 + k * 0.065;
+        const sx = cx + (cx - 960) * 1.7, sy = cy + 760 + (i % 3) * 60;
+        tl.fromTo("#d-p" + id, { ...place(sx, sy), scale: S * 1.25, rotation: ROT[i] + (i % 2 ? 14 : -12), opacity: 1 },
+          { ...place(cx, cy), scale: S, rotation: ROT[i], duration: 0.8, ease: "expo.out" }, t);
+      });
+      tl.fromTo("#d-h1", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2 }, 6.5);
+      tl.set("#d-head", { opacity: 1 }, 6.5);
+      tl.fromTo("#d-h2", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2 }, 6.62);
+      tl.fromTo("#d-pill", { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.55, ease: "expo.out" }, 8.1);
+      tl.fromTo("#d-roll", { y: 0 }, { y: -58, duration: 0.42, ease: "power3.inOut" }, 10.7);
+      tl.fromTo("#d-pill", { backgroundColor: "#eeede7" }, { backgroundColor: "#f3c8c9", duration: 0.3 }, 10.75);
+
+      // ---- L3: the light drops, the lens reads like a stranger (13.0 - 20.0)
+      tl.fromTo("#d-dim", { opacity: 0 }, { opacity: 0.64, duration: 0.7, ease: "power2.inOut" }, 13.0);
+      const PATH = [[-260, 262.5], [420, 262.5], [780, 262.5], [1140, 262.5], [1500, 262.5], [1500, 509.5], [1140, 509.5], [780, 509.5], [420, 509.5], [420, 756.5], [780, 756.5], [1140, 756.5], [1500, 756.5], [2250, 756.5]];
+      const T0 = 13.3, T1 = 19.9, SEG = (T1 - T0) / (PATH.length - 1);
+      const cr = (p0, p1, p2, p3, t) => 0.5 * (2 * p1 + (-p0 + p2) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t * t + (-p0 + 3 * p1 - 3 * p2 + p3) * t * t * t);
+      const lensAt = (u) => {
+        const n = PATH.length - 1, s = Math.min(n - 1e-6, Math.max(0, u * n)), i = Math.floor(s), f = s - i;
+        const P = (k) => PATH[Math.max(0, Math.min(n, k))];
+        return [cr(P(i - 1)[0], P(i)[0], P(i + 1)[0], P(i + 2)[0], f), cr(P(i - 1)[1], P(i)[1], P(i + 1)[1], P(i + 2)[1], f)];
+      };
+      const M = 1.9, R = 163;
+      const lens = { u: 0, x: -260, y: 262.5, mag: 1 };
+      const drawLens = () => {
+        $("#d-lens-g").setAttribute("transform", `translate(${lens.x.toFixed(2)} ${lens.y.toFixed(2)})`);
+        const mg = $("#d-mag");
+        mg.style.transformOrigin = "0 0";
+        mg.style.transform = `translate(${(lens.x - M * lens.x).toFixed(2)}px, ${(lens.y - M * lens.y).toFixed(2)}px) scale(${M})`;
+        mg.style.clipPath = `circle(${(R / M).toFixed(2)}px at ${lens.x.toFixed(2)}px ${lens.y.toFixed(2)}px)`;
+      };
+      tl.set("#d-lens", { opacity: 1 }, T0);
+      tl.set("#d-mag", { opacity: 1 }, T0);
+      tl.fromTo(lens, { u: 0 }, { u: 1, duration: T1 - T0, ease: "none", onUpdate: () => { const [x, y] = lensAt(lens.u); lens.x = x; lens.y = y; drawLens(); } }, T0);
+      tl.set("#d-mag", { opacity: 0 }, T1);
+      // markers: [print index, path index, marker number]
+      const MARK = [[0, 1, 1], [7, 5, 2], [6, 6, 3], [5, 7, 4], [4, 8, 5], [9, 10, 6], [10, 11, 7]];
+      const mpos = (i) => { const { cx, cy } = cell(i); return [cx + 142, cy - 90]; };
+      for (const [pi, k, n] of MARK) {
+        const [mx, my] = mpos(pi);
+        const t = T0 + k * SEG + 0.06;
+        gsap.set("#d-m" + n, { x: mx - 28, y: my - 28 });
+        tl.fromTo("#d-m" + n, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.32, ease: "back.out(2.4)" }, t);
+        tl.set("#d-p" + ids[pi], { zIndex: 30 }, t);
+      }
+
+
+      // ---- L4: three exhibits, hard cuts (20.0 - 27.0)
+      tl.set("#d-close", { opacity: 1 }, 20.0);
+      tl.set("#d-sheet", { opacity: 0 }, 20.0);
+      tl.set("#d-sheet", { opacity: 1 }, 27.0);
+      const shots = [["#d-c1", 20.0], ["#d-c2", 22.33], ["#d-c3", 24.67]];
+      shots.forEach(([sid, t], k) => {
+        tl.set(sid, { opacity: 1 }, t);
+        if (k < 2) tl.set(sid, { opacity: 0 }, shots[k + 1][1]);
+        tl.fromTo(sid + "p", { scale: 1.07 }, { scale: 1, duration: 0.7, ease: "expo.out" }, t);
+        tl.fromTo(sid + "box", { attr: { "stroke-dashoffset": 1.1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.42, ease: "power2.inOut" }, t + 0.3);
+        tl.fromTo(sid + "lead", { attr: { "stroke-dashoffset": 1.1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.3, ease: "power2.out" }, t + 0.62);
+        tl.fromTo(sid + "x", { opacity: 0 }, { opacity: 1, duration: 0.16 }, t + 0.78);
+        document.querySelectorAll(sid + "t span").forEach((w, j) => {
+          tl.fromTo(w, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power2.out" }, t + 0.86 + j * 0.09);
+        });
+        if (document.querySelector(sid + "s")) tl.fromTo(sid + "s", { opacity: 0 }, { opacity: 1, duration: 0.25 }, t + 0.95);
+      });
+      // pull back into the contact sheet
+      tl.fromTo("#d-close", { scale: 1, opacity: 1, transformOrigin: "1140px 509.5px" }, { scale: 0.24, opacity: 0, duration: 0.5, ease: "power3.in" }, 27.0);
+
+      // ---- L5: the red thread and the file pages (27.0 - 35.0)
+      const pins = [0, 4, 5, 9, 10, 6, 7].map(mpos);
+      let d = `M${pins[0][0]} ${pins[0][1]}`;
+      for (let k = 1; k < pins.length; k++) {
+        const [ax, ay] = pins[k - 1], [bx, by] = pins[k];
+        const mx = (ax + bx) / 2, my = (ay + by) / 2;
+        const horiz = Math.abs(bx - ax) > Math.abs(by - ay);
+        d += ` Q${(mx + (horiz ? 0 : 26)).toFixed(1)} ${(my + (horiz ? 46 : 0)).toFixed(1)} ${bx} ${by}`;
+      }
+      $("#d-thread-line").setAttribute("d", d);
+      $("#d-thread-shadow").setAttribute("d", d);
+      tl.fromTo(["#d-thread-line", "#d-thread-shadow"], { attr: { "stroke-dashoffset": 1.1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 2.1, ease: "power1.inOut" }, 29.0);
+      const pages = [["#d-pgA", 300, 150, -4, 31.15], ["#d-pgB", 690, 340, 3, 32.15], ["#d-pgC", 1080, 200, -2.5, 33.15]];
+      for (const [pid, x, y, r, t] of pages) {
+        gsap.set(pid, { x, y, opacity: 0 });
+        tl.fromTo(pid, { x, y: y - 30, scale: 1.32, rotation: r + 7, opacity: 0, transformOrigin: "50% 50%" }, { y, scale: 1, rotation: r, opacity: 1, duration: 0.2, ease: "power3.in" }, t);
+        tl.fromTo("#d-sheet", { y: 0 }, { y: 9, duration: 0.04, ease: "none" }, t + 0.2);
+        tl.to("#d-sheet", { y: 0, duration: 0.3, ease: "power2.out" }, t + 0.24);
+      }
+      // the lens returns to the centre; the music drops out; snap to black
+      tl.set(lens, { x: 2250, y: 540 }, 33.9);
+      tl.fromTo(lens, { x: 2250, y: 540 }, { x: 960, y: 540, duration: 0.95, ease: "expo.out", onUpdate: drawLens }, 33.95);
+      tl.set("#d-black", { opacity: 1 }, 35.0);
+      tl.set({}, {}, 36);
+      window.__timelines["desk"] = tl;
+    })();
+  </script>
+</template>

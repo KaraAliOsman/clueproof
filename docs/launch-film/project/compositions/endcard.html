@@ -1,0 +1,75 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0d1211; font-family: "Inter", sans-serif; color: #eeede7; }
+    #root .layer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    #root .ground { position: absolute; inset: 0; background: radial-gradient(1500px 1000px at 50% 30%, #18211e 0%, #0f1513 55%, #090c0b 100%); }
+    #root .wm { position: absolute; left: 664px; top: 392px; font-weight: 900; font-size: 170px; line-height: 1; letter-spacing: -0.045em; white-space: nowrap; clip-path: inset(0 100% 0 0); }
+    #root .claim { position: absolute; left: 0; width: 1920px; top: 628px; text-align: center; font-weight: 800; font-size: 74px; letter-spacing: -0.035em; white-space: nowrap; }
+    #root .claim span { display: inline-block; opacity: 0; }
+    #root .claim .acc { color: #5ed6a5; }
+    #root .info { position: absolute; left: 0; width: 1920px; text-align: center; white-space: nowrap; opacity: 0; }
+    #root .i1 { top: 782px; font-weight: 700; font-size: 36px; }
+    #root .i2 { top: 836px; font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 34px; color: #5ed6a5; }
+    #root .i3 { top: 892px; font-weight: 600; font-size: 28px; color: #98a29e; }
+    #root .credits { position: absolute; left: 0; width: 1920px; top: 150px; text-align: center; opacity: 0; }
+    #root .credits .h { font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 28px; letter-spacing: .08em; color: #5ed6a5; margin-top: 34px; }
+    #root .credits .h:first-child { margin-top: 0; }
+    #root .credits p { margin: 8px 0 0 0; font-weight: 600; font-size: 30px; line-height: 1.32; color: #eeede7; }
+    #root .credits p.m { color: #b7beba; font-weight: 500; font-size: 28px; }
+  </style>
+  <div id="root" data-composition-id="endcard" data-width="1920" data-height="1080">
+    <div class="ground"></div>
+    <div id="e-lock" class="layer">
+      <div id="e-wm" class="wm">Clueproof</div>
+      <div id="e-claim" class="claim"><span>Share</span> <span>the</span> <span>moment.</span> <span class="acc">Not</span> <span class="acc">the</span> <span class="acc">clues.</span></div>
+      <div id="e-i1" class="info i1">An AI Skill for UGREEN AI NAS</div>
+      <div id="e-i2" class="info i2">github.com/KaraAliOsman/clueproof</div>
+      <div id="e-i3" class="info i3">Not an official UGREEN product.</div>
+      <svg id="e-mark" class="layer" viewBox="0 0 1920 1080" data-layout-ignore>
+        <g id="e-mark-g" transform="translate(960 500) scale(0.62)">
+          <circle id="e-ring" cx="0" cy="0" r="168" fill="none" stroke="#eeede7" stroke-width="24" />
+          <rect id="e-bar" x="-104" y="-24" width="0" height="48" rx="6" fill="#5ed6a5" />
+        </g>
+      </svg>
+    </div>
+    <div id="e-credits" class="credits">
+      <div class="h">MUSIC</div>
+      <p>Impact Allegretto by Kevin MacLeod (incompetech.com)</p>
+      <p class="m">Licensed under Creative Commons: By Attribution 4.0 License<br />http://creativecommons.org/licenses/by/4.0/</p>
+      <div class="h">PHOTOGRAPHS · WIKIMEDIA COMMONS</div>
+      <p>“Sunset on the sea in Komodo National Park, Indonesia” by Jakub Hałun · CC BY 4.0</p>
+      <p>“Door, 31 rue des Thermopyles, Paris” by Tom Hilton · CC BY 2.0</p>
+      <p>“1984 Suzuki Alto FX (rear)” by Riley from Christchurch, New Zealand · CC BY 2.0</p>
+      <p>“Lesser black-backed gull winter” by Alexis Lours · CC BY 4.0</p>
+      <p class="m">CC0 and public domain: DimiTalen, Andy Li, Meg Sanchez, Jamesfren15, Hans, Gorgo, Eurowings, DHL</p>
+      <p class="m">All photos resized and cropped; plates, barcodes, postal code and house number pixelated.</p>
+      <div class="h">SOUND EFFECTS</div>
+      <p class="m">Pixabay · Pixabay Content License</p>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true, defaults: { immediateRender: false } });
+      const $ = (s) => document.querySelector(s);
+      const mark = { x: 960, y: 500, s: 0.62, sw: 24 };
+      const drawMark = () => {
+        $("#e-mark-g").setAttribute("transform", `translate(${mark.x.toFixed(2)} ${mark.y.toFixed(2)}) scale(${mark.s.toFixed(4)})`);
+        $("#e-ring").setAttribute("stroke-width", mark.sw.toFixed(2));
+      };
+      // the bar lands on the final hit, the name wipes in
+      tl.fromTo("#e-bar", { attr: { width: 0 } }, { attr: { width: 208 }, duration: 0.4, ease: "expo.out" }, 0.0);
+      tl.fromTo(mark, { x: 960, y: 500, s: 0.62, sw: 24 }, { x: 538, y: 474, s: 0.45, sw: 28, duration: 0.75, ease: "power3.inOut", onUpdate: drawMark }, 0.3);
+      tl.fromTo("#e-wm", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.65, ease: "power3.out" }, 0.62);
+      document.querySelectorAll("#e-claim span").forEach((w, j) => tl.fromTo(w, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16 }, (j < 3 ? 1.5 : 2.55) + (j % 3) * 0.12));
+      tl.fromTo("#e-i1", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, 3.8);
+      tl.fromTo("#e-i2", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, 3.95);
+      tl.fromTo("#e-i3", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, 4.1);
+      // credits roll
+      tl.to("#e-lock", { y: -120, opacity: 0, duration: 0.5, ease: "power2.in" }, 6.6);
+      tl.fromTo("#e-credits", { y: 140, opacity: 0 }, { y: 0, opacity: 1, duration: 1.0, ease: "expo.out" }, 7.2);
+      tl.to("#e-credits", { opacity: 0, duration: 0.5, ease: "power2.in" }, 12.4);
+      tl.set({}, {}, 13);
+      window.__timelines["endcard"] = tl;
+    })();
+  </script>
+</template>

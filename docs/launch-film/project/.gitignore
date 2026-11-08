@@ -1,0 +1,7 @@
+# render output and renderer working files
+renders/
+.hyperframes/
+# copies made by tools/build.mjs from ../vo and ../nas
+assets/vo/*.mp3
+assets/vo/*.wav
+assets/nas/

@@ -1,0 +1,294 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #e9ece8; font-family: "Inter", sans-serif; color: #121715; }
+    #root .layer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    #root .win { position: absolute; left: 130px; top: 120px; width: 900px; height: 750px; background: #fff; border-radius: 28px; overflow: hidden;
+      box-shadow: 0 1px 2px rgba(18,23,21,.08), 0 30px 70px -30px rgba(18,40,30,.35); }
+    #root .whead { position: absolute; left: 0; top: 0; width: 900px; height: 86px; border-bottom: 1.5px solid #e4e8e5; }
+    #root .whead svg { position: absolute; left: 30px; top: 23px; }
+    #root .whead .t { position: absolute; left: 84px; top: 24px; font-weight: 800; font-size: 31px; letter-spacing: -0.02em; }
+    #root .whead .m { position: absolute; right: 32px; top: 28px; font-weight: 600; font-size: 28px; color: #5b6662; }
+    #root .vp { position: absolute; left: 40px; top: 104px; width: 820px; height: 540px; overflow: hidden; }
+    #root .msgs { position: absolute; left: 0; top: 0; width: 820px; }
+    #root .ubub { position: absolute; right: 0; top: 0; padding: 14px 24px; border-radius: 24px 24px 6px 24px; background: #dff2e8; font-weight: 600; font-size: 30px; white-space: nowrap; opacity: 0; }
+    #root .status { position: absolute; left: 0; top: 96px; width: 760px; font-size: 28px; line-height: 1.4; color: #5b6662; }
+    #root .status span { opacity: 0; }
+    #root .prog { position: absolute; left: 0; top: 282px; font-size: 28px; color: #5b6662; font-weight: 600; opacity: 0; }
+    #root .bar { position: absolute; left: 0; top: 330px; width: 420px; height: 6px; border-radius: 3px; background: #e4e8e5; overflow: hidden; opacity: 0; }
+    #root .bar i { position: absolute; left: 0; top: 0; width: 420px; height: 6px; background: #12885c; transform-origin: 0 0; }
+    #root .ans { position: absolute; left: 0; top: 380px; width: 820px; font-size: 29px; line-height: 1.38; }
+    #root .ans p { margin: 0 0 16px 0; opacity: 0; }
+    #root .ans b { font-weight: 800; }
+    #root .g { color: #12885c; } #root .r { color: #cf2e35; } #root .a { color: #a86f00; }
+    #root .btns { position: absolute; left: 40px; top: 580px; width: 820px; height: 60px; }
+    #root .btn { position: absolute; top: 0; height: 60px; border-radius: 30px; font-weight: 800; font-size: 29px; line-height: 60px; text-align: center; opacity: 0; }
+    #root .yes { left: 0; width: 150px; background: #12885c; color: #fff; }
+    #root .no { left: 170px; width: 130px; background: #fff; color: #121715; box-shadow: inset 0 0 0 2px #cfd6d2; }
+    #root .done { position: absolute; left: 40px; top: 474px; width: 820px; font-size: 29px; line-height: 1.38; opacity: 0; }
+    #root .done b { font-weight: 800; color: #12885c; }
+    #root .input { position: absolute; left: 32px; top: 652px; width: 836px; height: 72px; border-radius: 36px; box-shadow: inset 0 0 0 2px #dde3e0; }
+    #root .input .ph { position: absolute; left: 30px; top: 18px; font-size: 29px; color: #8b9590; }
+    #root .input .tx { position: absolute; left: 30px; top: 17px; font-size: 30px; font-weight: 500; white-space: nowrap; }
+    #root .input .tx span { opacity: 0; }
+    #root .send { position: absolute; right: 10px; top: 10px; width: 52px; height: 52px; border-radius: 50%; background: #12885c; }
+    #root .send svg { position: absolute; left: 14px; top: 14px; }
+    #root .panel { position: absolute; left: 1100px; top: 120px; width: 660px; height: 750px; background: #fff; border-radius: 28px;
+      box-shadow: 0 1px 2px rgba(18,23,21,.08), 0 30px 70px -30px rgba(18,40,30,.35); }
+    #root .ptitle { position: absolute; left: 22px; top: 26px; font-weight: 800; font-size: 32px; letter-spacing: -0.02em; }
+    #root .psub { position: absolute; left: 252px; top: 31px; font-weight: 600; font-size: 28px; color: #5b6662; }
+    #root .th { position: absolute; left: 0; top: 0; width: 196px; height: 131px; border-radius: 12px; overflow: hidden; }
+    #root .th img { display: block; width: 196px; height: 131px; object-fit: cover; }
+    #root .ring { position: absolute; inset: 0; border-radius: 12px; box-shadow: inset 0 0 0 6px var(--c); opacity: 0; }
+    #root .ico { position: absolute; right: 8px; top: 8px; width: 38px; height: 38px; border-radius: 50%; background: var(--c); opacity: 0; }
+    #root .ico svg { position: absolute; left: 9px; top: 9px; }
+    #root .stamp { position: absolute; left: 34px; top: 24px; width: 128px; padding: 4px 0; border: 4px solid #cf2e35; border-radius: 10px; color: #cf2e35; background: rgba(255,255,255,.86);
+      font-weight: 900; font-size: 28px; line-height: 1.02; text-align: center; letter-spacing: .02em; opacity: 0; }
+    #root .legend { position: absolute; left: 22px; top: 690px; width: 620px; font-weight: 700; font-size: 28px; white-space: nowrap; }
+    #root .legend span { display: inline-block; margin-right: 26px; opacity: 0; }
+    #root .legend i { display: inline-block; width: 16px; height: 16px; border-radius: 50%; margin-right: 10px; vertical-align: 2px; }
+    #root .album { position: absolute; left: 20px; top: 100px; width: 620px; height: 131px; border-radius: 16px; background: #eef7f2; box-shadow: inset 0 0 0 2px #bfe3d0; opacity: 0; }
+    #root .album .at { position: absolute; left: 230px; top: 18px; font-weight: 800; font-size: 30px; color: #12885c; white-space: nowrap; }
+    #root .album .as { position: absolute; left: 230px; top: 60px; font-weight: 600; font-size: 28px; color: #3f4b47; white-space: nowrap; }
+    #root .scan { position: absolute; left: 20px; top: 100px; width: 620px; height: 4px; background: #12885c; opacity: 0; box-shadow: 0 0 0 1px rgba(18,136,92,.15); }
+    #root .cursor { position: absolute; left: 0; top: 0; opacity: 0; }
+    /* L11 takeover */
+    #root .split { position: absolute; inset: 0; background: #e9ece8; opacity: 0; }
+    #root .pane { position: absolute; top: 210px; width: 800px; height: 585px; border-radius: 18px; overflow: hidden; background: #ccc; }
+    #root .pane img { display: block; width: 800px; height: 585px; object-fit: cover; object-position: 50% 0%; }
+    #root .pane svg { position: absolute; left: 0; top: 0; }
+    #root .phead { position: absolute; top: 140px; font-weight: 800; font-size: 38px; letter-spacing: -0.02em; white-space: nowrap; }
+    #root .phead .ok { color: #12885c; margin-left: 16px; opacity: 0; }
+    #root .pres { position: absolute; top: 816px; font-weight: 700; font-size: 30px; white-space: nowrap; opacity: 0; }
+    #root .pres i { display: inline-block; width: 16px; height: 16px; border-radius: 50%; background: #cf2e35; margin-right: 12px; vertical-align: 2px; }
+    #root .tag { position: absolute; padding: 2px 10px; border-radius: 8px; font-weight: 700; font-size: 28px; white-space: nowrap; opacity: 0; }
+    #root .scanl { position: absolute; left: 0; top: 0; width: 800px; height: 60px; background: linear-gradient(rgba(18,136,92,0), rgba(18,136,92,.22)); border-bottom: 3px solid #12885c; opacity: 0; }
+    #root .stage { position: absolute; inset: 0; opacity: 0; }
+    #root .bigimg { position: absolute; border-radius: 20px; overflow: hidden; }
+    #root .bigimg img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    #root .chk { position: absolute; left: 1150px; font-weight: 800; font-size: 44px; letter-spacing: -0.02em; white-space: nowrap; }
+    #root .chk .bx { display: inline-block; width: 52px; height: 52px; border-radius: 14px; box-shadow: inset 0 0 0 3px #b9c3be; vertical-align: -10px; margin-right: 22px; position: relative; }
+    #root .chk .bx svg { position: absolute; left: 10px; top: 12px; opacity: 0; }
+    #root .clear { position: absolute; left: 1150px; top: 560px; width: 230px; height: 76px; border-radius: 38px; box-shadow: inset 0 0 0 3px #b9c3be; color: #9aa4a0;
+      font-weight: 900; font-size: 38px; line-height: 76px; text-align: center; }
+    #root .clearon { position: absolute; left: 1150px; top: 560px; width: 230px; height: 76px; border-radius: 38px; background: #12885c; color: #fff; font-weight: 900; font-size: 38px; line-height: 76px; text-align: center; opacity: 0; }
+    #root .hint { position: absolute; left: 1150px; top: 668px; font-weight: 600; font-size: 32px; color: #5b6662; white-space: nowrap; }
+    #root .dname { position: absolute; left: 990px; top: 230px; font-weight: 900; font-size: 88px; letter-spacing: -0.04em; line-height: 1; white-space: nowrap; }
+    #root .dpos { position: absolute; left: 994px; top: 330px; font-weight: 700; font-size: 40px; color: #5b6662; white-space: nowrap; }
+    #root .dline { position: absolute; left: 990px; top: 430px; width: 760px; padding: 26px 30px; border-radius: 20px; background: #fff; font-size: 30px; line-height: 1.42;
+      box-shadow: 0 1px 2px rgba(18,23,21,.08), 0 20px 50px -26px rgba(18,40,30,.35); }
+    #root .dline b { font-weight: 800; color: #cf2e35; }
+  </style>
+  <div id="root" data-composition-id="chat" data-width="1920" data-height="1080">
+    <div id="c-home" class="layer">
+      <div id="c-win" class="win">
+        <div class="whead">
+          <svg width="40" height="40" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#121715" stroke-width="9" /><rect x="24" y="44" width="52" height="12" rx="2" fill="#12885c" /></svg>
+          <div class="t">Clueproof</div>
+          <div class="m">Interface mock-up</div>
+        </div>
+        <div class="vp">
+          <div id="c-msgs" class="msgs">
+            <div id="c-u1" class="ubub">Is this safe to post?</div>
+            <div id="c-st" class="status"></div>
+            <div id="c-pr" class="prog">10 of 12 read, 3 clues so far.</div>
+            <div id="c-bar" class="bar"><i id="c-bari"></i></div>
+            <div class="ans">
+              <p id="c-a1"><b class="g">6 of 12 photos are ready to post</b> (S01 still carries GPS location: post it through an app that removes location).</p>
+              <p id="c-a2"><b class="r">4 give clues away:</b> house number (S05), boarding pass (S07), school crest (S08), address label (S10). <b class="a">2 need a fix:</b> license plate (S06), keys (S11).</p>
+              <p id="c-a3">Nothing was skipped.</p>
+            </div>
+          </div>
+        </div>
+        <div id="c-q" class="done" style="top: 474px">Put the 6 ready photos in a ready-to-share album and keep the 4 risky ones in a private Keep private album?</div>
+        <div class="btns"><div id="c-yes" class="btn yes">Yes</div><div id="c-no" class="btn no">No</div></div>
+        <div id="c-done" class="done"><b>Album Ready to share - Summer 2025 - 2026-11-20 created with 6 photos.</b> 4 photos kept in Keep private - 2026-11-20.</div>
+        <div class="input">
+          <div id="c-ph" class="ph">Ask Clueproof…</div>
+          <div id="c-tx" class="tx"></div>
+          <div id="c-send" class="send"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7" /></svg></div>
+        </div>
+      </div>
+
+      <div id="c-panel" class="panel">
+        <div class="ptitle">Summer 2025</div><div class="psub">12 photos · Shared</div>
+        <div id="c-album" class="album"><div class="at">Ready to share · 6 photos</div><div class="as">Summer 2025 - 2026-11-20</div></div>
+        <div id="c-grid"></div>
+        <div id="c-scan" class="scan"></div>
+        <div class="legend"><span id="c-lg1"><i style="background:#12885c"></i>Clear 6</span><span id="c-lg2"><i style="background:#a86f00"></i>Fix first 2</span><span id="c-lg3"><i style="background:#cf2e35"></i>Keep private 4</span></div>
+      </div>
+      <svg id="c-cursor" class="cursor" width="52" height="74" viewBox="0 0 26 37" data-layout-ignore><path d="M2 2 L2 30 L9 23.5 L14 34.5 L19 32.3 L14 21.5 L23.5 21.5 Z" fill="#fff" stroke="#121715" stroke-width="2.2" stroke-linejoin="round" /></svg>
+    </div>
+
+    <div id="c-split" class="split" data-layout-allow-occlusion>
+      <div id="c-s1" class="stage" style="opacity: 1">
+        <div id="c-ph1" class="phead" style="left: 140px">Text reading<span id="c-ok1" class="ok">✓ read</span></div>
+        <div id="c-ph2" class="phead" style="left: 980px">Visual reading<span id="c-ok2" class="ok">✓ read</span></div>
+        <div id="c-pane1" class="pane" style="left: 140px">
+          <img src="assets/photos/S05-house-number.jpg" alt="" />
+          <div id="c-scan1" class="scanl"></div>
+          <svg width="800" height="585" viewBox="0 0 800 585"><rect id="c-tb1" x="322" y="4" width="106" height="82" rx="4" fill="none" stroke="#cf2e35" stroke-width="5" opacity="0" /></svg>
+          <div id="c-tt1" class="tag" style="left: 322px; top: 96px; background: #cf2e35; color: #fff">text · house number</div>
+        </div>
+        <div id="c-pane2" class="pane" style="left: 980px">
+          <img src="assets/photos/S05-house-number.jpg" alt="" />
+          <svg width="800" height="585" viewBox="0 0 800 585">
+            <rect id="c-vb1" x="132" y="156" width="560" height="430" rx="4" fill="none" stroke="#121715" stroke-width="4" stroke-dasharray="14 10" opacity="0" />
+            <rect id="c-vb2" x="322" y="4" width="106" height="82" rx="4" fill="none" stroke="#cf2e35" stroke-width="5" opacity="0" />
+          </svg>
+          <div id="c-vt1" class="tag" style="left: 142px; top: 168px; background: #121715; color: #fff">door</div>
+          <div id="c-vt2" class="tag" style="left: 322px; top: 96px; background: #cf2e35; color: #fff">number plaque</div>
+        </div>
+        <div id="c-r1" class="pres" style="left: 140px"><i></i>House number found</div>
+        <div id="c-r2" class="pres" style="left: 980px"><i></i>House number found</div>
+      </div>
+      <div id="c-s2" class="stage">
+        <div class="bigimg" style="left: 160px; top: 170px; width: 900px; height: 640px"><img src="assets/photos/S12-mountain-lake.jpg" alt="" /></div>
+        <div class="chk" style="top: 318px"><span class="bx"><svg id="c-k1" width="32" height="28" viewBox="0 0 32 28"><path d="M3 14l9 9L29 4" fill="none" stroke="#12885c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" /></svg></span>Text reading</div>
+        <div class="chk" style="top: 418px"><span class="bx"><svg id="c-k2" width="32" height="28" viewBox="0 0 32 28"><path d="M3 14l9 9L29 4" fill="none" stroke="#12885c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" /></svg></span>Visual reading</div>
+        <div class="clear">Clear</div>
+        <div id="c-clearon" class="clearon">Clear</div>
+        <div class="hint">Clear only after both readings</div>
+      </div>
+      <div id="c-s3" class="stage">
+        <div class="bigimg" style="left: 200px; top: 170px; width: 700px; height: 655px"><img src="assets/photos/S05-house-number.jpg" alt="" style="object-position: 50% 0%" />
+          <svg style="position:absolute;left:0;top:0" width="700" height="655" viewBox="0 0 700 655"><rect id="c-redact" x="276" y="0" width="104" height="76" fill="#121715" /></svg>
+        </div>
+        <svg class="layer" viewBox="0 0 1920 1080" data-layout-ignore><path id="c-dlead" d="M582 208 H760 L960 278" fill="none" stroke="#cf2e35" stroke-width="3" pathLength="1" stroke-dasharray="1 1.2" stroke-dashoffset="1.1" /></svg>
+        <div id="c-dname" class="dname">House number</div>
+        <div id="c-dpos" class="dpos">top center</div>
+        <div id="c-dline" class="dline"><b>Keep private</b> · S05-house-number.jpg · House number visible, top center (text and vision) · Crop it out or leave this photo out.</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true, defaults: { immediateRender: false } });
+      const $ = (s) => document.querySelector(s);
+      const mk = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+
+      // ---------- album grid (3 x 4), verdicts from the Summer 2025 answer
+      const PH = [
+        ["S01-beach", "c"], ["S02-sunset", "c"], ["S03-ice-cream", "c"],
+        ["S04-dog-beach", "c"], ["S05-house-number", "k"], ["S06-license-plate", "f"],
+        ["S07-boarding-pass", "k"], ["S08-school-crest", "k"], ["S09-seagull", "c"],
+        ["S10-parcel-label", "k"], ["S11-house-key", "f"], ["S12-mountain-lake", "c"],
+      ];
+      const COL = { c: "#12885c", f: "#a86f00", k: "#cf2e35" };
+      const ICON = {
+        c: '<svg width="20" height="20" viewBox="0 0 20 20"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+        f: '<svg width="20" height="20" viewBox="0 0 20 20"><path d="M10 3v9M10 16.5v.5" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/></svg>',
+        k: '<svg width="20" height="20" viewBox="0 0 20 20"><rect x="4" y="9" width="12" height="9" rx="2" fill="#fff"/><path d="M6.5 9V6.5a3.5 3.5 0 0 1 7 0V9" fill="none" stroke="#fff" stroke-width="2.6"/></svg>',
+      };
+      const pos = (i) => ({ x: 20 + (i % 3) * 212, y: 100 + Math.floor(i / 3) * 147 });
+      PH.forEach(([f, v], i) => {
+        const th = mk("div", "th"); th.id = "c-th" + i; th.style.setProperty("--c", COL[v]);
+        const img = mk("img"); img.src = `assets/photos/${f}.jpg`; img.alt = ""; if (f.startsWith("S05")) img.style.objectPosition = "50% 0%";
+        th.appendChild(img);
+        const ring = mk("div", "ring"); ring.id = "c-rg" + i; th.appendChild(ring);
+        const ico = mk("div", "ico", ICON[v]); ico.id = "c-ic" + i; th.appendChild(ico);
+        if (v === "k") { const st = mk("div", "stamp", "KEEP<br>PRIVATE"); st.id = "c-sp" + i; th.appendChild(st); }
+        $("#c-grid").appendChild(th);
+        const p = pos(i); gsap.set(th, { x: p.x, y: p.y });
+      });
+
+      // ---------- status line, per word
+      const STATUS = "Checking 12 photos from today as if they were posted publicly (say family only to change that). They are read only by your NAS's own models. GPS location is stored in 1 of them.";
+      STATUS.split(" ").forEach((w, i) => { const s = mk("span", "", w + " "); s.id = "c-sw" + i; $("#c-st").appendChild(s); });
+      const Q = "Is this safe to post?";
+      [...Q].forEach((ch, i) => { const s = mk("span", "", ch === " " ? "&nbsp;" : ch); s.id = "c-q" + i; $("#c-tx").appendChild(s); });
+
+      // ---------- L9: just ask (0.0 - 5.0)
+      tl.fromTo("#c-win", { scale: 1.05, opacity: 0, filter: "blur(10px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "expo.out" }, 0.0);
+      tl.fromTo("#c-panel", { x: 80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: "expo.out" }, 0.15);
+      tl.set("#c-ph", { opacity: 0 }, 0.8);
+      [...Q].forEach((_, i) => tl.set("#c-q" + i, { opacity: 1 }, 0.8 + i * 0.062));
+      tl.fromTo("#c-send", { scale: 1 }, { scale: 0.86, duration: 0.08, ease: "power2.in" }, 2.36);
+      tl.to("#c-send", { scale: 1, duration: 0.22, ease: "power2.out" }, 2.44);
+      tl.set("#c-tx", { opacity: 0 }, 2.45);
+      tl.set("#c-ph", { opacity: 1 }, 2.6);
+      tl.fromTo("#c-u1", { opacity: 0, y: 40, scale: 0.96, transformOrigin: "100% 100%" }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "expo.out" }, 2.45);
+      STATUS.split(" ").forEach((_, i) => tl.to("#c-sw" + i, { opacity: 1, duration: 0.1 }, 3.0 + i * 0.036));
+      tl.fromTo("#c-scan", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 3.0);
+      tl.to("#c-scan", { y: 580, duration: 2.0, ease: "none" }, 3.0);
+      tl.to("#c-scan", { opacity: 0, duration: 0.15 }, 4.9);
+      tl.fromTo(["#c-pr", "#c-bar"], { opacity: 0 }, { opacity: 1, duration: 0.2 }, 4.25);
+      tl.fromTo("#c-bari", { scaleX: 0 }, { scaleX: 0.83, duration: 0.7, ease: "none" }, 4.3);
+
+      // ---------- L10: three lines (5.0 - 14.0)
+      tl.to("#c-msgs", { y: -380, duration: 0.55, ease: "power3.inOut" }, 5.0);
+      tl.fromTo("#c-a1", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25 }, 5.35);
+      PH.forEach(([, v], i) => {
+        if (v !== "c") return;
+        const k = [0, 1, 2, 3, 8, 11].indexOf(i);
+        tl.fromTo(["#c-rg" + i, "#c-ic" + i], { opacity: 0 }, { opacity: 1, duration: 0.2 }, 5.6 + k * 0.08);
+      });
+      tl.fromTo("#c-lg1", { opacity: 0 }, { opacity: 1, duration: 0.25 }, 5.9);
+      tl.fromTo("#c-a2", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25 }, 6.9);
+      [4, 6, 7, 9].forEach((i, k) => tl.fromTo(["#c-rg" + i, "#c-ic" + i], { opacity: 0 }, { opacity: 1, duration: 0.2 }, 7.15 + k * 0.1));
+      tl.fromTo("#c-lg3", { opacity: 0 }, { opacity: 1, duration: 0.25 }, 7.5);
+      [5, 10].forEach((i, k) => tl.fromTo(["#c-rg" + i, "#c-ic" + i], { opacity: 0 }, { opacity: 1, duration: 0.2 }, 8.4 + k * 0.1));
+      tl.fromTo("#c-lg2", { opacity: 0 }, { opacity: 1, duration: 0.25 }, 8.55);
+      tl.fromTo("#c-a3", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25 }, 9.2);
+      tl.fromTo("#c-q", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.25 }, 10.5);
+      tl.fromTo(["#c-yes", "#c-no"], { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out", stagger: 0.06 }, 11.2);
+
+      // ---------- L11: read twice (14.0 - 27.0)
+      tl.fromTo("#c-split", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 14.0);
+      tl.fromTo("#c-pane1", { x: 1192, y: 157, scale: 0.245, transformOrigin: "0 0" }, { x: 0, y: 0, scale: 1, duration: 0.7, ease: "power3.inOut" }, 14.0);
+      tl.fromTo("#c-pane2", { x: 300, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: "expo.out" }, 14.45);
+      tl.fromTo(["#c-ph1", "#c-ph2"], { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, stagger: 0.1 }, 14.6);
+      tl.fromTo("#c-scan1", { opacity: 1, y: -60 }, { y: 585, duration: 1.8, ease: "none" }, 14.8);
+      tl.to("#c-scan1", { opacity: 0, duration: 0.2 }, 16.5);
+      tl.fromTo("#c-tb1", { attr: { opacity: 0 } }, { attr: { opacity: 1 }, duration: 0.12 }, 14.98);
+      tl.fromTo("#c-tt1", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 15.08);
+      tl.fromTo("#c-vb1", { attr: { opacity: 0 } }, { attr: { opacity: 1 }, duration: 0.15 }, 15.2);
+      tl.fromTo("#c-vt1", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 15.25);
+      tl.fromTo("#c-vb2", { attr: { opacity: 0 } }, { attr: { opacity: 1 }, duration: 0.15 }, 15.7);
+      tl.fromTo("#c-vt2", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 15.75);
+      tl.fromTo("#c-r1", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3, ease: "expo.out" }, 16.6);
+      tl.fromTo("#c-r2", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3, ease: "expo.out" }, 16.75);
+      tl.fromTo(["#c-ok1", "#c-ok2"], { opacity: 0 }, { opacity: 1, duration: 0.2, stagger: 0.12 }, 17.3);
+      // whip to the two-tick rule
+      tl.to("#c-s1", { x: -1400, duration: 0.28, ease: "power3.in" }, 19.0);
+      tl.set("#c-s1", { opacity: 0 }, 19.28);
+      tl.fromTo("#c-s2", { x: 1400, opacity: 1 }, { x: 0, duration: 0.5, ease: "expo.out" }, 19.22);
+      tl.fromTo("#c-k1", { opacity: 0, scale: 0.4, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 20.0);
+      tl.fromTo("#c-k2", { opacity: 0, scale: 0.4, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 21.25);
+      tl.fromTo("#c-clearon", { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 0.3, ease: "expo.out" }, 21.5);
+      // whip to the redaction
+      tl.to("#c-s2", { x: -1400, duration: 0.28, ease: "power3.in" }, 22.75);
+      tl.set("#c-s2", { opacity: 0 }, 23.03);
+      tl.fromTo("#c-s3", { x: 1400, opacity: 1 }, { x: 0, duration: 0.5, ease: "expo.out" }, 22.97);
+      tl.fromTo("#c-redact", { attr: { width: 0 } }, { attr: { width: 104 }, duration: 0.35, ease: "power3.out" }, 23.65);
+      tl.fromTo("#c-dlead", { attr: { "stroke-dashoffset": 1.1 } }, { attr: { "stroke-dashoffset": 0 }, duration: 0.35, ease: "power2.out" }, 23.95);
+      tl.fromTo("#c-dname", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.22 }, 24.2);
+      tl.fromTo("#c-dpos", { opacity: 0 }, { opacity: 1, duration: 0.25 }, 24.4);
+      tl.fromTo("#c-dline", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "expo.out" }, 24.9);
+      tl.to("#c-split", { opacity: 0, duration: 0.3, ease: "power2.in" }, 26.75);
+
+      // ---------- L12: one yes (27.0 - 35.0)
+      tl.fromTo("#c-cursor", { x: 1560, y: 1010, opacity: 1 }, { x: 236, y: 724, duration: 1.15, ease: "power3.inOut" }, 27.3);
+      tl.to("#c-cursor", { scale: 0.88, duration: 0.07, transformOrigin: "0 0" }, 28.5);
+      tl.to("#c-cursor", { scale: 1, duration: 0.2 }, 28.57);
+      tl.to("#c-yes", { scale: 0.93, duration: 0.07 }, 28.5);
+      tl.to("#c-yes", { scale: 1, duration: 0.25, ease: "power2.out" }, 28.57);
+      tl.to("#c-no", { opacity: 0.25, duration: 0.3 }, 28.6);
+      tl.to("#c-cursor", { x: 520, y: 1120, duration: 0.7, ease: "power3.in" }, 29.1);
+      tl.fromTo("#c-album", { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.4, ease: "expo.out" }, 28.8);
+      const fan = [[34, 112, -7], [70, 108, 2], [106, 104, 9]];
+      [0, 1, 2, 3, 8, 11].forEach((i, k) => {
+        const [fx, fy, fr] = fan[Math.min(2, k % 3)];
+        tl.to("#c-th" + i, { x: fx, y: fy, scale: 0.55, rotation: fr, transformOrigin: "0 0", duration: 0.6, ease: "power3.inOut", zIndex: 5 + k }, 28.85 + k * 0.12);
+        if (k < 3) tl.to("#c-th" + i, { opacity: 0, duration: 0.2 }, 29.6 + k * 0.05);
+      });
+      [4, 6, 7, 9].forEach((i, k) => tl.fromTo("#c-sp" + i, { opacity: 0, scale: 1.7, rotation: -14 }, { opacity: 1, scale: 1, rotation: -9, duration: 0.18, ease: "power3.in" }, 30.55 + k * 0.15));
+      tl.to(["#c-q", "#c-yes", "#c-no"], { opacity: 0, duration: 0.25 }, 31.0);
+      tl.fromTo("#c-done", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.3 }, 31.25);
+      // clear the stage for the next question
+      tl.to(["#c-msgs", "#c-done"], { y: "-=420", opacity: 0, duration: 0.35, ease: "power3.in" }, 34.55);
+      tl.to(["#c-grid", "#c-album", ".legend", "#c-panel .ptitle", "#c-panel .psub"], { opacity: 0, duration: 0.3 }, 34.6);
+      tl.set({}, {}, 35);
+      window.__timelines["chat"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,126 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #050606; font-family: "Inter", sans-serif; color: #eeede7; }
+    #root .layer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    #root .wm { position: absolute; left: 664px; top: 392px; font-weight: 900; font-size: 170px; line-height: 1; letter-spacing: -0.045em; white-space: nowrap; }
+    #root .wm .l { position: relative; display: inline-block; opacity: 0; }
+    #root .wm .c { position: absolute; right: -20px; top: 18px; width: 14px; height: 138px; background: #5ed6a5; opacity: 0; }
+    #root .tag { position: absolute; left: 0; width: 1920px; top: 640px; text-align: center; font-weight: 700; font-size: 54px; letter-spacing: -0.02em; color: #c9ceca; white-space: nowrap; }
+    #root .tag span { display: inline-block; opacity: 0; }
+    #root .tag .acc { color: #5ed6a5; }
+    #root .card { position: absolute; left: 0; top: 0; width: 400px; height: 272px; padding: 8px; background: #f2efe7; box-shadow: 0 2px 3px rgba(0,0,0,.4), 0 26px 50px -18px rgba(0,0,0,.8); }
+    #root .card img { display: block; width: 384px; height: 256px; object-fit: cover; }
+    #root .card .veil { position: absolute; inset: 0; background: rgba(5, 7, 6, 0.6); }
+    #root .card svg { position: absolute; left: 8px; top: 8px; overflow: visible; }
+    #root .clabel { position: absolute; left: 0; top: 292px; width: 400px; text-align: center; font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 28px; letter-spacing: .04em; white-space: nowrap; }
+    #root .ok { position: absolute; right: -14px; top: -14px; width: 48px; height: 48px; border-radius: 50%; background: #5ed6a5; }
+    #root .ok svg { left: 11px; top: 12px; }
+  </style>
+  <div id="root" data-composition-id="reveal" data-width="1920" data-height="1080">
+    <div id="r-conv" class="layer">
+      <div id="r-before" class="layer" style="opacity: 0">
+        <div id="r-sb" class="layer"></div>
+      </div>
+      <div id="r-after" class="layer" style="opacity: 0">
+        <div id="r-sa" class="layer"></div>
+      </div>
+    </div>
+
+    <div id="r-wm" class="wm" aria-label="Clueproof"><span class="l">C<i class="c"></i></span><span class="l">l<i class="c"></i></span><span class="l">u<i class="c"></i></span><span class="l">e<i class="c"></i></span><span class="l">p<i class="c"></i></span><span class="l">r<i class="c"></i></span><span class="l">o<i class="c"></i></span><span class="l">o<i class="c"></i></span><span class="l">f<i class="c"></i></span></div>
+    <div id="r-tag" class="tag"><span>Every</span> <span>photo</span> <span>leaves</span> <span>clues.</span> <span>Clueproof</span> <span>finds</span> <span>them</span> <span class="acc">first.</span></div>
+
+    <svg id="r-mark" class="layer" viewBox="0 0 1920 1080" data-layout-ignore>
+      <g id="r-mark-g" transform="translate(960 540)">
+        <circle id="r-ring" cx="0" cy="0" r="168" fill="none" stroke="#eeede7" stroke-width="9.6" />
+        <rect id="r-bar" x="-104" y="-24" width="0" height="48" rx="6" fill="#5ed6a5" />
+      </g>
+    </svg>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true, defaults: { immediateRender: false } });
+      const $ = (s) => document.querySelector(s);
+
+      // ---------- conveyor cards (built once from data, deterministic)
+      const ITEMS = [
+        { src: "S03-ice-cream.jpg", a: 1600 / 1205, clean: true },
+        { src: "S06-license-plate.jpg", a: 1600 / 968, box: [0.226, 0.636, 0.128, 0.122], label: "License plate" },
+        { src: "S10-parcel-label.jpg", a: 1600 / 1141, box: [0.122, 0.123, 0.344, 0.11], label: "Address label" },
+        { src: "S12-mountain-lake.jpg", a: 1600 / 1200, clean: true },
+        { src: "S05-house-number.jpg", a: 1060 / 1600, box: [0.405, 0.004, 0.128, 0.066], label: "House number", top: true },
+      ];
+      const W = 384, H = 256;
+      const cover = (a, top) => {
+        if (a > W / H) { const dw = H * a; return { dw, dh: H, ox: (W - dw) / 2, oy: 0 }; }
+        const dh = W / a; return { dw: W, dh, ox: 0, oy: top ? 0 : (H - dh) / 2 };
+      };
+      const mk = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html) e.innerHTML = html; return e; };
+      ITEMS.forEach((it, i) => {
+        for (const side of ["b", "a"]) {
+          const card = mk("div", "card");
+          card.id = `r-${side}${i}`;
+          const img = mk("img"); img.src = "assets/photos/" + it.src; img.alt = "";
+          if (it.top) img.style.objectPosition = "50% 0%";
+          card.appendChild(img);
+          if (side === "b") card.appendChild(mk("div", "veil"));
+          if (side === "a" && it.box) {
+            const c = cover(it.a, it.top);
+            const [bx, by, bw, bh] = it.box;
+            const x = bx * c.dw + c.ox - 4, y = by * c.dh + c.oy - 4, w = bw * c.dw + 8, h = bh * c.dh + 8;
+            card.appendChild(mk("span", "", `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" fill="none" stroke="#e2383f" stroke-width="4"/></svg>`));
+            const lab = mk("div", "clabel"); lab.id = "r-l" + i; lab.textContent = it.label; lab.style.color = "#ff6b70"; lab.style.opacity = 0; card.appendChild(lab);
+          }
+          if (side === "a" && it.clean) {
+            card.appendChild(mk("div", "ok", `<svg width="26" height="24" viewBox="0 0 26 24"><path d="M3 12.5l6.5 6.5L23 4.5" fill="none" stroke="#0b1a14" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`));
+            const lab = mk("div", "clabel"); lab.id = "r-l" + i; lab.textContent = "No clues"; lab.style.color = "#5ed6a5"; lab.style.opacity = 0; card.appendChild(lab);
+          }
+          $(side === "b" ? "#r-sb" : "#r-sa").appendChild(card);
+          gsap.set(card, { x: 200 - 440 * i - 200, y: 540 - 136 });
+        }
+      });
+      // after-layer mask: right half-plane plus the lens disk
+      const disk = [];
+      for (let k = 0; k <= 32; k++) { const t = -Math.PI / 2 - (k * Math.PI) / 32; disk.push(`${(960 + 163 * Math.cos(t)).toFixed(1)}px ${(540 + 163 * Math.sin(t)).toFixed(1)}px`); }
+      $("#r-after").style.clipPath = `polygon(960px 0px, 960px 377px, ${disk.join(", ")}, 960px 1080px, 1920px 1080px, 1920px 0px)`;
+
+      gsap.set("#r-conv", { scale: 1.36, transformOrigin: "960px 540px" });
+      // ---------- the mark
+      const mark = { x: 960, y: 540, s: 1, sw: 9.6 };
+      const drawMark = () => {
+        $("#r-mark-g").setAttribute("transform", `translate(${mark.x.toFixed(2)} ${mark.y.toFixed(2)}) scale(${mark.s.toFixed(4)})`);
+        $("#r-ring").setAttribute("stroke-width", mark.sw.toFixed(2));
+      };
+      // L6: ring -> mark, the name types in (0.0 - 5.0)
+      tl.fromTo(mark, { x: 960, y: 540, s: 1, sw: 9.6 }, { x: 538, y: 474, s: 0.45, sw: 28, duration: 0.75, ease: "expo.out", onUpdate: drawMark }, 0.0);
+      const letters = document.querySelectorAll("#r-wm .l");
+      const carets = document.querySelectorAll("#r-wm .c");
+      letters.forEach((l, i) => {
+        const t = 0.32 + i * 0.075;
+        tl.set(l, { opacity: 1 }, t);
+        tl.set(carets[i], { opacity: 1 }, t);
+        tl.set(carets[i], { opacity: 0 }, i < letters.length - 1 ? t + 0.075 : t + 0.5);
+      });
+      tl.fromTo("#r-bar", { attr: { width: 0 } }, { attr: { width: 208 }, duration: 0.5, ease: "expo.out" }, 1.45);
+      document.querySelectorAll("#r-tag span").forEach((w, j) => {
+        const t = (j < 4 ? 2.35 : 3.05) + (j % 4) * 0.08 + (j >= 4 ? 0 : 0);
+        tl.fromTo(w, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "power2.out" }, t);
+      });
+      // L7: the lens reads (5.0 - 12.0)
+      tl.to(["#r-wm", "#r-tag"], { opacity: 0, filter: "blur(10px)", duration: 0.22, ease: "power2.in" }, 4.95);
+      tl.to("#r-bar", { attr: { width: 0, x: 104 }, duration: 0.2, ease: "power2.in" }, 4.95);
+      tl.to(mark, { x: 960, y: 540, s: 1.36, sw: 7.4, duration: 0.7, ease: "power3.inOut", onUpdate: drawMark }, 5.0);
+      tl.fromTo(["#r-before", "#r-after"], { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" }, 5.3);
+      const strip = { X: 0 };
+      const drawStrip = () => { $("#r-sb").style.transform = `translateX(${strip.X.toFixed(2)}px)`; $("#r-sa").style.transform = `translateX(${strip.X.toFixed(2)}px)`; };
+      // each label lands once its card has fully left the lens
+      ITEMS.forEach((_, i) => tl.fromTo("#r-l" + i, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2 }, 5.4 + (1170 - 500 + 440 * i) / 520));
+      tl.fromTo(strip, { X: 300 }, { X: 300 + 520 * 6.6, duration: 6.6, ease: "none", onUpdate: drawStrip }, 5.4);
+      // into the NAS: the ring becomes its power light
+      tl.to(["#r-before", "#r-after"], { opacity: 0, duration: 0.45, ease: "power2.in" }, 11.2);
+      tl.to(mark, { x: 790, y: 300, s: 0.08, sw: 50, duration: 0.75, ease: "power3.inOut", onUpdate: drawMark }, 11.2);
+      tl.to("#r-ring", { attr: { stroke: "#5ed6a5" }, duration: 0.5 }, 11.4);
+      tl.set({}, {}, 12);
+      window.__timelines["reveal"] = tl;
+    })();
+  </script>
+</template>

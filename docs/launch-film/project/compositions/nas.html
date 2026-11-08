@@ -1,0 +1,100 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #0b100f; font-family: "Inter", sans-serif; color: #eeede7; }
+    #root .grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(238,237,231,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(238,237,231,.035) 1px, transparent 1px); background-size: 48px 48px; background-position: 0 12px; }
+    #root .layer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    #root .mini { position: absolute; left: 0; top: 0; width: 140px; height: 96px; padding: 5px; background: #f2efe7; box-shadow: 0 10px 20px -6px rgba(0,0,0,.7); opacity: 0; }
+    #root .mini img { display: block; width: 130px; height: 86px; object-fit: cover; }
+    #root .nlabel { position: absolute; left: 0; width: 1920px; top: 792px; text-align: center; font-weight: 700; font-size: 38px; letter-spacing: 0.01em; opacity: 0; }
+    #root .nocall { position: absolute; left: 1452px; top: 470px; font-weight: 800; font-size: 56px; letter-spacing: -0.03em; line-height: 1.05; white-space: nowrap; }
+    #root .nocall span { display: inline-block; opacity: 0; }
+    #root .flood { position: absolute; inset: 0; background: #e9ece8; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="nas" data-width="1920" data-height="1080">
+    <div class="grid"></div>
+    <div id="n-world" class="layer">
+      <svg id="n-svg" class="layer" viewBox="0 0 1920 1080" data-layout-ignore>
+        <g fill="none" stroke="#eeede7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path id="n-body" d="M770 250 H1150 Q1180 250 1180 280 V740 Q1180 770 1150 770 H770 Q740 770 740 740 V280 Q740 250 770 250 Z" pathLength="1" stroke-dasharray="1 1.2" stroke-dashoffset="1.1" />
+          <path id="n-side" d="M1180 290 L1222 262 V722 L1180 752 M1150 250 L1192 222 H1196 Q1222 222 1222 248 V262" pathLength="1" stroke-dasharray="1 1.2" stroke-dashoffset="1.1" stroke-opacity=".55" />
+          <path id="n-t1" d="M800 358 H1120 Q1130 358 1130 368 V412 Q1130 422 1120 422 H800 Q790 422 790 412 V368 Q790 358 800 358 Z M1078 380 H1106" pathLength="1" stroke-dasharray="1 1.2" stroke-dashoffset="1.1" />
+          <path id="n-t2" d="M800 448 H1120 Q1130 448 1130 458 V502 Q1130 512 1120 512 H800 Q790 512 790 502 V458 Q790 448 800 448 Z M1078 470 H1106" pathLength="1" stroke-dasharray="1 1.2" stroke-dashoffset="1.1" />
+          <path id="n-t3" d="M800 538 H1120 Q1130 538 1130 548 V592 Q1130 602 1120 602 H800 Q790 602 790 592 V548 Q790 538 800 538 Z M1078 560 H1106" pathLength="1" stroke-dasharray="1 1.2" stroke-dashoffset="1.1" />
+          <path id="n-t4" d="M800 628 H1120 Q1130 628 1130 638 V682 Q1130 692 1120 692 H800 Q790 692 790 682 V638 Q790 628 800 628 Z M1078 650 H1106" pathLength="1" stroke-dasharray="1 1.2" stroke-dashoffset="1.1" />
+        </g>
+        <g fill="#5ed6a5">
+          <circle id="n-d1" cx="812" cy="390" r="5" opacity="0" />
+          <circle id="n-d2" cx="812" cy="480" r="5" opacity="0" />
+          <circle id="n-d3" cx="812" cy="570" r="5" opacity="0" />
+          <circle id="n-d4" cx="812" cy="660" r="5" opacity="0" />
+        </g>
+        <circle id="n-led" cx="790" cy="300" r="13.44" fill="none" stroke="#5ed6a5" stroke-width="4" />
+        <path id="n-house" d="M960 96 L1400 258 V870 H520 V258 Z" fill="none" stroke="#5ed6a5" stroke-width="3.5" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1.2" stroke-dashoffset="1.1" />
+        <g stroke="#eeede7" stroke-width="3" stroke-linecap="round" fill="none">
+          <line id="n-o1" x1="1182" y1="500" x2="1182" y2="500" stroke-dasharray="10 12" />
+          <line id="n-o2" x1="738" y1="500" x2="738" y2="500" stroke-dasharray="10 12" />
+          <line id="n-o3" x1="960" y1="248" x2="960" y2="248" stroke-dasharray="10 12" />
+        </g>
+        <g stroke="#5ed6a5" stroke-width="5" stroke-linecap="round">
+          <path id="n-s1" d="M1400 482 V518" opacity="0" />
+          <path id="n-s2" d="M520 482 V518" opacity="0" />
+          <path id="n-s3" d="M942 106 L978 106" opacity="0" />
+        </g>
+      </svg>
+      <div id="n-minis" class="layer">
+        <div class="mini" id="n-m1"><img src="assets/photos/S01-beach.jpg" alt="" /></div>
+        <div class="mini" id="n-m2"><img src="assets/photos/S02-sunset.jpg" alt="" /></div>
+        <div class="mini" id="n-m3"><img src="assets/photos/S03-ice-cream.jpg" alt="" /></div>
+        <div class="mini" id="n-m4"><img src="assets/photos/S04-dog-beach.jpg" alt="" /></div>
+        <div class="mini" id="n-m5"><img src="assets/photos/S05-house-number.jpg" alt="" style="object-position: 50% 0%" /></div>
+        <div class="mini" id="n-m6"><img src="assets/photos/S06-license-plate.jpg" alt="" /></div>
+        <div class="mini" id="n-m7"><img src="assets/photos/S07-boarding-pass.jpg" alt="" /></div>
+        <div class="mini" id="n-m8"><img src="assets/photos/S08-school-crest.jpg" alt="" /></div>
+        <div class="mini" id="n-m9"><img src="assets/photos/S09-seagull.jpg" alt="" /></div>
+        <div class="mini" id="n-m10"><img src="assets/photos/S10-parcel-label.jpg" alt="" /></div>
+        <div class="mini" id="n-m11"><img src="assets/photos/S11-house-key.jpg" alt="" /></div>
+        <div class="mini" id="n-m12"><img src="assets/photos/S12-mountain-lake.jpg" alt="" /></div>
+      </div>
+      <div id="n-label" class="nlabel">UGREEN AI NAS</div>
+      <div id="n-nocall" class="nocall"><span>No</span> <span>external</span><br /><span>calls.</span></div>
+    </div>
+    <div id="n-flood" class="flood"></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true, defaults: { immediateRender: false } });
+      const draw = (sel, t, d, ease) => tl.fromTo(sel, { attr: { "stroke-dashoffset": 1.1 } }, { attr: { "stroke-dashoffset": 0 }, duration: d, ease: ease || "power2.inOut" }, t);
+      // the NAS draws itself around its power light (0.0 - 1.6)
+      draw("#n-body", 0.05, 1.0, "power2.inOut");
+      draw("#n-side", 0.5, 0.8);
+      ["#n-t1", "#n-t2", "#n-t3", "#n-t4"].forEach((s, i) => draw(s, 0.45 + i * 0.12, 0.7));
+      tl.fromTo("#n-label", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.22 }, 3.45);
+      // the photos go in (1.4 - 4.6)
+      for (let i = 0; i < 12; i++) {
+        const el = "#n-m" + (i + 1);
+        const sx = -220 - (i % 3) * 120, sy = 150 + i * 62;
+        const tray = i % 4, tx = 960 - 70, ty = 390 + tray * 90 - 48;
+        const t = 1.4 + i * 0.2;
+        tl.set(el, { x: sx, y: sy, rotation: (i % 2 ? 8 : -6), opacity: 1, scale: 1 }, t);
+        tl.to(el, { x: tx, duration: 0.95, ease: "power2.in" }, t);
+        tl.to(el, { y: ty, rotation: 0, duration: 0.95, ease: "power3.out" }, t);
+        tl.to(el, { scale: 0.35, opacity: 0, duration: 0.22, ease: "power2.in" }, t + 0.78);
+        tl.fromTo("#n-d" + (tray + 1), { attr: { opacity: 1 } }, { attr: { opacity: 0.35 }, duration: 0.5, ease: "power2.out" }, t + 0.95);
+      }
+      // never leaves home (4.6 - 7.0)
+      draw("#n-house", 4.6, 1.6, "power2.inOut");
+      // not even to be checked (7.0 - 9.3)
+      [["#n-o1", "#n-s1", { x2: 1390 }, { x2: 1182 }], ["#n-o2", "#n-s2", { x2: 530 }, { x2: 738 }], ["#n-o3", "#n-s3", { y2: 112 }, { y2: 248 }]].forEach(([o, s, to, from], i) => {
+        const t = 7.0 + i * 0.18;
+        tl.fromTo(o, { attr: from }, { attr: to, duration: 0.45, ease: "power2.out" }, t);
+        tl.fromTo(s, { attr: { opacity: 0 } }, { attr: { opacity: 1 }, duration: 0.12 }, t + 0.42);
+      });
+      document.querySelectorAll("#n-nocall span").forEach((w, j) => tl.fromTo(w, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16 }, 7.55 + j * 0.08));
+      // zoom through the trays into the interface (9.3 - 10.0)
+      tl.to("#n-world", { scale: 7, transformOrigin: "960px 520px", duration: 0.7, ease: "power3.in" }, 9.3);
+      tl.fromTo("#n-flood", { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power2.in" }, 9.62);
+      tl.set({}, {}, 10);
+      window.__timelines["nas"] = tl;
+    })();
+  </script>
+</template>
