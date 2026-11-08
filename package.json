@@ -1,14 +1,14 @@
 {
-  "name": "before-you-share",
+  "name": "clueproof",
   "version": "1.0.0",
   "private": true,
-  "description": "Private pre-share privacy check for photos, a Skill for UGREEN AI NAS (UGREEN Hackathon 2026).",
+  "description": "Clueproof: private photo-privacy check and Stranger's File, a Skill for UGREEN AI NAS (UGREEN Hackathon 2026).",
   "type": "module",
   "scripts": {
     "build": "node tools/build.mjs",
     "check": "node tools/build.mjs --strict --kit ${ULIYA_KIT:-uliya-skill-kit}",
     "proposal": "python tools/make_proposal.py",
-    "specimens": "python tests/specimens/generate.py"
+    "site": "python -m http.server 8765 --directory docs"
   },
   "engines": { "node": ">=20" }
 }

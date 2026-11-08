@@ -108,14 +108,14 @@ def _arrow(x1: int, y: int, x2: int) -> str:
 
 def build_figure() -> str:
     step = 147
-    lane1 = [("Photo set", "photo or file agent"), ("Tags + rules", "EXIF, face rules"), ("Text reading", "photo-agent OCR"),
-             ("Visual reading", "photo-agent vision"), ("Verdicts", "asymmetric rule"), ("One approval", "album + tags")]
-    lane2 = [("Shared albums", "shared by the user"), ("Newest 20 photos", "photo-agent"), ("Same check", "two readings + metadata"),
-             ("Findings per album", "official fix steps")]
+    lane1 = [("Today's photos", "default selection"), ("Tags + rules", "EXIF, face rules"), ("Text reading", "photo-agent OCR"),
+             ("Visual reading", "photo-agent vision"), ("3-line answer", "asymmetric rule"), ("One yes", "album + tags")]
+    lane2 = [("Shared albums", "shared by the user"), ("Index shortlist", "text, cards, GPS"), ("Two readings", "text + vision"),
+             ("Stranger's File", "8 pages, combinations")]
     parts = ['<svg viewBox="0 0 890 250" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">',
              '<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">'
              '<path d="M0,0 L10,5 L0,10 z" fill="#16181d"/></marker></defs>',
-             '<text x="8" y="16" font-size="11" font-weight="700" letter-spacing="1.2" fill="#c2410c">CHECK BEFORE SHARING</text>']
+             '<text x="8" y="16" font-size="11" font-weight="700" letter-spacing="1.2" fill="#c2410c">IS THIS SAFE TO POST?</text>']
     for i, (title, sub) in enumerate(lane1):
         x = 8 + i * step
         parts.append(_box(x, 26, title, sub, accent=(i == 4)))
@@ -124,14 +124,14 @@ def build_figure() -> str:
     parts.append('<text x="449" y="100" text-anchor="middle" font-size="10.5" fill="#5b6170">'
                  'Text and visual readings run as separate delegations. One reading raises a concern; '
                  'Clear needs both readings and the metadata to complete clean.</text>')
-    parts.append('<text x="8" y="140" font-size="11" font-weight="700" letter-spacing="1.2" fill="#c2410c">SHARED-ALBUM AUDIT</text>')
+    parts.append('<text x="8" y="140" font-size="11" font-weight="700" letter-spacing="1.2" fill="#c2410c">WHAT COULD A STRANGER FIND OUT ABOUT US?</text>')
     for i, (title, sub) in enumerate(lane2):
         x = 8 + i * step
         parts.append(_box(x, 150, title, sub, accent=(i == 3)))
         if i:
             parts.append(_arrow(x - step + 124, 176, x))
     parts.append('<text x="8" y="226" font-size="10.5" fill="#5b6170">'
-                 'Findings are types and positions. Albums are never changed; only Keep private tags are written, after approval.</text>')
+                 'Pages count confirmed clues only and never state their values. One yes marks the photos Keep private and shows the official steps to unshare.</text>')
     parts.append('</svg>')
     return "".join(parts)
 

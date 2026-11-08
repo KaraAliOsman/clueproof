@@ -2,35 +2,39 @@
   "checkFormatVersion": "2.0.0",
   "status": "static-pass",
   "target": {
-    "skillName": "before-you-share"
+    "skillName": "clueproof"
   },
   "catalog": {
     "checkedVersion": "2.0.0"
   },
   "files": [
     {
+      "path": "references/answer-format.md",
+      "sha256": "e825a207d860428aea8022361f27d104ebb251a68c29a253aef0f269233c0fc0"
+    },
+    {
       "path": "references/disclosures.md",
-      "sha256": "60492efdabfdda4bb78d12ce51fd9f8496e827ab30deece065fa5f6984535f08"
+      "sha256": "38e60308919549443af9f03fdf41a1c5840a305af6930cb456df47c235126b7c"
     },
     {
       "path": "references/privacy-and-safety.md",
-      "sha256": "de4366677cd3b42677fc05b4d76b4d839a6aed4f03fd3325a84ccd63774d7902"
+      "sha256": "9fd7bf466e287c51b69e1ea02afb70de1c7d31fad945f1ca1563cb0cf657aa16"
     },
     {
-      "path": "references/report-format.md",
-      "sha256": "9c54afd74f7907e48e2ca067937954d9b15dfbd9e76cc4cf633e4ac428859bab"
+      "path": "references/strangers-file.md",
+      "sha256": "12c35d057d5ece93c487088dab7fef484e1a84143ac6617c8196a4e03a14f7b8"
     },
     {
       "path": "references/validation-plan.md",
-      "sha256": "596f810ebde4e35d1c01afd1be55e3c4394a51b12072978adb3bfb1cceea1b02"
+      "sha256": "6dae14a7fa09bc74585e6b19637c35ca86fb574b2ead3ecf0db537e135a398b0"
     },
     {
       "path": "references/verdict-rules.md",
-      "sha256": "66aa638344c6e1da0e1b650f1c6ff70962052d4d038f3f7cbd8aa4d4cf32fa22"
+      "sha256": "9f846b5b4f1e61dff320f484dee12700b6e3460ef4ed926cb41f96f4acb10bb4"
     },
     {
       "path": "SKILL.md",
-      "sha256": "d65424de8f953f4da5d9053b71f078c3ffbbadb48e7806f880a05da85b9e7d6c"
+      "sha256": "9d74d7a7749af0dfc7154c604417f8b0ed6c8ebff242ff337705835234293fcf"
     }
   ],
   "summary": {

@@ -26,9 +26,18 @@ The panel's first pick was a family emergency binder: find IDs, insurance, medic
 
 The competitor scan changed the picture. Among the readable public projects were about ten near-identical binders (for example Family Go-Bag, Ready Folder, Family Emergency Binder, VitalArchive, Renewal Radar and Fine Print), plus similar ideas announced in the Community. Extrapolated to all entries, that is likely two dozen. Home inventory, warranties, receipts, health timelines and family memories were crowded too. In a contest where Innovation & Differentiation is a quarter of the score and decides two awards, a well-executed clone is a poor bet.
 
-No readable project checked what photos reveal before they are shared. That gap became the new idea.
+No readable project checked what photos reveal before or after they are shared. That gap became the new idea.
 
-## The chosen idea: Before You Share
+## From Before You Share to Clueproof
+
+The first version, Before You Share, checked photos one at a time and asked the user to pick an album and an audience. Feedback was blunt: useful, but not a game changer, and too much to think about. Two changes made it one:
+
+1. **The mosaic effect.** Photos that are harmless alone become revealing together. The Stranger's File reads all shared albums and fills eight pages a stranger would try to fill, with the worst combinations, which no per-photo tool shows.
+2. **One sentence, one yes.** No setup: today's photos and a public audience by default, a three-line answer, and one yes that creates the albums. The fix for a shared album is a clean copy to share instead.
+
+The name changed to Clueproof ("Sharelock" was rejected because an iMessage app already uses it).
+
+## The chosen idea: Clueproof
 
 | Criterion | Why it scores |
 | --- | --- |
@@ -47,6 +56,9 @@ No readable project checked what photos reveal before they are shared. That gap 
 | No action returns per-photo index signals or people | Index step replaced by personal rules checked through the people index (search by person name) |
 | Tagged photos ignored the audience | Keep private settles photos only for Public and Marketplace; family checks read them normally |
 | Street signs and any QR code were too broad | ADR narrowed to house numbers and postal addresses, TKT to booking codes; FAC is bystanders only |
-| A saved log added writes and little value | Log removed; tags are the memory |
+| A saved log added writes and little value | Log removed; a private Keep private album is the memory |
+| Per-file tags meant up to six approval prompts | One private album: two prompts for one yes |
+| Real phone photos almost all carry GPS | Location-only photos join the ready-to-share album with one note |
+| Tagging a shared photo does not unshare it | The Stranger's File fix is a clean copy to share instead, plus the official steps to stop sharing |
 | Experts might transcribe secrets | Instructions ask only for types and positions, never content |
 | Another person's shared albums are theirs | The audit covers only albums the user shared |

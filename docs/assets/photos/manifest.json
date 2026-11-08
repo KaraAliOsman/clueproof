@@ -1,0 +1,605 @@
+{
+  "generated": "2026-11-08",
+  "images": [
+    {
+      "id": "S01",
+      "file": "S01-beach.jpg",
+      "set": "summer-2025",
+      "title": "Barceloneta promenade",
+      "description": "Wide view of Platja de la Barceloneta, Barcelona: sand, surf and the palm-lined seafront promenade with the W hotel in the haze. A few distant, unidentifiable walkers. Visually clean; GPS of Barceloneta beach (41.3784 N, 2.1925 E) written into EXIF.",
+      "risks": [
+        "LOC"
+      ],
+      "verdict": {
+        "public": "Fix first",
+        "private": "Clear"
+      },
+      "findings": [
+        {
+          "code": "LOC",
+          "label": "GPS location",
+          "position": null,
+          "bbox": null,
+          "readings": "metadata"
+        }
+      ],
+      "credit": {
+        "author": "DimiTalen",
+        "license": "CC0",
+        "url": "https://commons.wikimedia.org/wiki/File:Promenade_and_beach,_Platja_de_la_Barceloneta,_Barcelona,_2015.jpg"
+      },
+      "width": 720,
+      "height": 478
+    },
+    {
+      "id": "S02",
+      "file": "S02-sunset.jpg",
+      "set": "summer-2025",
+      "title": "Sunset over the sea",
+      "description": "Sun low over calm sea with island silhouettes on the horizon (Komodo National Park, Indonesia). No people, no text.",
+      "risks": [],
+      "verdict": {
+        "public": "Clear",
+        "private": "Clear"
+      },
+      "findings": [],
+      "credit": {
+        "author": "Jakub Hałun",
+        "license": "CC BY 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Sunset_on_the_sea_in_Komodo_National_Park,_Indonesia,_20250825_1748_3313.jpg"
+      },
+      "width": 720,
+      "height": 481
+    },
+    {
+      "id": "S03",
+      "file": "S03-ice-cream.jpg",
+      "set": "summer-2025",
+      "title": "Two ice cream cones",
+      "description": "Two hands holding chocolate and banoffee ice cream cones on a pebble beach, Brighton West Pier ruin in the background. Only text is the PURBECK brand on the cone sleeves. Distant people are out of focus.",
+      "risks": [],
+      "verdict": {
+        "public": "Clear",
+        "private": "Clear"
+      },
+      "findings": [],
+      "credit": {
+        "author": "Andy Li",
+        "license": "CC0",
+        "url": "https://commons.wikimedia.org/wiki/File:2_ice_cream_cones_2025-05-02.jpg"
+      },
+      "width": 720,
+      "height": 542
+    },
+    {
+      "id": "S04",
+      "file": "S04-dog-beach.jpg",
+      "set": "summer-2025",
+      "title": "Dog on the beach",
+      "description": "White terrier-type dog leaping along a white sand beach (Scotland Cay, Bahamas); two tiny, unidentifiable figures far away in the water. No text.",
+      "risks": [],
+      "verdict": {
+        "public": "Clear",
+        "private": "Clear"
+      },
+      "findings": [],
+      "credit": {
+        "author": "Meg Sanchez megsanchez",
+        "license": "CC0",
+        "url": "https://commons.wikimedia.org/wiki/File:Dog_on_a_beach_(Unsplash).jpg"
+      },
+      "width": 720,
+      "height": 480
+    },
+    {
+      "id": "S05",
+      "file": "S05-house-number.jpg",
+      "set": "summer-2025",
+      "title": "Blue door, number 31",
+      "description": "Turquoise wooden door of a Paris building (rue des Thermopyles) with a blue enamel street-number plaque reading 31 centred above the door.",
+      "risks": [
+        "ADR"
+      ],
+      "verdict": {
+        "public": "Keep private",
+        "private": "Clear"
+      },
+      "findings": [
+        {
+          "code": "ADR",
+          "label": "House number",
+          "position": "top center",
+          "bbox": [
+            0.413,
+            0.009,
+            0.112,
+            0.056
+          ],
+          "readings": "text and vision"
+        }
+      ],
+      "credit": {
+        "author": "Tom Hilton",
+        "license": "CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Door,_31_rue_des_Thermopyles,_Paris_4_June_2015.jpg"
+      },
+      "width": 720,
+      "height": 1087
+    },
+    {
+      "id": "S06",
+      "file": "S06-license-plate.jpg",
+      "set": "summer-2025",
+      "title": "Suzuki rear plate",
+      "description": "Rear three-quarter view of a blue 1984 Suzuki Alto FX in a car park; New Zealand plate LN811 clearly readable, dealer frame Hollands Suzuki Cars. Two parked cars behind show further plates (top left AHQ926, top right partial).",
+      "risks": [
+        "PLT"
+      ],
+      "verdict": {
+        "public": "Fix first",
+        "private": "Clear"
+      },
+      "findings": [
+        {
+          "code": "PLT",
+          "label": "License plate",
+          "position": "bottom left",
+          "bbox": [
+            0.225,
+            0.646,
+            0.141,
+            0.106
+          ],
+          "readings": "text and vision"
+        }
+      ],
+      "credit": {
+        "author": "Riley from Christchurch, New Zealand (Flickr)",
+        "license": "CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:1984_Suzuki_Alto_FX_(rear).jpg"
+      },
+      "width": 720,
+      "height": 435
+    },
+    {
+      "id": "S07",
+      "file": "S07-boarding-pass.jpg",
+      "set": "summer-2025",
+      "title": "Eurowings boarding pass",
+      "description": "Scanned Eurowings boarding pass EW 9846 Dusseldorf to Milan Linate, 30 Jul 2026, seat 10E, gate B31. Passenger name, ticket number and half of the 2D barcode were already blurred by the uploader; the left half of the barcode remains visible.",
+      "risks": [
+        "TKT"
+      ],
+      "verdict": {
+        "public": "Keep private",
+        "private": "Fix first"
+      },
+      "findings": [
+        {
+          "code": "TKT",
+          "label": "Boarding pass",
+          "position": "center",
+          "bbox": [
+            0.08,
+            0.14,
+            0.9,
+            0.78
+          ],
+          "readings": "text and vision"
+        }
+      ],
+      "credit": {
+        "author": "Eurowings",
+        "license": "Public domain",
+        "url": "https://commons.wikimedia.org/wiki/File:Eurowings_-_boarding_pass_EW_9846_-_2026-07-30.jpg"
+      },
+      "width": 720,
+      "height": 290
+    },
+    {
+      "id": "S08",
+      "file": "S08-school-crest.jpg",
+      "set": "summer-2025",
+      "title": "School blazer crest",
+      "description": "Navy school blazer with gold piping; embroidered pocket crest with the monogram IHS (Iere High School, Trinidad) and the motto Truth Conquers All. No person in the photo.",
+      "risks": [
+        "SCH"
+      ],
+      "verdict": {
+        "public": "Keep private",
+        "private": "Clear"
+      },
+      "findings": [
+        {
+          "code": "SCH",
+          "label": "School crest",
+          "position": "center",
+          "bbox": [
+            0.547,
+            0.469,
+            0.162,
+            0.211
+          ],
+          "readings": "text and vision"
+        }
+      ],
+      "credit": {
+        "author": "Jamesfren15",
+        "license": "CC0",
+        "url": "https://commons.wikimedia.org/wiki/File:Iere_High_School_Blazer.jpg"
+      },
+      "width": 720,
+      "height": 702
+    },
+    {
+      "id": "S09",
+      "file": "S09-seagull.jpg",
+      "set": "summer-2025",
+      "title": "Gull on wet sand",
+      "description": "Lesser black-backed gull walking on wet sand at low tide (Saint-Jean-de-Monts, France). No people, no text.",
+      "risks": [],
+      "verdict": {
+        "public": "Clear",
+        "private": "Clear"
+      },
+      "findings": [],
+      "credit": {
+        "author": "Alexis Lours",
+        "license": "CC BY 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Lesser_black-backed_gull_winter.jpg"
+      },
+      "width": 720,
+      "height": 480
+    },
+    {
+      "id": "S10",
+      "file": "S10-parcel-label.jpg",
+      "set": "summer-2025",
+      "title": "Parcel label",
+      "description": "Scan of a DHL/Deutsche Post freight parcel label. Sender block is a business: Lebkuchen-Schmidt GmbH & Co. KG, Zollhausstrasse 30, 90469 Nuernberg, with logo; recipient name and street were blurred by the uploader, 50823 Koeln and several barcodes remain.",
+      "risks": [
+        "MAL"
+      ],
+      "verdict": {
+        "public": "Keep private",
+        "private": "Clear"
+      },
+      "findings": [
+        {
+          "code": "MAL",
+          "label": "Shipping label",
+          "position": "top left",
+          "bbox": [
+            0.122,
+            0.123,
+            0.344,
+            0.11
+          ],
+          "readings": "text and vision"
+        }
+      ],
+      "credit": {
+        "author": "DHL",
+        "license": "Public domain",
+        "url": "https://commons.wikimedia.org/wiki/File:Paketaufkleber_Geschenksendung_Lebkuchen_Schmidt_2014.jpg"
+      },
+      "width": 720,
+      "height": 513
+    },
+    {
+      "id": "S11",
+      "file": "S11-house-key.jpg",
+      "set": "summer-2025",
+      "title": "House key",
+      "description": "Single double-bit security door key with a split ring on a cracked tree-stump surface; the full bit profile is sharply visible (substitute for keys on a table).",
+      "risks": [
+        "KEY"
+      ],
+      "verdict": {
+        "public": "Fix first",
+        "private": "Clear"
+      },
+      "findings": [
+        {
+          "code": "KEY",
+          "label": "House key",
+          "position": "center",
+          "bbox": [
+            0.122,
+            0.379,
+            0.69,
+            0.242
+          ],
+          "readings": "vision only"
+        }
+      ],
+      "credit": {
+        "author": "Hans",
+        "license": "CC0",
+        "url": "https://commons.wikimedia.org/wiki/File:Key-182922.jpg"
+      },
+      "width": 720,
+      "height": 540
+    },
+    {
+      "id": "S12",
+      "file": "S12-mountain-lake.jpg",
+      "set": "summer-2025",
+      "title": "Moraine Lake",
+      "description": "Moraine Lake and the Valley of the Ten Peaks, Banff National Park, Canada, with mirror reflection. No people, no text.",
+      "risks": [],
+      "verdict": {
+        "public": "Clear",
+        "private": "Clear"
+      },
+      "findings": [],
+      "credit": {
+        "author": "Gorgo",
+        "license": "Public domain",
+        "url": "https://commons.wikimedia.org/wiki/File:Moraine_Lake_17092005.jpg"
+      },
+      "width": 720,
+      "height": 540
+    },
+    {
+      "id": "H01",
+      "file": "H01-id-card.jpg",
+      "set": "hazard-set",
+      "title": "Specimen ID card",
+      "description": "Official German identity card specimen (2010 design) for ERIKA MUSTERMANN, card number T22000129, with photo, birth date and signature. Sample image of the Federal Ministry of the Interior, not a real person's card.",
+      "risks": [
+        "IDD"
+      ],
+      "verdict": {
+        "public": "Keep private",
+        "private": "Fix first"
+      },
+      "findings": [
+        {
+          "code": "IDD",
+          "label": "Identity card",
+          "position": "center",
+          "bbox": [
+            0.01,
+            0.01,
+            0.98,
+            0.98
+          ],
+          "readings": "text and vision"
+        }
+      ],
+      "credit": {
+        "author": "Bundesrepublik Deutschland, Bundesministerium des Innern",
+        "license": "Public domain",
+        "url": "https://commons.wikimedia.org/wiki/File:Deutscher_Personalausweis_(2010_Version).jpg"
+      },
+      "width": 720,
+      "height": 458
+    },
+    {
+      "id": "H02",
+      "file": "H02-payment-card.jpg",
+      "set": "hazard-set",
+      "title": "Payment card",
+      "description": "Lloyds Bank Visa Debit card on a wooden table. The first digits 4921 81 are readable; the rest of the number, the dates and the cardholder name were covered with white boxes by the uploader.",
+      "risks": [
+        "PAY"
+      ],
+      "verdict": {
+        "public": "Keep private",
+        "private": "Keep private"
+      },
+      "findings": [
+        {
+          "code": "PAY",
+          "label": "Payment card",
+          "position": "center",
+          "bbox": [
+            0.166,
+            0.185,
+            0.669,
+            0.659
+          ],
+          "readings": "text and vision"
+        }
+      ],
+      "credit": {
+        "author": "JeppaG4",
+        "license": "CC0",
+        "url": "https://commons.wikimedia.org/wiki/File:Lloyds_Bank_Visa_Debit_card.jpg"
+      },
+      "width": 720,
+      "height": 461
+    },
+    {
+      "id": "H03",
+      "file": "H03-chat-screen.jpg",
+      "set": "hazard-set",
+      "title": "Chat list screen",
+      "description": "Telegram for iOS chat list from Telegram's own demo screenshot: names (Alicia Torreaux, Roberto, Veronica, Little Sister, James) and message previews such as Table for four, 2 PM. Be there. All content is fictional demo data.",
+      "risks": [
+        "SCR"
+      ],
+      "verdict": {
+        "public": "Keep private",
+        "private": "Fix first"
+      },
+      "findings": [
+        {
+          "code": "SCR",
+          "label": "Chat screen",
+          "position": "center",
+          "bbox": [
+            0.0,
+            0.17,
+            1.0,
+            0.705
+          ],
+          "readings": "text and vision"
+        }
+      ],
+      "credit": {
+        "author": "Telegram",
+        "license": "CC0",
+        "url": "https://commons.wikimedia.org/wiki/File:Telegram_Chats_List_on_iOS.png"
+      },
+      "width": 720,
+      "height": 1559
+    },
+    {
+      "id": "H04",
+      "file": "H04-wifi-password.jpg",
+      "set": "hazard-set",
+      "title": "Wi-Fi password note",
+      "description": "Printed note taped under a glass table top in a cafe: Wifi: Thanh van / Pass: van0984561355. Business guest Wi-Fi, photographed in a public place.",
+      "risks": [
+        "COD"
+      ],
+      "verdict": {
+        "public": "Keep private",
+        "private": "Keep private"
+      },
+      "findings": [
+        {
+          "code": "COD",
+          "label": "Written password",
+          "position": "center",
+          "bbox": [
+            0.125,
+            0.227,
+            0.826,
+            0.605
+          ],
+          "readings": "text and vision"
+        }
+      ],
+      "credit": {
+        "author": "Martin Lewison (Flickr)",
+        "license": "CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Wi_Fi_Password_(49358092582).jpg"
+      },
+      "width": 720,
+      "height": 596
+    },
+    {
+      "id": "H05",
+      "file": "H05-prescription.jpg",
+      "set": "hazard-set",
+      "title": "Prescription bottles",
+      "description": "Three orange pharmacy bottles with joke prescription labels: Trimyazagain Uprick 30MG, Dr. Leif Mealone, Skull & Crossbones Pharmacy, Ibdonewithol 500MG. All names are fictional parody text.",
+      "risks": [
+        "MED"
+      ],
+      "verdict": {
+        "public": "Keep private",
+        "private": "Fix first"
+      },
+      "findings": [
+        {
+          "code": "MED",
+          "label": "Prescription label",
+          "position": "middle right",
+          "bbox": [
+            0.644,
+            0.079,
+            0.256,
+            0.538
+          ],
+          "readings": "text and vision"
+        }
+      ],
+      "credit": {
+        "author": "Betty Wills (Atsme)",
+        "license": "CC BY 2.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Prescription_bottle_humor.jpg"
+      },
+      "width": 720,
+      "height": 540
+    },
+    {
+      "id": "H06",
+      "file": "H06-plaza.jpg",
+      "set": "hazard-set",
+      "title": "Fountain Square, Baku",
+      "description": "Fountain Square in Baku: a tall palm tree and a steel-sphere fountain as main subject, with adult pedestrians on the patterned plaza in the background and lower left.",
+      "risks": [
+        "FAC"
+      ],
+      "verdict": {
+        "public": "Fix first",
+        "private": "Clear"
+      },
+      "findings": [
+        {
+          "code": "FAC",
+          "label": "Bystander faces",
+          "position": "bottom left",
+          "bbox": [
+            0.0,
+            0.76,
+            0.52,
+            0.17
+          ],
+          "readings": "vision only"
+        }
+      ],
+      "credit": {
+        "author": "Francisco Anzola",
+        "license": "CC BY 3.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Fountain_Square_(221090077).jpeg"
+      },
+      "width": 720,
+      "height": 479
+    },
+    {
+      "id": "H07",
+      "file": "H07-calculator.jpg",
+      "set": "hazard-set",
+      "title": "Calculator screenshot",
+      "description": "Android calculator app screenshot showing 0,3333333333333333 and 1/3 on a dark keypad. No place names, accounts or notifications.",
+      "risks": [],
+      "verdict": {
+        "public": "Clear",
+        "private": "Clear"
+      },
+      "findings": [],
+      "credit": {
+        "author": "EWna",
+        "license": "CC0",
+        "url": "https://commons.wikimedia.org/wiki/File:Screenshot_calculator_app_third.png"
+      },
+      "width": 720,
+      "height": 1472
+    },
+    {
+      "id": "H08",
+      "file": "H08-coffee.jpg",
+      "set": "hazard-set",
+      "title": "Espresso cup",
+      "description": "Top-down photo of black coffee in a cream cup on a black saucer on white fabric. Visually clean; EXIF Artist Test Owner, Copyright Test and BodySerialNumber TEST-0000 added.",
+      "risks": [
+        "MET"
+      ],
+      "verdict": {
+        "public": "Clear",
+        "private": "Clear"
+      },
+      "findings": [
+        {
+          "code": "MET",
+          "label": "Owner metadata",
+          "position": null,
+          "bbox": null,
+          "readings": "metadata"
+        }
+      ],
+      "credit": {
+        "author": "Jubair1985",
+        "license": "CC0",
+        "url": "https://commons.wikimedia.org/wiki/File:Espresso_Coffee_01.jpg"
+      },
+      "width": 720,
+      "height": 480
+    }
+  ]
+}

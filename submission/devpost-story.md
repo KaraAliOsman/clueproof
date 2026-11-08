@@ -2,61 +2,67 @@
 
 Copy each section into the matching field of the Devpost submission form.
 
-**Project name:** Before You Share
+**Project name:** Clueproof
 
-**Tagline:** Your photos say more than you think. Before You Share reads them first, privately, on your NAS.
+**Tagline:** Every photo leaves clues. Clueproof finds them first, privately, on your NAS.
 
 **Track:** Open Innovation
 
 ## Inspiration
 
-Picture an ordinary beach album posted publicly: the house number on the front door in the last photo of the day, a boarding pass on the towel with its barcode, the school crest on a child's backpack, and the GPS position stored inside the first photo. Nobody means to share any of that, and nobody checks twelve photos pixel by pixel before tapping "share".
+Picture an ordinary summer album shared with friends and a few people you barely know. One photo shows the house number on your front door. Another shows the crest on your child's school blazer. A third has a boarding pass on the table, and the first one still carries the GPS position of where it was taken. None of them looks dangerous. Together, they tell a stranger where you live, where your children study and when the house will be empty.
 
-Photos leak in ways people rarely notice, and once a photo is out it cannot be recalled. The obvious fix, asking a cloud AI to check them, would upload exactly what you are trying to protect. A family's photos already live on the NAS, and its AI has already indexed them. The check belongs there.
+About 3 in 4 parents share content about their children online, and 21 to 23% of those who share post content with a location tagged (DPC and CNIL, 2026). Every tool we found looks at one photo at a time and mostly at metadata. Nobody shows what a stranger could piece together from a whole shared album, and checking private photos with a cloud AI would upload exactly what you want to protect. A family's photos already live on the NAS, and its AI has already indexed them. The check belongs there.
 
 ## What it does
 
-- **Check before sharing:** "Check the beach photos before I post them publicly." Every photo gets a verdict for the chosen audience (Private, Public or Marketplace): **Clear**, **Fix first**, **Check this** or **Keep private**, with the exact position of each finding and a fix ("house number visible, top right; crop it or leave this photo out").
-- **Fourteen risk types:** GPS location, house numbers and addresses, license plates, ID documents, payment cards, boarding passes and barcodes, mail and package labels, screens with messages or accounts, notes with passwords or Wi-Fi keys, keys, school crests and name labels, prescription labels, bystanders' faces, and owner or camera-serial metadata.
-- **Personal rules with local face recognition:** "never show Mia's face publicly" is checked by the NAS's own people index, so no face is uploaded anywhere to be matched.
-- **Share-ready album:** after one approval, a new album with only the Clear photos.
-- **Memory that respects the audience:** photos marked Keep private are tagged, so later public checks settle them at once, while a family check still reads them normally.
-- **Shared-album audit:** the same check on albums you already shared, with the official steps to fix what it finds.
+Clueproof answers two questions, one sentence each, with no setup.
+
+- **"Is this safe to post?"** Clueproof takes today's photos, assumes a public audience and says so. It reads every photo twice and answers in three lines: how many are ready to post, which ones give clues away (house number, boarding pass, school crest, address label) and which need a fix (license plate, keys). One yes creates a "Ready to share" album and a private "Keep private" album, so those photos are flagged instantly next time.
+- **"What could a stranger find out about us?"** Clueproof reads the albums you have shared and fills the **Stranger's File**: eight pages a stranger would try to fill. They cover where you live, your children, your car, where you go, who you are, how to get in, your health, and other people. It shows how many pages are filled ("5 of 8"), the **worst combinations** ("where your children live and study"), and offers a clean copy of the album with only the photos that fill no page, to share instead.
+
+It covers fourteen clue types: GPS location, house numbers, address labels, license plates, boarding passes and barcodes, school crests and name labels, ID and payment cards, screens with accounts, notes with passwords, keys, prescription labels, bystanders, and owner metadata. Personal rules such as "never show Mia's face publicly" are checked with the NAS's own face recognition.
 
 ## How we built it
 
-Before You Share is a Markdown-only Skill built with the official UGOS Skill Creation Tool. The parent workflow only delegates self-contained tasks to three registered NAS experts and passes real upstream file paths through named slots:
+Clueproof is a Markdown-only Skill built with the official UGOS Skill Creation Tool. The parent workflow only delegates self-contained tasks to three registered NAS experts and passes real file paths through named slots:
 
-- **photo-agent** resolves the photo set, reads metadata, applies personal rules with the library's own face recognition, runs the text reading (OCR) and, in a separate delegation, the visual reading (vision model), creates the share-ready album and lists shared albums.
-- **file-agent** checks and adds the Keep private tag and resolves folders.
-- **knowledge-agent** fetches official UGOS guidance, such as how to share without location data or remove a photo from a shared album.
+- **photo-agent** selects photos and shared albums and shortlists likely clues from the existing AI index. It reads metadata and applies personal rules with face recognition. It runs the text reading (OCR) and, in a separate delegation, the visual reading (vision model). It also creates the albums.
+- **file-agent** resolves folders the user names.
+- **knowledge-agent** fetches the official UGOS steps to share without location or to stop sharing an album.
 
-Design rules: the rule is asymmetric, so one reading is enough to raise a concern but Clear needs two independent clean readings plus clean metadata. Findings are reported as types and positions, so numbers, codes, names and addresses are never transcribed. Everything is read-only until one consolidated approval, and the NAS asks again before each write. Photos are never edited, moved, deleted or shared, and only the user's own photos and albums are checked. Every delegation handles completed, failed, cancelled, waiting_user and waiting_approval.
+The design rules are:
 
-The package passes the official checker with status static-pass, 0 errors and 0 warnings. We also generated 22 fictional SPECIMEN photos with expected verdicts for every core and edge case, and built an interactive simulation.
+- **Two witnesses:** one reading is enough to raise a concern, but a photo is Clear only when both readings and the metadata complete clean.
+- **No echo:** Clueproof says "house number, top right", never the number.
+- **Location only:** photos whose only clue is GPS still go into the album, with one note, so real phone photos are not all flagged.
+- **One yes:** read-only until the user says yes, and the NAS still asks its own approval for each write.
+
+Every delegation handles completed, failed, cancelled, waiting_user and waiting_approval. The package passes the official checker with status static-pass, 0 errors and 0 warnings. We tested the logic on 20 real, freely licensed Wikimedia Commons photos with expected results, and built an interactive demo and a launch film.
 
 ## Challenges we ran into
 
-- **Our first idea was taken.** We first built a family emergency-document binder, then found about ten near-identical public projects. We pivoted to the gap nobody covered.
-- **Not becoming the leak.** An AI that reads secrets aloud is a new leak, so every instruction asks only for the type and position of a finding.
-- **Trusting "clear".** A missed leak is worse than a false alarm, so Clear requires two independent readings and complete metadata.
-- **Slow local models.** We sized runs to 20 photos, read them in batches of 5 with verdicts per batch, and show the GPS result first so the user sees progress in seconds.
+- **Our first idea was taken.** We first built an emergency-document binder, then found about ten near-identical public projects. We pivoted to the gap nobody covered.
+- **Not becoming the leak.** An AI that reads secrets aloud is a new leak, so every instruction asks for the type and position of a clue, never its value. Even our public demo pixelates real people's plates and card digits.
+- **Real phone photos carry GPS.** A naive rule would flag every photo; "location only" keeps the answer useful.
+- **One yes should mean one yes.** We replaced per-file tags with a private album, cutting the NAS approval prompts from up to six to two.
+- **Slow local models.** We read 20 photos per run in batches of 5, give the GPS count in seconds, and show progress.
 
 ## Accomplishments that we're proud of
 
-- A clean pass of the official checker on the first run.
-- Audience-aware verdicts: the same house number is fine for grandma and wrong for the internet.
-- A design that never needs to see a secret in plain text to warn you about it.
+- The Stranger's File: a privacy check that reasons across photos, not one at a time.
+- A design that never needs to repeat a secret to warn you about it.
+- A clean pass of the official checker.
 
 ## What we learned
 
-For a privacy tool, how you report a finding matters as much as finding it.
+The most dangerous clues are the ones that look harmless on their own. A privacy tool has to think like the stranger, and talk like a friend.
 
 ## What's next
 
 - Validate expert outputs on real hardware and tune the visual questions.
-- Folder and document checks before sharing a shared folder.
-- Region-specific cues (plate formats, school uniforms, ID layouts) built with local communities.
+- Shared folders and File Manager share links.
+- Region-specific cues (plate formats, uniforms, ID layouts) built with local communities.
 
 ## Built with
 
