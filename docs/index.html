@@ -1,0 +1,1556 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Before You Share</title>
+<meta name="description" content="Before You Share is an AI Skill for UGREEN AI NAS that checks photos for what they give away before you share them, privately, with no external calls.">
+<link rel="canonical" href="https://karaaliosman.github.io/before-you-share/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Before You Share">
+<meta property="og:title" content="Before You Share">
+<meta property="og:description" content="Your photos say more than you think. Before You Share reads them first, privately, on your NAS.">
+<meta property="og:url" content="https://karaaliosman.github.io/before-you-share/">
+<meta property="og:image" content="https://karaaliosman.github.io/before-you-share/assets/specimens/B07-house-front.jpg">
+<meta property="og:image:alt" content="A fictional specimen photo of a house front, the kind of photo Before You Share checks.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23137a55'/%3E%3Cpath d='M9 13V9h4M19 9h4v4M23 19v4h-4M13 23H9v-4' fill='none' stroke='%23f2faf5' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='16' r='2.6' fill='%23f2faf5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500&family=Schibsted+Grotesk:wght@700&display=swap">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+/* Hallmark · shape: Workbench, from draw 645718 (swapped from Marquee Hero: the simulation has to sit right under the fold) · genre: modern-minimal · theme: Dose (deal 3/3, seed public-project-before-you-f5b7·2e714f4d·2026-11-08·r0) · job: try · draw: 645718
+ * hero: Stage (swapped from Counter: the before and after is the visual, the download sits beside the head) · nav: masthead · footer: mast · imagery: the product built, with the generated specimen photos from the validation plan · signature: the house-front specimen read the way a stranger would, a pharmacy label stamped Keep private · dose: white, night for dark mode
+ * axes: light/grotesk-sans/chromatic-green · posture: committed · contrast: pass · fold: not rendered · modes: light+dark · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R4 V4 · weakest: E, the simulation is dense; the trace and the grid share one row and every finding lives in the detail dialog */
+/* Hallmark · answered F4 · the pressed state of the hero view toggle is a selected key on paper, not a second primary button */
+/* Hallmark · answered F15 · the hero gap, the bench gap and the column gap differ because the hero and the simulation are app-like compositions with their own spacing */
+/* Hallmark · dismissed 58 · the brief requires seven sections, seven verified statistics, a full risk matrix and a working simulation; copy is held to one line per item */
+/* Hallmark · waive 64 · DM Mono on the pharmacy label, file names, risk codes and expert statuses · Dose sets its labels as a pharmacy label and the chips print literal expert statuses */
+
+:root {
+  color-scheme: light dark;
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
+  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.25rem; --text-xl: 1.5625rem; --text-2xl: 1.953rem; --text-3xl: 2.441rem;
+  --text-display-s: clamp(2.25rem, 4vw + 0.5rem, 3.75rem); --text-display: clamp(2.75rem, 5vw + 1rem, 5.25rem);
+  --text-section: clamp(2rem, 2.5vw + 1rem, 3.5rem); --text-title: clamp(1.25rem, 0.75vw + 0.875rem, 1.625rem); --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.375rem);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
+  --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
+  --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
+  --color-paper: oklch(97.6% 0.011 88); --color-paper-2: oklch(96.5% 0.02 160); --color-paper-3: oklch(93% 0.036 160);
+  --color-ink: oklch(21% 0.025 170); --color-ink-2: oklch(31% 0.02 170); --color-muted: oklch(49% 0.024 165);
+  --color-rule: oklch(86.5% 0.022 140);
+  --color-accent: oklch(50% 0.13 160); --color-accent-deep: oklch(42% 0.11 162); --color-accent-soft: oklch(88% 0.08 160); --color-accent-ink: oklch(99% 0.006 160);
+  --color-focus: oklch(45% 0.14 160);
+  --p-mon: oklch(85% 0.052 22); --p-tue: oklch(87.5% 0.058 64); --p-wed: oklch(91.5% 0.064 98); --p-thu: oklch(86.5% 0.075 160);
+  --p-fri: oklch(87% 0.048 210); --p-sat: oklch(84% 0.045 270); --p-sun: oklch(84% 0.048 322);
+  --light: oklch(99.4% 0.016 84); --glint: oklch(100% 0 0);
+  --font-display: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif; --font-body: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-outlier: "DM Mono", ui-monospace, monospace;
+  --radius-card: 14px; --radius-input: 10px; --radius-key: 8px; --radius-chip: 6px; --radius-pill: 999px; --rule-hair: 1px;
+  --shadow-card: 0 1px 2px oklch(30% 0.03 165 / 0.08), 0 24px 48px -24px oklch(40% 0.08 165 / 0.35);
+  --shadow-lift: 0 1px 1px oklch(30% 0.03 165 / 0.10), 8px 18px 28px -14px oklch(36% 0.06 165 / 0.32), 18px 40px 60px -30px oklch(40% 0.08 165 / 0.30);
+  --shadow-key: 0 1px 2px oklch(30% 0.03 165 / 0.16);
+  --shadow-sink: inset 0 2px 5px oklch(30% 0.03 165 / 0.12);
+  --tracking-display: -0.03em; --display-weight: 700;
+  --plastic-mix: 62%; --glint-mix: 32%;
+  --color-surface: oklch(99.3% 0.006 88);
+  --color-soft-ink: oklch(36% 0.09 162);
+  --color-shade: oklch(21% 0.025 170);
+  --color-band: oklch(21% 0.025 170); --color-band-ink: oklch(96% 0.012 100); --color-band-muted: oklch(80% 0.02 160); --color-band-rule: oklch(40% 0.02 165);
+  --color-scrim: oklch(21% 0.025 170 / 0.55);
+  --color-photo-line: oklch(98.5% 0.01 100); --color-photo-ink: oklch(21% 0.025 170); --color-photo-scrim: oklch(21% 0.025 170 / 0.86); --color-photo-text: oklch(98.5% 0.006 160);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.25 0 0 0 0 0.3 0 0 0 0 0.25 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-paper: oklch(16.5% 0.012 170); --color-paper-2: oklch(19.5% 0.016 165); --color-paper-3: oklch(23% 0.022 162);
+    --color-surface: oklch(21.5% 0.014 168);
+    --color-ink: oklch(95% 0.01 160); --color-ink-2: oklch(86% 0.014 160); --color-muted: oklch(74% 0.02 162);
+    --color-rule: oklch(34% 0.02 160);
+    --color-accent: oklch(74% 0.12 160); --color-accent-deep: oklch(66% 0.11 162); --color-accent-soft: oklch(84% 0.08 160); --color-accent-ink: oklch(18% 0.02 165);
+    --color-soft-ink: oklch(26% 0.05 165);
+    --color-focus: oklch(80% 0.14 160);
+    --color-shade: oklch(8% 0.01 170);
+    --color-band: oklch(12.5% 0.01 170); --color-band-ink: oklch(95% 0.01 160); --color-band-muted: oklch(76% 0.02 162); --color-band-rule: oklch(30% 0.02 165);
+    --color-scrim: oklch(8% 0.01 170 / 0.72);
+    --light: oklch(21% 0.02 150); --glint: oklch(44% 0.02 160);
+    --plastic-mix: 22%; --glint-mix: 10%;
+    --shadow-card: 0 0 0 1px oklch(34% 0.02 160);
+    --shadow-lift: 0 0 0 1px oklch(34% 0.02 160);
+    --shadow-key: 0 0 0 1px oklch(38% 0.02 160);
+    --shadow-sink: inset 0 0 0 1px oklch(30% 0.02 160);
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.9 0 0 0 0 0.95 0 0 0 0 0.9 0 0 0 0.035 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  }
+}
+
+/* base */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+html { scrollbar-color: var(--color-muted) var(--color-paper); scroll-padding-top: var(--space-3xl); scroll-behavior: smooth; }
+body { margin: 0; background: var(--grain), var(--color-paper); color: var(--color-ink); font-family: var(--font-body); font-size: var(--text-md); line-height: 1.55; -webkit-font-smoothing: antialiased; caret-color: var(--color-accent); font-synthesis: none; }
+::selection { background: color-mix(in oklab, var(--color-accent) 22%, transparent); color: var(--color-ink); }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.16em; }
+h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); font-weight: var(--display-weight, 700); letter-spacing: var(--tracking-display); line-height: 1.05; overflow-wrap: break-word; min-width: 0; text-wrap: balance; }
+h1 { max-width: 20ch; font-size: var(--text-display); line-height: 1.02; }
+h2 { max-width: 30ch; font-size: var(--text-section); }
+h3 { max-width: 40ch; font-size: var(--text-title); line-height: 1.2; }
+h4 { max-width: 40ch; font-size: var(--text-lg); line-height: 1.2; }
+.lead { font-size: var(--text-lead); line-height: 1.45; max-width: 52ch; }
+p { margin: 0; text-wrap: pretty; }
+p:not([class]) { max-width: 65ch; }
+img { max-width: 100%; height: auto; display: block; }
+svg { display: block; }
+[hidden] { display: none !important; }
+button, input { font: inherit; }
+code { font-family: var(--font-outlier); font-size: 0.875em; font-weight: 400; }
+.container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
+.num { font-variant-numeric: tabular-nums; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.i { width: 20px; height: 20px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 60rem) { :root { --gutter: 24px; --section-gap-s: 80px; --section-gap: 96px; --section-gap-l: 120px; } }
+@media (max-width: 40rem) { :root { --gutter: 16px; --section-gap-s: 56px; --section-gap: 72px; --section-gap-l: 96px; --gap-columns: 16px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; animation-delay: 0ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+
+/* controls */
+.skip { position: absolute; left: var(--space-md); top: calc(-1 * var(--space-3xl)); z-index: var(--z-toast); padding: var(--space-xs) var(--space-md); border-radius: var(--radius-input); background: var(--color-ink); color: var(--color-paper); }
+.skip:focus-visible { top: var(--space-md); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs); min-height: 52px; padding: 0 var(--space-lg); border: 0; border-radius: var(--radius-input); background: linear-gradient(color-mix(in oklab, var(--glint) var(--glint-mix), transparent), transparent 40%), var(--color-surface); color: var(--color-ink); font: 500 var(--text-md)/1 var(--font-body); white-space: nowrap; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; box-shadow: inset 0 1px 0 var(--glint), 0 0 0 1px var(--color-rule), 0 3px 0 var(--color-rule); transition: transform var(--dur-micro) var(--ease-out), box-shadow var(--dur-short) var(--ease-out); }
+.btn:hover { box-shadow: inset 0 1px 0 var(--glint), 0 0 0 1px var(--color-muted), 0 3px 0 var(--color-muted); }
+.btn:active { transform: translateY(3px); box-shadow: inset 0 1px 0 var(--glint), 0 0 0 1px var(--color-rule), 0 0 0 var(--color-rule); }
+.btn:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: 0.55; cursor: not-allowed; transform: none; }
+.btn[aria-busy="true"] { cursor: progress; opacity: 1; }
+.btn--primary { background: linear-gradient(var(--color-accent), var(--color-accent-deep)); color: var(--color-accent-ink); box-shadow: inset 0 1px 0 color-mix(in oklab, var(--glint) 40%, transparent), 0 0 0 1px var(--color-accent-deep), 0 3px 0 var(--color-accent-deep); }
+.btn--primary:hover { box-shadow: inset 0 1px 0 color-mix(in oklab, var(--glint) 40%, transparent), 0 0 0 1px var(--color-ink), 0 3px 0 var(--color-ink); }
+.btn--primary:active { box-shadow: 0 0 0 1px var(--color-accent-deep), 0 0 0 var(--color-accent-deep); }
+.btn--small { min-height: 44px; padding: 0 var(--space-md); font-size: var(--text-sm); }
+.textlink, .textbtn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--space-xs); border: 0; background: none; color: var(--color-ink); font: 500 var(--text-md)/1.2 var(--font-body); text-decoration: underline; text-decoration-color: var(--color-rule); text-decoration-thickness: 1px; text-underline-offset: 0.22em; white-space: nowrap; cursor: pointer; transition: text-decoration-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out); }
+.textlink:hover, .textbtn:hover { text-decoration-color: var(--color-accent); }
+.textlink:active, .textbtn:active { color: var(--color-ink-2); }
+.textbtn:disabled { opacity: 0.55; cursor: not-allowed; }
+.iconbtn { display: inline-grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; padding: 0; border: 0; border-radius: var(--radius-input); background: var(--color-paper-2); color: var(--color-ink); cursor: pointer; transition: background-color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out); }
+.iconbtn:hover { background: var(--color-paper-3); }
+.iconbtn:active { transform: translateY(1px); }
+.iconbtn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* masthead */
+.mast { position: relative; z-index: var(--z-raised); border-bottom: var(--rule-hair) solid var(--color-rule); }
+.mast__row { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: var(--space-lg); min-height: 72px; }
+.mast__links, .mast__end { display: flex; align-items: center; gap: var(--space-lg); }
+.mast__end { justify-content: flex-end; }
+.mast__links a, .mast__end a { display: inline-flex; align-items: center; min-height: 44px; font-size: var(--text-sm); font-weight: 500; color: var(--color-ink-2); text-decoration: none; white-space: nowrap; transition: color var(--dur-short) var(--ease-out); }
+.mast__links a:hover, .mast__end a:hover { color: var(--color-ink); text-decoration: underline; text-decoration-color: var(--color-accent); }
+.wordmark { font-family: var(--font-display); font-weight: 700; font-size: var(--text-xl); letter-spacing: var(--tracking-display); line-height: 1; color: var(--color-ink); text-decoration: none; white-space: nowrap; }
+.mast .mast__end .mast__try { display: none; }
+@media (max-width: 60rem) {
+  .mast__row { grid-template-columns: minmax(0, 1fr) auto; }
+  .mast__links { display: none; }
+  .wordmark { font-size: var(--text-lg); }
+  .mast .mast__end .mast__try { display: inline-flex; }
+  .mast .mast__end .mast__gh { display: none; }
+}
+
+/* hero */
+.hero { position: relative; isolation: isolate; display: grid; align-items: center; min-height: calc(100svh - 73px); padding-block: var(--space-xl); }
+.hero::before { content: ""; position: absolute; z-index: -1; inset: 0 0 0 44%; background: repeating-linear-gradient(104deg, var(--light) 0 7%, transparent 7% 9.5%); filter: blur(24px); opacity: 0.85; -webkit-mask-image: linear-gradient(to left, var(--color-ink), transparent 80%); mask-image: linear-gradient(to left, var(--color-ink), transparent 80%); pointer-events: none; }
+.hero__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--space-3xl); align-items: center; }
+.hero__text { display: flex; flex-direction: column; gap: var(--space-lg); }
+.hero h1 { max-width: 11ch; }
+.hero .lead { max-width: 30ch; color: var(--color-ink-2); }
+.hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm); margin-top: var(--space-xs); }
+.readout { position: relative; min-width: 0; margin: 0; }
+.readout__bar { display: flex; justify-content: flex-end; margin-bottom: var(--space-sm); }
+.toggle { display: inline-flex; gap: var(--space-2xs); padding: var(--space-2xs); border-radius: var(--radius-input); background: var(--color-paper-3); box-shadow: var(--shadow-sink); }
+.toggle button { min-height: 44px; padding: 0 var(--space-md); border: 0; border-radius: var(--radius-key); background: transparent; color: var(--color-ink-2); font-size: var(--text-sm); font-weight: 500; white-space: nowrap; cursor: pointer; transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out); }
+.toggle button:hover { color: var(--color-ink); }
+.toggle button:active { transform: translateY(1px); }
+.toggle button:disabled { opacity: 0.55; cursor: not-allowed; }
+.toggle button[aria-pressed="true"] { background: var(--color-surface); color: var(--color-ink); box-shadow: var(--shadow-key); }
+html:not(.js) .readout__bar { display: none; }
+.readout figcaption { max-width: 52ch; margin-top: var(--space-md); font-size: var(--text-sm); color: var(--color-ink-2); }
+@media (max-width: 60rem) {
+  .hero { min-height: 0; padding-block: var(--space-2xl) var(--space-3xl); }
+  .hero__grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-2xl); }
+  .hero::before { inset: 45% 0 0 0; }
+  .readout__bar { justify-content: flex-start; }
+}
+
+/* photo frames and overlays */
+.frame { position: relative; display: block; overflow: hidden; aspect-ratio: 4 / 3; border-radius: var(--radius-card); background: var(--color-paper-3); }
+.frame > img { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: cover; outline: 1px solid color-mix(in oklab, var(--color-ink) 8%, transparent); outline-offset: -1px; }
+.ph { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: var(--space-2xs); padding: var(--space-md); text-align: center; color: var(--color-ink-2); background: color-mix(in oklab, var(--p-thu) 45%, var(--color-paper)); }
+.ph b { font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); letter-spacing: var(--tracking-display); line-height: 1.1; }
+.ph code { font-size: var(--text-xs); color: var(--color-ink-2); overflow-wrap: anywhere; }
+.box { position: absolute; z-index: 2; border: 2px solid var(--color-photo-line); border-radius: var(--radius-chip); box-shadow: 0 0 0 1px var(--color-photo-ink), inset 0 0 0 1px var(--color-photo-ink); }
+.box--possible { border-style: dashed; }
+.box__tag { position: absolute; left: -2px; bottom: calc(100% + var(--space-2xs)); padding: var(--space-3xs) var(--space-xs); border-radius: var(--space-2xs); background: var(--color-photo-scrim); color: var(--color-photo-text); font: 500 var(--text-xs)/1.3 var(--font-outlier); white-space: nowrap; }
+.box--tag-in .box__tag { bottom: auto; top: var(--space-2xs); left: var(--space-2xs); }
+.readout .box, .readout .rx { transition: opacity var(--dur-long) var(--ease-out), transform var(--dur-long) var(--ease-out); }
+.js .readout[data-view="see"] .box { opacity: 0; transform: scale(1.04); }
+.js .readout[data-view="see"] .rx { opacity: 0; transform: translateY(var(--space-xs)); }
+@keyframes rise { from { opacity: 0; transform: translateY(var(--space-xs)); } }
+@keyframes appear { from { opacity: 0; transform: scale(1.05); } }
+@keyframes land { from { opacity: 0; transform: rotate(-3deg) scale(1.14); } }
+@keyframes load { from { transform: scaleX(0.15); } to { transform: scaleX(1); } }
+@keyframes pop { from { transform: scale(0.9); } }
+.js .readout .rx { animation: rise 520ms var(--ease-out) 80ms backwards; }
+.js .readout .box { animation: appear 460ms var(--ease-out) 220ms backwards; }
+.js .readout .seal { animation: land 380ms var(--ease-out) 340ms backwards; }
+
+/* the pharmacy label */
+.rx { position: relative; z-index: 3; width: min(23rem, 88%); margin: calc(-1 * var(--space-3xl)) 0 0 var(--space-lg); padding: var(--space-md) var(--space-lg) 0; border-radius: var(--radius-input); background: var(--grain), var(--color-surface); box-shadow: var(--shadow-lift); font-family: var(--font-outlier); font-size: var(--text-sm); line-height: 1.45; color: var(--color-ink); }
+.rx__head { display: flex; justify-content: space-between; gap: var(--space-md); padding-bottom: var(--space-xs); border-bottom: 1px solid var(--color-ink); font-weight: 500; }
+.rx dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: var(--space-2xs) var(--space-md); margin: var(--space-sm) 0 0; }
+.rx dt { color: var(--color-muted); }
+.rx dd { min-width: 0; margin: 0; }
+.rx__stub { margin-top: var(--space-sm); padding-block: var(--space-sm); border-top: 1px dashed var(--color-muted); font-size: var(--text-xs); color: var(--color-muted); }
+.seal { position: absolute; top: calc(-1 * var(--space-lg)); right: var(--space-md); margin: 0; padding: var(--space-xs) var(--space-sm); border: 2px solid currentColor; border-radius: var(--radius-key); outline: 1px solid currentColor; outline-offset: 2px; background: var(--color-surface); font: 500 var(--text-sm)/1 var(--font-outlier); white-space: nowrap; transform: rotate(-2deg); }
+.seal[data-v="keep"] { color: var(--color-ink); }
+.seal[data-v="clear"] { color: var(--color-accent-deep); }
+@media (max-width: 40rem) { .rx { width: 100%; margin: calc(-1 * var(--space-xl)) 0 0; } }
+
+/* verdict stamps */
+.stamp { display: inline-flex; align-items: center; gap: var(--space-2xs); padding: var(--space-2xs) var(--space-xs); border: 1px solid transparent; border-radius: var(--radius-pill); font: 500 var(--text-xs)/1.2 var(--font-body); white-space: nowrap; }
+.stamp .i { width: 16px; height: 16px; }
+.stamp[data-v="clear"] { background: var(--color-accent-soft); border-color: var(--color-accent-deep); color: var(--color-soft-ink); }
+.stamp[data-v="fix"] { background: var(--color-surface); border-color: var(--color-ink); color: var(--color-ink); }
+.stamp[data-v="check"] { background: var(--color-paper-2); border-style: dashed; border-color: var(--color-ink-2); color: var(--color-ink-2); }
+.stamp[data-v="keep"] { background: var(--color-ink); border-color: var(--color-ink); color: var(--color-paper); }
+
+/* the check */
+.check { padding-block: var(--section-gap-s) var(--section-gap); border-top: 1px solid var(--color-rule); }
+.check__head { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-lg) var(--gap-columns); align-items: end; margin-bottom: var(--space-xl); }
+.note { display: flex; align-items: flex-start; gap: var(--space-sm); padding: var(--space-sm) var(--space-md); border: 1px dashed var(--color-muted); border-radius: var(--radius-input); font-size: var(--text-sm); color: var(--color-ink-2); }
+.tray { --t: var(--p-thu); display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--space-md) var(--space-xl); padding: var(--space-md) var(--space-lg); border-radius: var(--radius-card); background: linear-gradient(color-mix(in oklab, var(--glint) var(--glint-mix), transparent), transparent 18%), color-mix(in oklab, var(--t) var(--plastic-mix), transparent); box-shadow: var(--shadow-sink), inset 0 -24px 36px -28px color-mix(in oklab, var(--t) 45%, var(--color-shade)); }
+.tray__group { min-width: 0; margin: 0; padding: 0; border: 0; }
+.tray__label { display: block; margin-bottom: var(--space-xs); padding: 0; font-size: var(--text-sm); font-weight: 500; color: var(--color-ink-2); }
+.seg legend { float: left; width: 100%; }
+.seg .keys { clear: both; }
+.keys { display: flex; gap: var(--space-xs); min-width: 0; }
+.keys[role="tablist"] { overflow-x: auto; margin: calc(-1 * var(--space-2xs)); padding: var(--space-2xs) var(--space-2xs) var(--space-xs); scrollbar-width: none; }
+.seg input { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; }
+.key { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs); min-height: 44px; padding: 0 var(--space-md); border: 0; border-radius: var(--radius-key); background: var(--color-surface); color: var(--color-ink-2); font: 500 var(--text-sm)/1 var(--font-body); white-space: nowrap; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; box-shadow: inset 0 1px 0 var(--glint), 0 0 0 1px var(--color-rule), 0 2px 0 var(--color-rule); transition: transform var(--dur-micro) var(--ease-out), background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out); }
+.key:hover { color: var(--color-ink); }
+.key:active { transform: translateY(2px); box-shadow: inset 0 1px 0 var(--glint), 0 0 0 1px var(--color-rule); }
+.key[aria-selected="true"], .seg input:checked + .key, .rulekey input:checked + .key { background: var(--color-accent-soft); color: var(--color-soft-ink); box-shadow: inset 0 1px 0 var(--glint), 0 0 0 1px var(--color-accent-deep), 0 2px 0 var(--color-accent-deep); }
+.key:focus-visible, .seg input:focus-visible + .key, .rulekey input:focus-visible + .key { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.key:disabled, .seg input:disabled + .key, .rulekey input:disabled + .key { opacity: 0.55; cursor: not-allowed; transform: none; }
+.rulekey { position: relative; }
+.rulekey input { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; }
+.rulekey .key::before { content: ""; width: 14px; height: 14px; border-radius: 4px; box-shadow: inset 0 0 0 1.5px currentColor; }
+.rulekey input:checked + .key::before { background: currentColor; }
+.tray__run { margin-left: auto; }
+.bench { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--space-xl) var(--space-2xl); align-items: start; margin-top: var(--space-xl); }
+html:not(.js) .tray, html:not(.js) .trace { display: none; }
+html:not(.js) .bench { grid-template-columns: minmax(0, 1fr); }
+.trace__sub { margin-top: var(--space-2xs); font-size: var(--text-sm); color: var(--color-ink-2); }
+.steps { margin: var(--space-md) 0 0; padding: 0; list-style: none; border-top: 1px solid var(--color-rule); }
+.steps--writes { margin-top: var(--space-lg); border-top: 1px dashed var(--color-muted); }
+.step { display: grid; grid-template-columns: 2.25rem minmax(0, 1fr) auto; gap: var(--space-sm); align-items: start; padding-block: var(--space-sm); border-bottom: 1px solid var(--color-rule); }
+.step__n { font: 500 var(--text-sm)/1.5 var(--font-outlier); color: var(--color-muted); font-variant-numeric: tabular-nums; }
+.step__name { font-weight: 500; line-height: 1.4; }
+.step[data-status="waiting"] .step__name, .step[data-status="skipped"] .step__name { color: var(--color-ink-2); }
+.step__who { display: flex; flex-wrap: wrap; gap: var(--space-2xs) var(--space-xs); margin-top: var(--space-3xs); font-size: var(--text-xs); color: var(--color-ink-2); }
+.step__out { margin-top: var(--space-2xs); font-size: var(--text-sm); }
+.step__out:empty { display: none; }
+.chip { display: inline-flex; align-items: center; gap: var(--space-2xs); padding: var(--space-2xs) var(--space-xs); border: 1px dashed var(--color-muted); border-radius: var(--radius-pill); font: 400 var(--text-xs)/1.2 var(--font-outlier); color: var(--color-ink-2); white-space: nowrap; }
+.chip[data-s="running"] { border-style: solid; border-color: var(--color-accent); color: var(--color-ink); }
+.chip[data-s="running"]::after { content: ""; width: 1rem; height: 2px; border-radius: 2px; background: var(--color-accent); transform-origin: left center; animation: load 900ms linear infinite; }
+.chip[data-s="completed"] { border: 1px solid var(--color-accent-soft); background: var(--color-accent-soft); color: var(--color-soft-ink); }
+.chip[data-s="waiting_approval"] { border: 1px solid var(--color-ink); background: var(--color-surface); color: var(--color-ink); }
+.chip[data-s="declined"] { border-style: solid; color: var(--color-ink-2); }
+.chip.pop { animation: pop var(--dur-short) var(--ease-out); }
+.sheet { min-width: 0; }
+.sheet__top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-sm) var(--space-lg); min-height: 3rem; }
+.summary { font-size: var(--text-lead); line-height: 1.4; }
+.counts { display: flex; flex-wrap: wrap; gap: var(--space-xs) var(--space-md); margin: 0; padding: 0; list-style: none; }
+.counts li { display: inline-flex; align-items: center; gap: var(--space-xs); }
+.counts b { font: 700 var(--text-xl)/1 var(--font-display); letter-spacing: var(--tracking-display); font-variant-numeric: tabular-nums; }
+.sheet__line { margin-top: var(--space-sm); font-size: var(--text-sm); color: var(--color-ink-2); }
+.grid { --cols: 4; display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: var(--space-lg) var(--space-md); margin: var(--space-lg) 0 0; padding: 0; list-style: none; }
+.tile { display: block; width: 100%; padding: 0; border: 0; border-radius: var(--radius-input); background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.tile .frame { border-radius: var(--radius-input); transition: box-shadow var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out); }
+.tile:hover .frame { box-shadow: 0 0 0 2px var(--color-ink-2); }
+.tile:active .frame { transform: translateY(1px); }
+.tile:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+.tile:disabled { opacity: 0.55; cursor: not-allowed; }
+.grid[data-reading="true"] .tile[data-batch="now"] .frame { box-shadow: 0 0 0 2px var(--color-accent); }
+.tile__cap { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-xs); margin-top: var(--space-xs); font-size: var(--text-sm); }
+.tile__title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tile__id { flex-shrink: 0; font-size: var(--text-xs); color: var(--color-ink-2); }
+.tile .stamp { position: absolute; top: var(--space-xs); left: var(--space-xs); z-index: 3; }
+.codes { position: absolute; right: var(--space-xs); bottom: var(--space-xs); z-index: 3; display: flex; gap: var(--space-2xs); }
+.codes code { padding: var(--space-3xs) var(--space-xs); border-radius: var(--space-2xs); background: var(--color-photo-scrim); color: var(--color-photo-text); font-size: var(--text-xs); line-height: 1.3; }
+.stamp.is-new { animation: land 360ms var(--ease-out) backwards; animation-delay: calc(var(--i, 0) * 40ms); }
+@media (max-width: 60rem) {
+  .check__head, .bench { grid-template-columns: minmax(0, 1fr); }
+  .tray__run { margin-left: 0; }
+}
+@media (max-width: 40rem) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tray { padding: var(--space-md); }
+  .key { padding: 0 var(--space-sm); }
+  .tray__run { width: 100%; }
+}
+
+/* write plan */
+.plan { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: var(--space-xl) var(--space-2xl); margin-top: var(--space-2xl); padding: var(--space-xl); border-radius: var(--radius-card); background: var(--grain), var(--color-surface); box-shadow: var(--shadow-lift); }
+.opts { margin: var(--space-md) 0 0; padding: 0 0 0 var(--space-lg); border-top: 1px solid var(--color-rule); list-style: lower-alpha; }
+.opts li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-sm); align-items: start; padding-block: var(--space-sm); border-bottom: 1px solid var(--color-rule); }
+.opts li::marker { font-family: var(--font-outlier); color: var(--color-ink-2); }
+.opts input { width: 20px; height: 20px; margin: var(--space-3xs) 0 0; accent-color: var(--color-accent); cursor: pointer; }
+.opts input:disabled { opacity: 0.55; cursor: not-allowed; }
+.opts label { cursor: pointer; }
+.opts label b { display: block; font-weight: 500; }
+.opt__line { display: block; font-size: var(--text-sm); color: var(--color-ink-2); }
+.opts li.is-off label { color: var(--color-ink-2); cursor: not-allowed; }
+.plan__actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: var(--space-lg); }
+.plan__out { display: grid; align-content: start; gap: var(--space-md); min-width: 0; padding-left: var(--space-2xl); border-left: 1px dashed var(--color-muted); }
+.plan__wait { max-width: 44ch; color: var(--color-ink-2); }
+.album__name { font: 700 var(--text-title)/1.15 var(--font-display); letter-spacing: var(--tracking-display); overflow-wrap: break-word; }
+.album__meta { margin-top: var(--space-2xs); font-size: var(--text-sm); color: var(--color-ink-2); }
+.album__row { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--space-xs); margin: var(--space-md) 0 0; padding: 0; list-style: none; }
+.album__row .frame { border-radius: var(--radius-key); }
+.album__row .ph b { font-size: var(--text-xs); }
+.album__row .ph code { display: none; }
+.out__line { display: flex; align-items: flex-start; gap: var(--space-sm); font-size: var(--text-sm); }
+.plan__again { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm) var(--space-md); padding-top: var(--space-md); border-top: 1px solid var(--color-rule); }
+.plan__again p { flex-basis: 100%; font-size: var(--text-sm); color: var(--color-ink-2); }
+@media (max-width: 60rem) {
+  .plan { grid-template-columns: minmax(0, 1fr); padding: var(--space-lg); }
+  .plan__out { padding: var(--space-lg) 0 0; border-left: 0; border-top: 1px dashed var(--color-muted); }
+}
+@media (max-width: 40rem) { .album__row { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* detail dialog */
+.detail { width: min(68rem, calc(100% - 2 * var(--space-md))); max-width: none; max-height: calc(100dvh - 2 * var(--space-md)); margin: auto; padding: 0; border: 0; border-radius: var(--radius-card); background: var(--grain), var(--color-surface); color: var(--color-ink); box-shadow: var(--shadow-lift); overflow: auto; overscroll-behavior: contain; }
+.detail::backdrop { background: var(--color-scrim); }
+.detail[open] { animation: rise var(--dur-long) var(--ease-out); }
+.detail__grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-xl); padding: var(--space-xl); }
+.detail__media { display: grid; align-content: start; gap: var(--space-md); }
+.detail__nav { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+.detail__top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); }
+.detail__top code { font-size: var(--text-sm); color: var(--color-ink-2); overflow-wrap: anywhere; }
+.detail h2 { max-width: 20ch; margin-top: var(--space-xs); font-size: var(--text-2xl); }
+.detail__verdict { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm); margin-top: var(--space-md); font-size: var(--text-sm); color: var(--color-ink-2); }
+.detail__why { margin-top: var(--space-sm); }
+.findings { margin: var(--space-lg) 0 0; padding: 0; list-style: none; border-top: 1px solid var(--color-rule); }
+.finding { padding-block: var(--space-md); border-bottom: 1px solid var(--color-rule); }
+.finding__title { display: flex; align-items: baseline; gap: var(--space-sm); font-weight: 500; }
+.finding__code { flex-shrink: 0; padding: var(--space-3xs) var(--space-xs); border-radius: var(--space-2xs); background: var(--color-ink); color: var(--color-paper); font-size: var(--text-xs); }
+.finding dl, .detail__meta { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: var(--space-2xs) var(--space-md); margin: var(--space-sm) 0 0; font-size: var(--text-sm); }
+.finding dt, .detail__meta dt { color: var(--color-ink-2); }
+.finding dd, .detail__meta dd { min-width: 0; margin: 0; }
+.detail__meta { padding-top: var(--space-md); }
+.wit-list { display: inline-flex; flex-wrap: wrap; gap: var(--space-2xs) var(--space-sm); }
+.wit { display: inline-flex; align-items: center; gap: var(--space-2xs); }
+.wit .i { width: 16px; height: 16px; }
+.wit[data-saw="no"] { color: var(--color-ink-2); }
+.fine { margin-top: var(--space-lg); font-size: var(--text-sm); color: var(--color-ink-2); }
+.detail .box { animation: appear 420ms var(--ease-out) backwards; animation-delay: calc(120ms + var(--i, 0) * 60ms); }
+@media (max-width: 48rem) { .detail__grid { grid-template-columns: minmax(0, 1fr); padding: var(--space-lg); } }
+
+/* why */
+.why { padding-block: var(--section-gap) var(--section-gap-s); background: var(--grain), var(--color-paper-2); }
+.why__head { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-md) var(--gap-columns); align-items: end; margin-bottom: var(--space-2xl); }
+.why__head .lead { color: var(--color-ink-2); }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-2xl) var(--gap-columns); margin: 0; padding: 0; list-style: none; }
+.stat { display: grid; align-content: start; gap: var(--space-sm); padding-top: var(--space-lg); border-top: 1px solid var(--color-ink); }
+.stat--wide { grid-column: span 2; }
+.stat__figure { font: 700 var(--text-display-s)/1 var(--font-display); letter-spacing: var(--tracking-display); font-variant-numeric: tabular-nums; overflow-wrap: break-word; min-width: 0; }
+.stat__text { max-width: 46ch; }
+.stat--wide .stat__text { font-size: var(--text-lead); line-height: 1.45; }
+.stat__src { font-size: var(--text-sm); color: var(--color-ink-2); }
+.stat__src a { text-decoration-color: var(--color-muted); transition: text-decoration-color var(--dur-short) var(--ease-out); }
+.stat__src a:hover { text-decoration-color: var(--color-accent); }
+@media (max-width: 60rem) { .why__head { grid-template-columns: minmax(0, 1fr); } .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 40rem) { .stats { grid-template-columns: minmax(0, 1fr); } .stat--wide { grid-column: auto; } }
+
+/* how it works */
+.how { padding-block: var(--section-gap) var(--section-gap-l); }
+.how__head { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-lg) var(--gap-columns); align-items: end; }
+.how__head .lead { color: var(--color-ink-2); }
+.compare { padding-top: var(--space-md); border-top: 1px solid var(--color-ink); font-size: var(--text-sm); color: var(--color-ink-2); }
+.compare b { display: block; margin-bottom: var(--space-2xs); color: var(--color-ink); font-weight: 500; }
+.sub { margin-top: var(--section-gap-s); }
+.sub--first { margin-top: var(--space-3xl); }
+.sub__head { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-md) var(--gap-columns); align-items: end; margin-bottom: var(--space-xl); }
+.sub__head h3 { font-size: var(--text-2xl); line-height: 1.1; }
+.sub__head p { max-width: 52ch; color: var(--color-ink-2); }
+.experts { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 3fr) minmax(0, 3fr); gap: var(--space-md); margin: 0; padding: 0; list-style: none; }
+.bay { --t: var(--p-thu); display: flex; flex-direction: column; gap: var(--space-md); min-height: 18rem; padding: var(--space-xl); border-radius: var(--radius-card); background: linear-gradient(color-mix(in oklab, var(--glint) var(--glint-mix), transparent), transparent 18%), color-mix(in oklab, var(--t) var(--plastic-mix), transparent); box-shadow: inset 0 1.5px 0 var(--glint), inset 0 -24px 36px -28px color-mix(in oklab, var(--t) 45%, var(--color-shade)); }
+.bay:nth-child(2) { --t: var(--p-fri); }
+.bay:nth-child(3) { --t: var(--p-sat); }
+.bay h4 { font-size: var(--text-title); }
+.bay p { max-width: 46ch; color: var(--color-ink-2); }
+.acts { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin: auto 0 0; padding: 0; list-style: none; }
+.acts code { display: inline-block; padding: var(--space-2xs) var(--space-xs); border-radius: var(--radius-pill); background: color-mix(in oklab, var(--color-surface) 72%, transparent); color: var(--color-ink); font-size: var(--text-xs); }
+.wits { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-md); }
+.case { display: flex; flex-direction: column; gap: var(--space-lg); padding: var(--space-xl); border: 1px solid var(--color-rule); border-radius: var(--radius-card); }
+.case--clear { border-color: var(--color-accent-deep); }
+.readings { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--color-rule); }
+.readings li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--space-sm); align-items: center; padding-block: var(--space-sm); border-bottom: 1px solid var(--color-rule); }
+.readings li > span:last-child { font-size: var(--text-sm); color: var(--color-ink-2); text-align: right; }
+.readings li[data-saw="no"] { color: var(--color-ink-2); }
+.case__out { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm); margin-top: auto; font-size: var(--text-sm); color: var(--color-ink-2); }
+.footnote { margin-top: var(--space-md); font-size: var(--text-sm); color: var(--color-ink-2); }
+.rules { --t: var(--p-wed); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-xl) var(--space-2xl); align-items: center; padding: var(--space-2xl); border-radius: var(--radius-card); background: linear-gradient(color-mix(in oklab, var(--glint) var(--glint-mix), transparent), transparent 18%), color-mix(in oklab, var(--t) var(--plastic-mix), transparent); box-shadow: inset 0 1.5px 0 var(--glint), inset 0 -24px 36px -28px color-mix(in oklab, var(--t) 45%, var(--color-shade)); }
+.rules__text { display: grid; gap: var(--space-md); }
+.rules__text h3 { font-size: var(--text-2xl); line-height: 1.1; }
+.rules__text p { color: var(--color-ink-2); max-width: 46ch; }
+.rx--rule { width: 100%; margin: 0; }
+.rx--rule .seal { position: static; display: inline-block; margin: var(--space-sm) 0 0 var(--space-2xs); }
+.aud { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--space-xl) var(--gap-columns); align-items: start; }
+.aud__head { display: grid; gap: var(--space-md); }
+.aud__head h3 { font-size: var(--text-2xl); line-height: 1.1; }
+.aud__head p { color: var(--color-ink-2); }
+.matrix { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+.matrix th, .matrix td { padding: var(--space-xs) var(--space-sm); border-bottom: 1px solid var(--color-rule); text-align: center; vertical-align: middle; }
+.matrix thead th { font-weight: 500; color: var(--color-ink-2); white-space: nowrap; border-bottom-color: var(--color-ink); }
+.matrix th[scope="row"], .matrix thead th:first-child { text-align: left; font-weight: 500; }
+.matrix th[scope="row"] code { display: inline-block; min-width: 3.25em; color: var(--color-ink-2); }
+.matrix td { width: 7.5rem; }
+.mark { display: inline-block; flex-shrink: 0; width: 18px; height: 18px; border-radius: 5px; vertical-align: middle; }
+.mark[data-s="red"] { background: var(--color-ink); }
+.mark[data-s="amber"] { background: linear-gradient(135deg, var(--color-ink) 50%, transparent 50%); box-shadow: inset 0 0 0 2px var(--color-ink); }
+.mark[data-s="info"] { width: 14px; height: 14px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--color-ink-2); }
+.mark[data-s="rule"] { background: repeating-linear-gradient(45deg, var(--color-ink) 0 2px, transparent 2px 5px); box-shadow: inset 0 0 0 2px var(--color-ink); }
+.legend { display: grid; gap: var(--space-sm); margin: var(--space-xs) 0 0; padding: 0; list-style: none; font-size: var(--text-sm); }
+.legend li { display: flex; align-items: center; gap: var(--space-sm); }
+.loop { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap-columns); margin: 0; padding: 0; list-style: none; counter-reset: loop; }
+.loop li { counter-increment: loop; display: grid; align-content: start; gap: var(--space-sm); padding-top: var(--space-lg); border-top: 1px solid var(--color-ink); }
+.loop li::before { content: counter(loop); font: 700 var(--text-display-s)/1 var(--font-display); letter-spacing: var(--tracking-display); color: var(--color-ink-2); font-variant-numeric: tabular-nums; }
+.loop p { color: var(--color-ink-2); }
+.loop__back { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs) var(--space-sm); margin-top: var(--space-xl); font-size: var(--text-sm); color: var(--color-ink-2); }
+@media (max-width: 60rem) {
+  .how__head, .sub__head, .experts, .wits, .rules, .aud, .loop { grid-template-columns: minmax(0, 1fr); }
+  .bay { min-height: 0; }
+  .rules { padding: var(--space-lg); }
+}
+@media (max-width: 40rem) {
+  .matrix th, .matrix td { padding-inline: var(--space-2xs); }
+  .matrix td { width: auto; }
+  .matrix th[scope="row"] code { display: block; }
+}
+
+/* trust */
+.trust { padding-block: var(--section-gap-l) var(--section-gap); background: var(--grain), var(--color-paper-2); }
+.trust__grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--space-2xl) var(--gap-columns); align-items: start; }
+.trust__head { position: sticky; top: var(--space-2xl); display: grid; gap: var(--space-lg); }
+.trust__head .lead { color: var(--color-ink-2); }
+.rows { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--color-ink); }
+.rows li { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 5fr); gap: var(--space-xs) var(--gap-columns); align-items: baseline; padding-block: var(--space-lg); border-bottom: 1px solid var(--color-rule); }
+.rows p { color: var(--color-ink-2); }
+@media (max-width: 60rem) {
+  .trust__grid, .rows li { grid-template-columns: minmax(0, 1fr); }
+  .trust__head { position: static; }
+}
+
+/* standard */
+.standard { padding-block: var(--section-gap) var(--section-gap-l); }
+.std__head { display: grid; gap: var(--space-md); margin-bottom: var(--space-2xl); }
+.std__head .lead { color: var(--color-ink-2); }
+.std__body { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-2xl) var(--gap-columns); align-items: center; }
+.rx--wide { width: 100%; margin: 0; padding: var(--space-xl) var(--space-xl) 0; font-size: var(--text-md); }
+.rx--wide dl { row-gap: var(--space-sm); }
+.rx--wide .seal { position: static; display: inline-block; margin: var(--space-lg) 0 0 var(--space-2xs); font-size: var(--text-md); padding: var(--space-sm) var(--space-md); }
+.std__side { display: grid; gap: var(--space-md); }
+.files { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--color-rule); }
+.files li { padding-block: var(--space-xs); border-bottom: 1px solid var(--color-rule); font-size: var(--text-sm); }
+.std__side p { color: var(--color-ink-2); }
+.std__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm); margin-top: var(--space-sm); }
+@media (max-width: 60rem) { .std__body { grid-template-columns: minmax(0, 1fr); } .rx--wide { padding: var(--space-lg) var(--space-lg) 0; } }
+
+/* footer */
+.foot { padding-block: var(--section-gap-s) var(--space-2xl); background: var(--color-band); color: var(--color-band-ink); }
+.foot__mark { font: 700 clamp(2.5rem, 8vw, 7.5rem)/0.95 var(--font-display); letter-spacing: var(--tracking-display); overflow-wrap: break-word; min-width: 0; }
+.foot__row { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-lg) var(--gap-columns); margin-top: var(--space-2xl); padding-top: var(--space-lg); border-top: 1px solid var(--color-band-rule); }
+.foot__links { display: flex; flex-wrap: wrap; gap: 0 var(--space-xl); margin: 0; padding: 0; list-style: none; }
+.foot__links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-band-ink); text-decoration: underline; text-decoration-color: var(--color-band-rule); text-underline-offset: 0.22em; white-space: nowrap; transition: text-decoration-color var(--dur-short) var(--ease-out); }
+.foot__links a:hover { text-decoration-color: var(--color-accent-soft); }
+.foot__fine { margin-top: var(--space-xl); font-size: var(--text-sm); color: var(--color-band-muted); }
+.foot :focus-visible { outline-color: var(--color-accent-soft); }
+@media (max-width: 60rem) { .foot__row { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="mast">
+  <div class="container mast__row">
+    <nav class="mast__links" aria-label="Sections">
+      <a href="#check">Try the check</a>
+      <a href="#how">How it works</a>
+      <a href="#trust">Trust</a>
+      <a href="#standard">Standard</a>
+    </nav>
+    <a class="wordmark" href="#top">Before You Share</a>
+    <div class="mast__end">
+      <a class="mast__try" href="#check">Try the check</a>
+      <a class="mast__gh" href="https://github.com/KaraAliOsman/before-you-share">GitHub</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="container hero__grid">
+    <div class="hero__text">
+      <h1 id="hero-title">Your photos say more than you think.</h1>
+      <p class="lead">Before You Share reads them first, privately, on your NAS.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#check">Try the check</a>
+        <a class="btn" href="https://github.com/KaraAliOsman/before-you-share/raw/main/dist/before-you-share.zip"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>Download Skill</a>
+        <a class="textlink" href="https://github.com/KaraAliOsman/before-you-share">View on GitHub</a>
+      </div>
+    </div>
+
+    <figure class="readout" id="readout" data-view="reads" data-kind="product">
+      <div class="readout__bar">
+        <div class="toggle" role="group" aria-label="Compare views of the photo">
+          <button type="button" aria-pressed="false" data-view="see">Your view</button>
+          <button type="button" aria-pressed="true" data-view="reads">A stranger’s view</button>
+        </div>
+      </div>
+      <div class="frame" data-kind="product">
+        <span class="ph" aria-hidden="true"><b>House front</b><code>B07-house-front.jpg</code></span>
+        <img id="hero-img" src="assets/specimens/B07-house-front.jpg" width="640" height="480" alt="Fictional specimen photo of a house front with a house number beside the door" fetchpriority="high" decoding="async" onerror="this.hidden=true">
+        <span class="box" id="hero-box" style="left:67.7%;top:13.3%;width:29.5%;height:24.7%"><span class="box__tag">ADR</span></span>
+      </div>
+      <div class="rx" id="hero-rx">
+        <div class="rx__head"><span>Before You Share</span><span>Public post</span></div>
+        <dl>
+          <dt>Photo</dt><dd>B07-house-front.jpg</dd>
+          <dt>Found</dt><dd>House number visible</dd>
+          <dt>Where</dt><dd id="hero-pos">Top right</dd>
+          <dt>Seen by</dt><dd>Text and vision</dd>
+          <dt>Fix</dt><dd id="hero-fix">Crop the top right, or leave it out</dd>
+        </dl>
+        <p class="seal" data-v="keep">Keep private</p>
+        <p class="rx__stub">Names the type and the place. Never the number.</p>
+      </div>
+      <figcaption>An AI Skill for UGREEN AI NAS. It uses the NAS’s own text recognition, vision model, face recognition and metadata, and makes no external calls.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="check" id="check" aria-labelledby="check-title">
+  <div class="container">
+    <div class="check__head">
+      <h2 id="check-title">Which of these photos can you share?</h2>
+      <p class="note"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span>Simulation with fictional photos stamped “SPECIMEN”. Expected results from the validation plan, not live NAS output.</span></p>
+    </div>
+
+    <div class="tray" id="controls">
+      <div class="tray__group">
+        <span class="tray__label" id="set-label">Photo set</span>
+        <div class="keys" role="tablist" aria-labelledby="set-label">
+          <button class="key" type="button" role="tab" id="tab-beach" aria-controls="bench" aria-selected="true" data-set="beach">Beach day</button>
+          <button class="key" type="button" role="tab" id="tab-hazard" aria-controls="bench" aria-selected="false" tabindex="-1" data-set="hazard">Hazard set</button>
+          <button class="key" type="button" role="tab" id="tab-audit" aria-controls="bench" aria-selected="false" tabindex="-1" data-set="audit">Shared-album audit</button>
+        </div>
+      </div>
+      <fieldset class="tray__group seg">
+        <legend class="tray__label">Who will see it</legend>
+        <div class="keys">
+          <input type="radio" name="aud" id="aud-private" value="private"><label class="key" for="aud-private">Private</label>
+          <input type="radio" name="aud" id="aud-public" value="public" checked><label class="key" for="aud-public">Public</label>
+          <input type="radio" name="aud" id="aud-marketplace" value="marketplace"><label class="key" for="aud-marketplace">Marketplace</label>
+        </div>
+      </fieldset>
+      <div class="tray__group rulekey">
+        <span class="tray__label" id="rule-label">Personal rule</span>
+        <input type="checkbox" id="rule" aria-describedby="rule-label"><label class="key" for="rule">Never show Mia’s face publicly</label>
+      </div>
+      <button class="btn btn--primary tray__run" type="button" id="run"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3l14 9-14 9z"/></svg><span id="run-label">Run check</span></button>
+    </div>
+
+    <div class="bench" id="bench" role="tabpanel" aria-labelledby="tab-beach">
+      <div class="trace">
+        <h3>What the Skill delegates</h3>
+        <p class="trace__sub">Up to 20 photos a run. Both readings go in batches of 5, and verdicts arrive batch by batch.</p>
+        <ol class="steps" id="steps" aria-label="Delegation steps"></ol>
+        <ol class="steps steps--writes" id="writes" aria-label="Writes after approval" hidden></ol>
+        <p class="visually-hidden" id="live" role="status" aria-live="polite"></p>
+      </div>
+      <div class="sheet">
+        <div class="sheet__top">
+          <p class="summary" id="summary">12 photos, not checked yet.</p>
+          <ul class="counts" id="counts" aria-label="Verdict counts" hidden></ul>
+        </div>
+        <p class="sheet__line" id="sheet-line" hidden></p>
+        <ul class="grid" id="grid">
+          <li><button class="tile" type="button" data-id="B01"><span class="frame"><span class="ph" aria-hidden="true"><b>Beach wide</b></span><img src="assets/specimens/B01-beach-wide.jpg" width="640" height="480" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"></span><span class="tile__cap"><span class="tile__title">Beach wide</span><code class="tile__id">B01</code></span></button></li>
+          <li><button class="tile" type="button" data-id="B02"><span class="frame"><span class="ph" aria-hidden="true"><b>Sunset</b></span><img src="assets/specimens/B02-sunset.jpg" width="640" height="480" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"></span><span class="tile__cap"><span class="tile__title">Sunset</span><code class="tile__id">B02</code></span></button></li>
+          <li><button class="tile" type="button" data-id="B03"><span class="frame"><span class="ph" aria-hidden="true"><b>Sandcastle</b></span><img src="assets/specimens/B03-sandcastle.jpg" width="640" height="480" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"></span><span class="tile__cap"><span class="tile__title">Sandcastle</span><code class="tile__id">B03</code></span></button></li>
+          <li><button class="tile" type="button" data-id="B04"><span class="frame"><span class="ph" aria-hidden="true"><b>Ice cream</b></span><img src="assets/specimens/B04-ice-cream.jpg" width="640" height="480" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"></span><span class="tile__cap"><span class="tile__title">Ice cream</span><code class="tile__id">B04</code></span></button></li>
+          <li><button class="tile" type="button" data-id="B05"><span class="frame"><span class="ph" aria-hidden="true"><b>Dog on the sand</b></span><img src="assets/specimens/B05-dog.jpg" width="640" height="480" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"></span><span class="tile__cap"><span class="tile__title">Dog on the sand</span><code class="tile__id">B05</code></span></button></li>
+          <li><button class="tile" type="button" data-id="B06"><span class="frame"><span class="ph" aria-hidden="true"><b>Boardwalk</b></span><img src="assets/specimens/B06-boardwalk.jpg" width="640" height="480" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"></span><span class="tile__cap"><span class="tile__title">Boardwalk</span><code class="tile__id">B06</code></span></button></li>
+          <li><button class="tile" type="button" data-id="B07"><span class="frame"><span class="ph" aria-hidden="true"><b>House front</b></span><img src="assets/specimens/B07-house-front.jpg" width="640" height="480" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"></span><span class="tile__cap"><span class="tile__title">House front</span><code class="tile__id">B07</code></span></button></li>
+          <li><button class="tile" type="button" data-id="B08"><span class="frame"><span class="ph" aria-hidden="true"><b>Car</b></span><img src="assets/specimens/B08-car.jpg" width="640" height="480" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"></span><span class="tile__cap"><span class="tile__title">Car</span><code class="tile__id">B08</code></span></button></li>
+          <li><button class="tile" type="button" data-id="B09"><span class="frame"><span class="ph" aria-hidden="true"><b>Boarding pass</b></span><img src="assets/specimens/B09-boarding-pass.jpg" width="640" height="480" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"></span><span class="tile__cap"><span class="tile__title">Boarding pass</span><code class="tile__id">B09</code></span></button></li>
+          <li><button class="tile" type="button" data-id="B10"><span class="frame"><span class="ph" aria-hidden="true"><b>Backpack</b></span><img src="assets/specimens/B10-backpack.jpg" width="640" height="480" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"></span><span class="tile__cap"><span class="tile__title">Backpack</span><code class="tile__id">B10</code></span></button></li>
+          <li><button class="tile" type="button" data-id="B11"><span class="frame"><span class="ph" aria-hidden="true"><b>Seagull</b></span><img src="assets/specimens/B11-seagull.jpg" width="640" height="480" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"></span><span class="tile__cap"><span class="tile__title">Seagull</span><code class="tile__id">B11</code></span></button></li>
+          <li><button class="tile" type="button" data-id="B12"><span class="frame"><span class="ph" aria-hidden="true"><b>Parking lot</b></span><img src="assets/specimens/B12-parking.jpg" width="640" height="480" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"></span><span class="tile__cap"><span class="tile__title">Parking lot</span><code class="tile__id">B12</code></span></button></li>
+        </ul>
+        <noscript><p class="sheet__line">The simulation needs JavaScript. Expected for a public post: 6 Clear, 2 Fix first, 1 Check this, 3 Keep private.</p></noscript>
+      </div>
+    </div>
+
+    <div class="plan" id="plan" aria-labelledby="plan-title" hidden>
+      <div class="plan__ask">
+        <h3 id="plan-title">Ready to write, after your approval</h3>
+        <ol class="opts" id="opts"></ol>
+        <div class="plan__actions">
+          <button class="btn btn--primary" type="button" id="approve">Approve plan</button>
+          <button class="btn" type="button" id="decline">Decline</button>
+        </div>
+      </div>
+      <div class="plan__out" id="plan-out"></div>
+    </div>
+  </div>
+</section>
+
+<section class="why" id="why" aria-labelledby="why-title" hidden>
+  <div class="container">
+    <div class="why__head">
+      <h2 id="why-title">Why a second look matters</h2>
+      <p class="lead">A beach photo can carry the GPS position of your home. Most leaks are noticed only after the photo is out.</p>
+    </div>
+    <ul class="stats" id="stats"></ul>
+  </div>
+</section>
+
+<section class="how" id="how" aria-labelledby="how-title">
+  <div class="container">
+    <div class="how__head">
+      <div>
+        <h2 id="how-title">Three experts, two readings, one verdict</h2>
+        <p class="lead" style="margin-top: var(--space-md)">The Skill is Markdown only. The NAS’s registered experts do every reading.</p>
+      </div>
+      <p class="compare"><b>What phones already do</b>Share sheets can strip location, and one phone maker blurs ID cards photo by photo. None audits your library and the albums you already shared, privately, on your own storage.</p>
+    </div>
+
+    <div class="sub sub--first">
+      <div class="sub__head">
+        <h3>Every reading runs on a NAS expert</h3>
+        <p>Text reading and visual reading are separate delegations. Neither sees the other’s answer.</p>
+      </div>
+      <ul class="experts">
+        <li class="bay">
+          <h4>photo-agent</h4>
+          <p>Finds the photos, reads metadata, matches your personal rules, runs both readings and creates the album.</p>
+          <ul class="acts" aria-label="Catalog actions">
+            <li><code>search-picture</code></li><li><code>meta</code></li><li><code>search-classify</code></li><li><code>vision-ocr</code></li><li><code>vision-vlm</code></li><li><code>create-album</code></li>
+          </ul>
+        </li>
+        <li class="bay">
+          <h4>file-agent</h4>
+          <p>Reads and adds the Keep private tag. Resolves folders you name.</p>
+          <ul class="acts" aria-label="Catalog actions">
+            <li><code>tag-get-file</code></li><li><code>tag-add-file</code></li><li><code>find</code></li>
+          </ul>
+        </li>
+        <li class="bay">
+          <h4>knowledge-agent</h4>
+          <p>Answers from official UGREEN documentation only.</p>
+          <ul class="acts" aria-label="Catalog actions">
+            <li><code>answer-official</code></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="sub">
+      <div class="sub__head">
+        <h3>Quick to worry, slow to clear</h3>
+        <p>One reading is enough to raise a concern. Clear needs both readings and the metadata, all completed.</p>
+      </div>
+      <div class="wits">
+        <div class="case">
+          <h4>One reading saw something</h4>
+          <ul class="readings">
+            <li data-saw="yes"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Visual reading</span><span>possible plate</span></li>
+            <li data-saw="no"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg><span>Text reading</span><span>nothing readable</span></li>
+          </ul>
+          <p class="case__out"><span class="stamp" data-v="check"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>Check this</span>One witness is enough to stop.</p>
+        </div>
+        <div class="case case--clear">
+          <h4>All three completed and found nothing that matters</h4>
+          <ul class="readings">
+            <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Text reading</span><span>completed</span></li>
+            <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Visual reading</span><span>completed</span></li>
+            <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Metadata</span><span>completed</span></li>
+          </ul>
+          <p class="case__out"><span class="stamp" data-v="clear"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Clear</span>Never on a single reading.</p>
+        </div>
+      </div>
+      <p class="footnote">Metadata facts, personal-rule matches and vision-only types (keys, background faces) confirm on their own.</p>
+    </div>
+
+    <div class="sub">
+      <div class="rules">
+        <div class="rules__text">
+          <h3>Your rules, checked by the NAS’s own face recognition</h3>
+          <p>Write a rule once, in your words. Step 4 asks the library’s people index which photos show that person, before any reading runs.</p>
+          <p>Matches become Keep private for the audiences the rule covers. The name appears only in the rule line, never in a tag or an album.</p>
+        </div>
+        <div class="rx rx--rule">
+          <div class="rx__head"><span>Personal rule</span><span>Step 4</span></div>
+          <dl>
+            <dt>Rule</dt><dd>Never show Mia’s face publicly</dd>
+            <dt>Covers</dt><dd>Public, Marketplace</dd>
+            <dt>Checked by</dt><dd>photo-agent, people index</dd>
+            <dt>Actions</dt><dd>search-classify, search-picture</dd>
+          </dl>
+          <p class="seal" data-v="keep">Keep private</p>
+          <p class="rx__stub">The name must be a person your library already recognizes.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub aud">
+      <div class="aud__head">
+        <h3>Same house number, three audiences</h3>
+        <p>Fine for grandma, wrong for the internet.</p>
+        <ul class="legend">
+          <li><span class="mark" data-s="red" aria-hidden="true"></span>Red: Keep private once confirmed</li>
+          <li><span class="mark" data-s="amber" aria-hidden="true"></span>Amber: Fix first</li>
+          <li><span class="mark" data-s="info" aria-hidden="true"></span>Info: noted, never blocks</li>
+          <li><span class="mark" data-s="rule" aria-hidden="true"></span>As your rule says</li>
+        </ul>
+      </div>
+      <table class="matrix chart" aria-label="Risk severity chart by audience">
+        <caption class="visually-hidden">How much each risk type counts for each audience</caption>
+        <thead><tr><th scope="col">Risk</th><th scope="col">Private</th><th scope="col">Public</th><th scope="col">Marketplace</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><code>LOC</code> GPS location</th><td><span class="mark" data-s="info"><span class="visually-hidden">Info</span></span></td><td><span class="mark" data-s="amber"><span class="visually-hidden">Amber</span></span></td><td><span class="mark" data-s="amber"><span class="visually-hidden">Amber</span></span></td></tr>
+          <tr><th scope="row"><code>ADR</code> House number or address</th><td><span class="mark" data-s="info"><span class="visually-hidden">Info</span></span></td><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td></tr>
+          <tr><th scope="row"><code>PLT</code> License plate</th><td><span class="mark" data-s="info"><span class="visually-hidden">Info</span></span></td><td><span class="mark" data-s="amber"><span class="visually-hidden">Amber</span></span></td><td><span class="mark" data-s="amber"><span class="visually-hidden">Amber</span></span></td></tr>
+          <tr><th scope="row"><code>IDD</code> ID document</th><td><span class="mark" data-s="amber"><span class="visually-hidden">Amber</span></span></td><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td></tr>
+          <tr><th scope="row"><code>PAY</code> Payment card</th><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td></tr>
+          <tr><th scope="row"><code>TKT</code> Ticket, barcode or QR</th><td><span class="mark" data-s="amber"><span class="visually-hidden">Amber</span></span></td><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td></tr>
+          <tr><th scope="row"><code>MAL</code> Mail or package label</th><td><span class="mark" data-s="info"><span class="visually-hidden">Info</span></span></td><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td></tr>
+          <tr><th scope="row"><code>SCR</code> Screen with messages</th><td><span class="mark" data-s="amber"><span class="visually-hidden">Amber</span></span></td><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td></tr>
+          <tr><th scope="row"><code>COD</code> Password or PIN note</th><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td></tr>
+          <tr><th scope="row"><code>KEY</code> Keys</th><td><span class="mark" data-s="info"><span class="visually-hidden">Info</span></span></td><td><span class="mark" data-s="amber"><span class="visually-hidden">Amber</span></span></td><td><span class="mark" data-s="amber"><span class="visually-hidden">Amber</span></span></td></tr>
+          <tr><th scope="row"><code>SCH</code> School crest or name</th><td><span class="mark" data-s="info"><span class="visually-hidden">Info</span></span></td><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td></tr>
+          <tr><th scope="row"><code>MED</code> Prescription label</th><td><span class="mark" data-s="amber"><span class="visually-hidden">Amber</span></span></td><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td></tr>
+          <tr><th scope="row"><code>FAC</code> Background faces</th><td><span class="mark" data-s="info"><span class="visually-hidden">Info</span></span></td><td><span class="mark" data-s="amber"><span class="visually-hidden">Amber</span></span></td><td><span class="mark" data-s="amber"><span class="visually-hidden">Amber</span></span></td></tr>
+          <tr><th scope="row"><code>MET</code> Owner or serial metadata</th><td><span class="mark" data-s="info"><span class="visually-hidden">Info</span></span></td><td><span class="mark" data-s="info"><span class="visually-hidden">Info</span></span></td><td><span class="mark" data-s="amber"><span class="visually-hidden">Amber</span></span></td></tr>
+          <tr><th scope="row"><code>RUL</code> Your personal rule</th><td><span class="mark" data-s="rule"><span class="visually-hidden">As the rule says</span></span></td><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td><td><span class="mark" data-s="red"><span class="visually-hidden">Red</span></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sub">
+      <div class="sub__head">
+        <h3>Marked once, settled every public check after</h3>
+        <p>The Keep private tag is memory the NAS keeps in File Manager. It says a photo is sensitive, never why.</p>
+      </div>
+      <ol class="loop">
+        <li><h4>You approve one plan</h4><p>Then the NAS asks its own approval for each write.</p></li>
+        <li><h4>file-agent adds the tag</h4><p>Only on Keep private photos that do not carry it yet.</p></li>
+        <li><h4>The next check knows</h4><p>For Public and Marketplace, tagged photos are Keep private at once. For Private they are read normally.</p></li>
+      </ol>
+      <p class="loop__back"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>Try it above: approve the plan, then run the check again. <a class="textlink" href="#check">Back to the check</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="trust" id="trust" aria-labelledby="trust-title">
+  <div class="container trust__grid">
+    <div class="trust__head">
+      <h2 id="trust-title">Nothing leaves the NAS</h2>
+      <p class="lead">A cloud check would upload exactly what you are trying to protect.</p>
+    </div>
+    <ul class="rows">
+      <li><h3>No external calls</h3><p>Every reading runs on the NAS’s own experts. Nothing is uploaded.</p></li>
+      <li><h3>Types and positions only</h3><p>It says “house number, top right”, never the number itself. No place names.</p></li>
+      <li><h3>Payment cards never read</h3><p>Reported only as “payment card visible”.</p></li>
+      <li><h3>Read-only until you approve</h3><p>One plan for you, then the NAS asks again for each write.</p></li>
+      <li><h3>Photos stay as they are</h3><p>It never edits, moves, deletes or shares a photo, or changes permissions.</p></li>
+      <li><h3>Only what is yours</h3><p>Your library and the albums you shared. Never albums shared with you.</p></li>
+      <li><h3>A second look, not a guarantee</h3><p>Tiny text, reflections and context only a person knows can slip through.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section class="standard" id="standard" aria-labelledby="standard-title">
+  <div class="container">
+    <div class="std__head">
+      <h2 id="standard-title">Passes the official Skill checker</h2>
+      <p class="lead">Checked with the UGOS Skill Creation Tool, uliya-skill-kit 0.7.3.</p>
+    </div>
+    <div class="std__body">
+      <div class="rx rx--wide" role="group" aria-label="Official checker result">
+        <div class="rx__head"><span>UGOS Skill checker</span><span>check-result.json</span></div>
+        <dl>
+          <dt>Skill</dt><dd>before-you-share</dd>
+          <dt>Errors</dt><dd>0</dd>
+          <dt>Warnings</dt><dd>0</dd>
+          <dt>Catalog</dt><dd>2.0.0</dd>
+          <dt>Experts</dt><dd>photo-agent, file-agent, knowledge-agent</dd>
+        </dl>
+        <p class="seal" data-v="clear">static-pass</p>
+        <p class="rx__stub">Delegates only to registered experts.</p>
+      </div>
+      <div class="std__side">
+        <h3>Six Markdown files</h3>
+        <ul class="files">
+          <li><code>SKILL.md</code></li>
+          <li><code>references/verdict-rules.md</code></li>
+          <li><code>references/report-format.md</code></li>
+          <li><code>references/privacy-and-safety.md</code></li>
+          <li><code>references/validation-plan.md</code></li>
+          <li><code>references/disclosures.md</code></li>
+        </ul>
+        <p>No scripts, libraries, models or external calls.</p>
+        <div class="std__actions">
+          <a class="btn btn--primary" href="https://github.com/KaraAliOsman/before-you-share/raw/main/dist/before-you-share.zip"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>Download Skill</a>
+          <a class="textlink" href="https://github.com/KaraAliOsman/before-you-share/blob/main/skill/before-you-share/SKILL.md">Read SKILL.md</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="container">
+    <p class="foot__mark">Before You Share</p>
+    <div class="foot__row">
+      <ul class="foot__links">
+        <li><a href="https://github.com/KaraAliOsman/before-you-share">GitHub repository</a></li>
+        <li><a href="https://github.com/KaraAliOsman/before-you-share/blob/main/submission/proposal.pdf">Proposal (PDF)</a></li>
+        <li><a href="https://github.com/KaraAliOsman/before-you-share/raw/main/dist/before-you-share.zip">Download Skill</a></li>
+      </ul>
+      <p>Not an official UGREEN product. Built for the UGREEN Hackathon 2026 on AI NAS.</p>
+    </div>
+    <p class="foot__fine">Specimen photos are generated and fictional. © 2026 Ali Osman Kara.</p>
+  </div>
+</footer>
+
+<dialog class="detail" id="detail" aria-labelledby="d-title">
+  <div class="detail__grid">
+    <div class="detail__media">
+      <div id="d-frame"></div>
+      <p class="detail__nav">
+        <button class="btn btn--small" type="button" id="d-prev"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>Previous photo</button>
+        <button class="btn btn--small" type="button" id="d-next">Next photo<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+      </p>
+    </div>
+    <div class="detail__text">
+      <div class="detail__top"><code id="d-file"></code><button class="iconbtn" type="button" id="d-close" aria-label="Close details"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
+      <h2 id="d-title">Photo</h2>
+      <div class="detail__verdict" id="d-verdict"></div>
+      <p class="detail__why" id="d-why"></p>
+      <ul class="findings" id="d-findings"></ul>
+      <dl class="detail__meta" id="d-meta"></dl>
+      <p class="fine">A second look, not a guarantee. Tiny text, reflections and context only a person would recognize can slip through.</p>
+    </div>
+  </div>
+</dialog>
+
+<script>
+/* Verified statistics for "Why this matters". Each item: { text, source, url } and an optional
+   figure (a number quoted from the text, shown large). The section stays hidden while this is empty. */
+const STATS = [
+  { figure: '3 in 4', text: 'About 3 in 4 parents share content about their children online; among those who share, 21–23% post content with a location tagged and 15% in Ireland show the school name or uniform.', source: 'DPC (Ireland) & CNIL (France) Sharenting Research, 2026', url: 'https://www.dataprotection.ie/sites/default/files/uploads/2026-06/DPC-CNIL-Sharenting-Research-Final.pdf' },
+  { figure: '1,300', text: 'By age 13, parents have posted about 1,300 photos and videos of their child.', source: "Children’s Commissioner for England, 2018", url: 'https://assets.childrenscommissioner.gov.uk/wpuploads/2018/11/who-knows-what-about-me-infographic.pdf' },
+  { figure: '1,135,291', text: '1,135,291 identity theft reports in the US in 2024.', source: 'FTC Consumer Sentinel Data Book 2024', url: 'https://www.ftc.gov/system/files/ftc_gov/pdf/csn-annual-data-book-2024.pdf' },
+  { text: "A boarding pass barcode posted online revealed the traveler’s name, frequent-flyer number and booking code, enough to view and change the trip.", source: 'KrebsOnSecurity, 2015', url: 'https://krebsonsecurity.com/2015/10/whats-in-a-boarding-pass-barcode-a-lot/' },
+  { figure: '60 m', text: 'Researchers made working copies of house keys from photos, one taken from about 60 m away.', source: 'UC San Diego, 2008', url: 'https://jacobsschool.ucsd.edu/news/release/791' },
+  { text: 'Police advise parents not to post school uniforms, logos, name tags or house numbers.', source: 'Australian Federal Police, 2023', url: 'https://afp.gov.au/news-centre/media-release/advice-parents-sharing-back-school-images-online' },
+  { figure: '81%', text: "81% of Americans familiar with AI expect companies’ use of it to put their personal information to uses they are uncomfortable with.", source: 'Pew Research Center, 2023', url: 'https://www.pewresearch.org/short-reads/2023/10/18/key-findings-about-americans-and-data-privacy/' }
+];
+
+(() => {
+  'use strict';
+  const doc = document;
+  const $ = (s, r) => (r || doc).querySelector(s);
+  const $$ = (s, r) => Array.from((r || doc).querySelectorAll(s));
+  const RM = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const sleep = (ms) => new Promise((res) => setTimeout(res, RM.matches ? 0 : ms));
+  const BASE = 'assets/specimens/';
+  const REF_DATE = '2026-11-20';
+  const BATCH = 5;
+  const RULE_PERSON = 'Mia';
+  const RULE_TEXT = "never show Mia’s face publicly";
+  /* In this simulation, the subject of H08 is the recognized person named in the rule. */
+  const RULE_MATCH = new Set(['H08']);
+
+  const AUDS = ['private', 'public', 'marketplace'];
+  const AUD = {
+    private: { name: 'Private', phrase: 'family and friends' },
+    public: { name: 'Public', phrase: 'a public post' },
+    marketplace: { name: 'Marketplace', phrase: 'a marketplace listing' }
+  };
+  const ORDER = ['Clear', 'Fix first', 'Check this', 'Keep private'];
+  const VKEY = { 'Clear': 'clear', 'Fix first': 'fix', 'Check this': 'check', 'Keep private': 'keep' };
+  const VICON = { clear: 'check', fix: 'crop', check: 'eye', keep: 'lock' };
+
+  const RISK = {
+    LOC: { label: 'GPS location stored in the file', fix: 'Share a copy without location data. NAS share links send the original file with its location.', sev: ['Info', 'Amber', 'Amber'], meta: true },
+    ADR: { label: 'House number visible', fix: 'Crop or blur the area, or choose another photo.', sev: ['Info', 'Red', 'Red'] },
+    PLT: { label: 'Readable license plate', fix: 'Crop or blur the plate.', sev: ['Info', 'Amber', 'Amber'] },
+    IDD: { label: 'Identity document visible', fix: 'Leave the photo out.', sev: ['Amber', 'Red', 'Red'] },
+    PAY: { label: 'Payment card visible', fix: 'Leave the photo out. If it was already shared, contact the bank.', sev: ['Red', 'Red', 'Red'] },
+    TKT: { label: 'Boarding pass with a barcode', fix: 'Crop out the code. Codes can reveal bookings and names.', sev: ['Amber', 'Red', 'Red'] },
+    MAL: { label: 'Package label with a name and address', fix: 'Crop or blur the label.', sev: ['Info', 'Red', 'Red'] },
+    SCR: { label: 'Screen showing messages', fix: 'Crop the screen out.', sev: ['Amber', 'Red', 'Red'] },
+    COD: { label: 'Note with a code or password', fix: 'Leave the photo out. Change the code if it was already shared.', sev: ['Red', 'Red', 'Red'] },
+    KEY: { label: 'Keys clearly visible', fix: 'Crop or blur. Clear photos of keys can be used to copy them.', sev: ['Info', 'Amber', 'Amber'], visionOnly: true },
+    SCH: { label: 'School crest and name label', fix: 'Crop or blur the label or crest.', sev: ['Info', 'Red', 'Red'] },
+    MED: { label: 'Prescription label', fix: 'Crop or blur the label.', sev: ['Amber', 'Red', 'Red'] },
+    FAC: { label: 'Faces of people in the background', fix: 'Ask those people first, or crop them out.', sev: ['Info', 'Amber', 'Amber'], visionOnly: true },
+    MET: { label: 'Owner or camera serial fields filled', fix: 'Share a copy without metadata.', sev: ['Info', 'Info', 'Amber'], meta: true }
+  };
+  const SEV_IDX = { private: 0, public: 1, marketplace: 2 };
+
+  const ICONS = {
+    check: '<path d="M20 6 9 17l-5-5"/>',
+    crop: '<path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/>',
+    eye: '<path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/>',
+    lock: '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+    minus: '<path d="M5 12h14"/>',
+    tag: '<path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r="1"/>',
+    book: '<path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>',
+    images: '<rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>',
+    again: '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>'
+  };
+
+  function h(tag, attrs, kids) {
+    const el = doc.createElement(tag);
+    if (attrs) Object.keys(attrs).forEach((k) => {
+      const v = attrs[k];
+      if (v === false || v == null) return;
+      if (k === 'class') el.className = v; else el.setAttribute(k, v === true ? '' : String(v));
+    });
+    if (kids != null) (Array.isArray(kids) ? kids : [kids]).forEach((c) => {
+      if (c == null || c === false) return;
+      el.append(c instanceof Node ? c : doc.createTextNode(String(c)));
+    });
+    return el;
+  }
+  function icon(name) {
+    const s = doc.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('class', 'i');
+    s.setAttribute('aria-hidden', 'true'); s.setAttribute('focusable', 'false');
+    s.innerHTML = ICONS[name] || '';
+    return s;
+  }
+  const count = (n, word) => n + ' ' + word + (n === 1 ? '' : 's');
+  const countOr = (n) => (n ? count(n, 'photo') : 'no photo');
+  const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+  const listing = (arr) => arr.length < 2 ? arr.join('') : arr.slice(0, -1).join(', ') + ' and ' + arr[arr.length - 1];
+
+  /* Fallback data, derived from the validation plan; manifest.json overrides it when available. */
+  const F = (id, file, set, title, findings, exif) => ({ id, file, set, title, findings: findings || [], exif: Object.assign({ gps: false, owner: false, serial: false }, exif || {}), width: 640, height: 480 });
+  const f = (code, position, readings, label) => ({ code, position, readings, label: label || null, bbox: null });
+  const FALLBACK = [
+    F('B01', 'B01-beach-wide.jpg', 'beach-day', 'Beach wide', [f('LOC', null, 'metadata')], { gps: true }),
+    F('B02', 'B02-sunset.jpg', 'beach-day', 'Sunset'),
+    F('B03', 'B03-sandcastle.jpg', 'beach-day', 'Sandcastle'),
+    F('B04', 'B04-ice-cream.jpg', 'beach-day', 'Ice cream'),
+    F('B05', 'B05-dog.jpg', 'beach-day', 'Dog on the sand'),
+    F('B06', 'B06-boardwalk.jpg', 'beach-day', 'Boardwalk'),
+    F('B07', 'B07-house-front.jpg', 'beach-day', 'House front', [f('ADR', 'top right', 'text and vision', 'House number visible')]),
+    F('B08', 'B08-car.jpg', 'beach-day', 'Car', [f('PLT', 'bottom center', 'text and vision', 'License plate readable')]),
+    F('B09', 'B09-boarding-pass.jpg', 'beach-day', 'Boarding pass', [f('TKT', 'middle center', 'text and vision', 'Boarding pass with a barcode')]),
+    F('B10', 'B10-backpack.jpg', 'beach-day', 'Backpack', [f('SCH', 'middle left', 'text and vision', 'School crest and name label on a backpack')]),
+    F('B11', 'B11-seagull.jpg', 'beach-day', 'Seagull'),
+    F('B12', 'B12-parking.jpg', 'beach-day', 'Parking lot', [f('PLT', 'bottom left', 'vision only', 'Possible license plate, blurred')]),
+    F('H01', 'H01-id-card.jpg', 'hazard-set', 'ID card', [f('IDD', 'middle center', 'text and vision', 'Identity card visible')]),
+    F('H02', 'H02-payment-card.jpg', 'hazard-set', 'Payment card', [f('PAY', 'middle left', 'text and vision')]),
+    F('H03', 'H03-package-label.jpg', 'hazard-set', 'Package label', [f('MAL', 'middle center', 'text and vision', 'Package label with a name and address')]),
+    F('H04', 'H04-laptop-screen.jpg', 'hazard-set', 'Laptop screen', [f('SCR', 'middle center', 'text and vision', 'Screen showing a message thread')]),
+    F('H05', 'H05-wifi-note.jpg', 'hazard-set', 'Wi-Fi note', [f('COD', 'middle right', 'text and vision', 'Note with a Wi-Fi key')]),
+    F('H06', 'H06-keys.jpg', 'hazard-set', 'Keys', [f('KEY', 'middle center', 'vision only', 'House and car keys clearly visible')]),
+    F('H07', 'H07-prescription.jpg', 'hazard-set', 'Prescription bottle', [f('MED', 'middle center', 'text and vision', 'Prescription label')]),
+    F('H08', 'H08-bystanders.jpg', 'hazard-set', 'Bystanders', [f('FAC', 'top right', 'vision only', 'Faces of people in the background who are not the subject')]),
+    F('H09', 'H09-calculator-screenshot.jpg', 'hazard-set', 'Calculator screenshot'),
+    F('H10', 'H10-metadata-only.jpg', 'hazard-set', 'Metadata only', [f('MET', null, 'metadata')], { owner: true, serial: true })
+  ];
+
+  const clean = (s, fb) => (typeof s === 'string' && s.trim() && !/\d/.test(s) && s.length <= 90) ? s.trim() : fb;
+  const POS_RE = /^(top|middle|bottom) (left|center|right)$/;
+  function cleanPos(p) {
+    if (typeof p !== 'string') return null;
+    const t = p.trim().toLowerCase().replace('centre', 'center').replace(/\s+/g, ' ');
+    return POS_RE.test(t) ? t : null;
+  }
+  function normReadings(r, code) {
+    if (RISK[code] && RISK[code].meta) return 'metadata';
+    const t = String(r || '').toLowerCase();
+    const text = t.indexOf('text') > -1, vision = t.indexOf('vision') > -1;
+    if (text && vision) return 'text and vision';
+    if (text) return 'text only';
+    return 'vision only';
+  }
+  function validBox(b) {
+    if (!Array.isArray(b) || b.length !== 4) return null;
+    if (!b.every((n) => typeof n === 'number' && isFinite(n) && n >= 0 && n <= 1)) return null;
+    return b[2] > 0 && b[3] > 0 ? b : null;
+  }
+  function normalize(raw, fb) {
+    const id = String(raw.id || '').trim();
+    const file = (typeof raw.file === 'string' && /^[\w.-]+$/.test(raw.file)) ? raw.file : (fb ? fb.file : id + '.jpg');
+    const set = (raw.set === 'hazard-set' || raw.set === 'beach-day') ? raw.set : (fb ? fb.set : (id.charAt(0) === 'H' ? 'hazard-set' : 'beach-day'));
+    const ex = (raw.exif && typeof raw.exif === 'object') ? raw.exif : (fb ? fb.exif : {});
+    /* Place names are dropped on purpose: location findings never show them. */
+    const exif = { gps: !!ex.gps, owner: !!ex.owner, serial: !!ex.serial };
+    const src = Array.isArray(raw.findings) ? raw.findings : (fb ? fb.findings : []);
+    const findings = src.filter((x) => x && RISK[x.code]).map((x) => {
+      let label = x.code === 'PAY' ? RISK.PAY.label : clean(x.label, RISK[x.code].label);
+      if (x.code === 'ADR' && /street sign/i.test(label)) label = RISK.ADR.label;
+      if (x.code === 'LOC') label = RISK.LOC.label;
+      return { code: x.code, label, position: RISK[x.code].meta ? null : cleanPos(x.position), bbox: RISK[x.code].meta ? null : validBox(x.bbox), readings: normReadings(x.readings, x.code) };
+    });
+    if (exif.gps && !findings.some((x) => x.code === 'LOC')) findings.unshift({ code: 'LOC', label: RISK.LOC.label, position: null, bbox: null, readings: 'metadata' });
+    if ((exif.owner || exif.serial) && !findings.some((x) => x.code === 'MET')) findings.push({ code: 'MET', label: RISK.MET.label, position: null, bbox: null, readings: 'metadata' });
+    const expected = {};
+    if (raw.verdict && typeof raw.verdict === 'object') AUDS.forEach((a) => { if (VKEY[raw.verdict[a]]) expected[a] = raw.verdict[a]; });
+    const w = Number(raw.width) > 0 ? Number(raw.width) : (fb ? fb.width : 640);
+    const hh = Number(raw.height) > 0 ? Number(raw.height) : (fb ? fb.height : 480);
+    return { id, file, set, title: clean(raw.title, fb ? fb.title : id), findings, exif, width: w, height: hh, expected };
+  }
+
+  const FB = new Map(FALLBACK.map((x) => [x.id, normalize(x, null)]));
+  const IMG = new Map(FB);
+
+  const SETS = {
+    beach: { name: 'Beach day', key: 'beach-day', album: 'Beach day', guidance: 'how to share a photo without location data' },
+    hazard: { name: 'Hazard set', key: 'hazard-set', album: 'Hazard set', guidance: 'how to share a copy without location or other metadata' },
+    audit: { name: 'Shared-album audit', audit: true, shared: 'Family summer', ids: ['B07', 'B02', 'B05', 'H01', 'B11'], guidance: 'how to remove a photo from a shared album or change who can see it' }
+  };
+  function imagesFor(key) {
+    const s = SETS[key];
+    if (s.audit) return s.ids.map((id) => IMG.get(id)).filter(Boolean);
+    return Array.from(IMG.values()).filter((x) => x.set === s.key).sort((a, b) => a.id.localeCompare(b.id, 'en', { numeric: true }));
+  }
+
+  const STEP = {
+    A1: { n: 'A1', name: 'Shared albums', expert: 'photo-agent', action: 'ug-photo albums' },
+    s1: { n: '1', name: 'Photo set', expert: 'photo-agent', action: 'ug-photo search-picture' },
+    s2: { n: '2', name: 'Known private', expert: 'file-agent', action: 'ug-filemgr tag-get-file' },
+    s3: { n: '3', name: 'Metadata', expert: 'photo-agent', action: 'ug-photo meta' },
+    s4: { n: '4', name: 'Personal rules', expert: 'photo-agent', action: 'ug-photo search-classify' },
+    s5: { n: '5', name: 'Text reading', expert: 'photo-agent', action: 'ug-photo vision-ocr' },
+    s6: { n: '6', name: 'Visual reading', expert: 'photo-agent', action: 'ug-photo vision-vlm' },
+    s7: { n: '7', name: 'Verdicts', note: 'Reasoning only, no delegation' },
+    s8: { n: '8', name: 'Your approval', note: 'One consolidated plan' },
+    s9: { n: '9', name: 'Share-ready album', expert: 'photo-agent', action: 'ug-photo create-album' },
+    s10: { n: '10', name: 'Keep private tags', expert: 'file-agent', action: 'ug-filemgr tag-add-file' },
+    s11: { n: '11', name: 'Official guidance', expert: 'knowledge-agent', action: 'ug-knowledge answer-official' }
+  };
+
+  const S = { set: 'beach', aud: 'public', rule: false, phase: 'idle', token: 0, results: new Map(), tagged: new Set(), view: [], plan: null, detail: null };
+
+  const isConfirmed = (x) => x.readings === 'metadata' || x.readings === 'rule' || x.readings === 'text and vision' || (x.readings === 'vision only' && !!RISK[x.code] && !!RISK[x.code].visionOnly);
+  const settled = (id) => S.tagged.has(id) && S.aud !== 'private';
+  function judge(img) {
+    const aud = S.aud;
+    if (settled(img.id)) return { verdict: 'Keep private', tagged: true, items: [] };
+    const items = img.findings.map((x) => Object.assign({}, x, { confirmed: isConfirmed(x), sev: RISK[x.code].sev[SEV_IDX[aud]] }));
+    if (S.rule && aud !== 'private' && RULE_MATCH.has(img.id)) items.unshift({ code: 'RUL', label: 'Your rule: ' + RULE_TEXT, position: null, bbox: null, readings: 'rule', confirmed: true, sev: 'Red' });
+    let v = 'Clear';
+    if (items.some((i) => i.confirmed && i.sev === 'Red')) v = 'Keep private';
+    else if (items.some((i) => !i.confirmed && i.sev !== 'Info')) v = 'Check this';
+    else if (items.some((i) => i.confirmed && i.sev === 'Amber')) v = 'Fix first';
+    const exp = img.expected[aud];
+    const ruleHit = items.some((i) => i.code === 'RUL');
+    if (exp && exp !== v && !ruleHit) { if (window.console) console.warn('Before You Share demo: ' + img.id + ' computed ' + v + ', manifest expects ' + exp); v = exp; }
+    return { verdict: v, tagged: false, taggedInfo: S.tagged.has(img.id), items };
+  }
+
+  /* trace */
+  function stepEl(key) {
+    const d = STEP[key];
+    const li = h('li', { class: 'step', 'data-key': key, 'data-status': 'waiting' });
+    li.append(h('span', { class: 'step__n', 'aria-hidden': 'true' }, d.n));
+    const who = h('p', { class: 'step__who' }, d.expert ? [h('code', {}, d.expert), h('code', {}, d.action)] : d.note);
+    li.append(h('div', {}, [h('p', { class: 'step__name' }, [h('span', { class: 'visually-hidden' }, 'Step ' + d.n + ': '), d.name]), who, h('p', { class: 'step__out' })]));
+    li.append(h('span', { class: 'chip', 'data-s': 'waiting' }, 'waiting'));
+    return li;
+  }
+  function setStatus(key, s, out) {
+    const li = $('.step[data-key="' + key + '"]');
+    if (!li) return;
+    li.setAttribute('data-status', s);
+    const chip = $('.chip', li);
+    chip.setAttribute('data-s', s); chip.textContent = s;
+    if (out != null) $('.step__out', li).textContent = out;
+    if (s === 'completed' && !RM.matches) { chip.classList.remove('pop'); void chip.offsetWidth; chip.classList.add('pop'); }
+  }
+  const say = (t) => { $('#live').textContent = t; };
+  const keysFor = () => (SETS[S.set].audit ? ['A1'] : []).concat(['s1', 's2', 's3', 's4', 's5', 's6', 's7']);
+  function renderSteps() { const ol = $('#steps'); ol.textContent = ''; keysFor().forEach((k) => ol.append(stepEl(k))); }
+  function clearWrites() { const w = $('#writes'); w.textContent = ''; w.hidden = true; }
+
+  /* grid */
+  function frameEl(img, opts) {
+    const o = opts || {};
+    const fr = h('span', { class: 'frame', 'data-kind': 'product', style: 'aspect-ratio:' + img.width + ' / ' + img.height });
+    fr.append(h('span', { class: 'ph', 'aria-hidden': 'true' }, [h('b', {}, img.title), h('code', {}, img.file)]));
+    const im = h('img', { src: BASE + img.file, width: img.width, height: img.height, alt: o.alt || '', decoding: 'async', loading: o.lazy ? 'lazy' : null });
+    im.addEventListener('error', () => { im.hidden = true; }, { once: true });
+    fr.append(im);
+    return fr;
+  }
+  function stampEl(v) {
+    const k = VKEY[v];
+    const s = h('span', { class: 'stamp', 'data-v': k });
+    s.append(icon(VICON[k]), h('span', {}, v));
+    return s;
+  }
+  const colsFor = (n) => (n === 10 || n === 5) ? 5 : (n <= 3 ? Math.max(n, 1) : 4);
+  function renderGrid() {
+    const imgs = imagesFor(S.set);
+    S.view = imgs;
+    const grid = $('#grid');
+    grid.textContent = '';
+    grid.style.setProperty('--cols', String(colsFor(imgs.length)));
+    imgs.forEach((img, i) => {
+      const btn = h('button', { class: 'tile', type: 'button', 'data-id': img.id, style: '--i:' + i });
+      btn.append(frameEl(img, { lazy: true }), h('span', { class: 'tile__cap' }, [h('span', { class: 'tile__title' }, img.title), h('code', { class: 'tile__id' }, img.id)]));
+      updateTile(btn, img, false);
+      grid.append(h('li', {}, btn));
+    });
+  }
+  function updateTile(btn, img, animate) {
+    const frame = $('.frame', btn);
+    $$('.stamp, .codes', frame).forEach((x) => x.remove());
+    const r = S.results.get(img.id);
+    let label = img.id + ', ' + img.title + '.';
+    if (r) {
+      const st = stampEl(r.verdict);
+      if (animate) st.classList.add('is-new');
+      frame.append(st);
+      const codes = r.tagged ? ['tag'] : Array.from(new Set(r.items.map((x) => x.code)));
+      if (codes.length) frame.append(h('span', { class: 'codes', 'aria-hidden': 'true' }, codes.map((c) => h('code', {}, c))));
+      label += ' ' + r.verdict + (r.tagged ? ', marked by you earlier' : '') + '.';
+    } else label += ' Not checked yet.';
+    btn.setAttribute('aria-label', label + ' Open details.');
+  }
+  const tileFor = (id) => $('.tile[data-id="' + id + '"]');
+
+  function tally() {
+    const c = { 'Clear': 0, 'Fix first': 0, 'Check this': 0, 'Keep private': 0 };
+    S.results.forEach((r) => { c[r.verdict] += 1; });
+    return c;
+  }
+  function countsSentence() {
+    const c = tally();
+    return ORDER.filter((v) => c[v]).map((v) => c[v] + ' ' + v).join(', ') + '.';
+  }
+  function summaryBase(n) {
+    const set = SETS[S.set], p = AUD[S.aud].phrase;
+    return set.audit ? count(n, 'photo') + ' in 1 shared album checked for ' + p : count(n, 'photo') + ' checked for ' + p;
+  }
+  function renderCounts() {
+    const ul = $('#counts'); ul.textContent = '';
+    const c = tally();
+    ORDER.forEach((v) => { if (c[v]) ul.append(h('li', {}, [h('b', {}, String(c[v])), stampEl(v)])); });
+    ul.hidden = false;
+  }
+  function renderSheetLine() {
+    const line = $('#sheet-line');
+    const set = SETS[S.set];
+    if (!set.audit) { line.hidden = true; return; }
+    const need = S.view.filter((i) => S.results.has(i.id) && S.results.get(i.id).verdict !== 'Clear').length;
+    line.textContent = set.shared + ', shared by you: ' + count(need, 'photo') + ' need' + (need === 1 ? 's' : '') + ' attention. A Keep private tag does not remove a photo from an album, and the album itself is never changed.';
+    line.hidden = false;
+  }
+  function setRun(state) {
+    const b = $('#run'), lab = $('#run-label');
+    if (state === 'busy') { b.setAttribute('aria-busy', 'true'); b.setAttribute('aria-disabled', 'true'); lab.textContent = 'Checking…'; }
+    else { b.removeAttribute('aria-busy'); b.removeAttribute('aria-disabled'); lab.textContent = state === 'done' ? 'Run again' : 'Run check'; }
+  }
+  function renderIdle() {
+    S.token += 1; S.phase = 'idle'; S.results.clear(); S.plan = null;
+    renderGrid(); renderSteps(); clearWrites();
+    const set = SETS[S.set];
+    $('#summary').textContent = set.audit ? count(S.view.length, 'photo') + ' in ' + set.shared + ', shared by you. Not checked yet.' : count(S.view.length, 'photo') + ', not checked yet.';
+    $('#counts').hidden = true; $('#sheet-line').hidden = true; $('#plan').hidden = true;
+    setRun('idle');
+  }
+
+  /* the run */
+  async function run() {
+    if ($('#run').getAttribute('aria-disabled') === 'true') return;
+    S.token += 1;
+    const token = S.token;
+    const set = SETS[S.set];
+    S.phase = 'running'; S.results.clear(); S.plan = null;
+    renderGrid(); renderSteps(); clearWrites();
+    $('#plan').hidden = true; $('#counts').hidden = true; $('#sheet-line').hidden = true;
+    setRun('busy');
+    const imgs = S.view, n = imgs.length;
+    const known = imgs.filter((i) => S.tagged.has(i.id));
+    const settledNow = imgs.filter((i) => settled(i.id));
+    const toRead = imgs.filter((i) => !settled(i.id));
+    const phrase = AUD[S.aud].phrase;
+    const alive = () => token === S.token;
+    $('#summary').textContent = 'Checking ' + count(n, 'photo') + ' for ' + phrase + '…';
+    say('Check started: ' + count(n, 'photo') + ' for ' + phrase + '.');
+
+    const go = async (keys, ms, outs) => {
+      keys.forEach((k) => setStatus(k, 'running'));
+      await sleep(ms);
+      if (!alive()) return false;
+      keys.forEach((k) => setStatus(k, outs[k] === 'skipped' ? 'skipped' : 'completed', outs[k] === 'skipped' ? 'No personal rule given.' : outs[k]));
+      return true;
+    };
+
+    if (set.audit && !(await go(['A1'], 600, { A1: '1 album shared by you through a link: ' + set.shared + ', ' + count(n, 'photo') + '.' }))) return;
+    if (!(await go(['s1'], 600, { s1: count(n, 'photo') + ', no videos. Within the 20-photo cap.' }))) return;
+
+    const gps = imgs.filter((i) => i.exif.gps).length;
+    const met = imgs.filter((i) => i.exif.owner || i.exif.serial).length;
+    const ruleHits = S.rule && S.aud !== 'private' ? imgs.filter((i) => RULE_MATCH.has(i.id)).length : 0;
+    let s2;
+    if (!known.length) s2 = 'No photo carries Keep private yet.';
+    else if (settledNow.length) s2 = count(known.length, 'photo') + ' marked by you earlier, settled as Keep private.';
+    else s2 = count(known.length, 'photo') + ' carry the tag. For Private they are read normally.';
+    const s4 = !S.rule ? 'skipped' : (S.aud === 'private' ? 'The rule covers Public and Marketplace, so it does not apply here.' : (ruleHits ? RULE_PERSON + ' appears in ' + count(ruleHits, 'photo') + '.' : 'No photo shows ' + RULE_PERSON + '.'));
+    const gpsLine = 'GPS location stored in ' + gps + ' of ' + n + ' photos.';
+    if (!(await go(['s2', 's3', 's4'], 800, { s2, s3: gpsLine + ' Owner or serial fields in ' + countOr(met) + '.', s4 }))) return;
+    $('#summary').textContent = gpsLine + ' Reading each photo twice now.';
+    say(gpsLine);
+
+    settledNow.forEach((img) => { S.results.set(img.id, judge(img)); const b = tileFor(img.id); if (b) updateTile(b, img, true); });
+
+    const batches = [];
+    for (let i = 0; i < toRead.length; i += BATCH) batches.push(toRead.slice(i, i + BATCH));
+    const total = batches.length;
+    let textSeen = 0, visSeen = 0;
+    const grid = $('#grid');
+    for (let b = 0; b < total; b += 1) {
+      const batch = batches[b];
+      const tag = 'Batch ' + (b + 1) + ' of ' + total;
+      $$('.tile').forEach((t) => t.removeAttribute('data-batch'));
+      batch.forEach((img) => { const t = tileFor(img.id); if (t) t.setAttribute('data-batch', 'now'); });
+      grid.setAttribute('data-reading', 'true');
+      setStatus('s5', 'running', tag + '.');
+      await sleep(650); if (!alive()) return;
+      textSeen += batch.filter((i) => i.findings.some((x) => x.readings.indexOf('text') > -1)).length;
+      setStatus('s6', 'running', tag + '.');
+      setStatus('s5', b === total - 1 ? 'completed' : 'running', (b === total - 1 ? '' : tag + '. ') + 'Text types in ' + countOr(textSeen) + '. Nothing transcribed.');
+      await sleep(750); if (!alive()) return;
+      visSeen += batch.filter((i) => i.findings.some((x) => x.readings.indexOf('vision') > -1)).length;
+      setStatus('s6', b === total - 1 ? 'completed' : 'running', (b === total - 1 ? '' : tag + '. ') + 'Something seen in ' + countOr(visSeen) + '.');
+      batch.forEach((img) => { S.results.set(img.id, judge(img)); const t = tileFor(img.id); if (t) updateTile(t, img, true); });
+      setStatus('s7', b === total - 1 ? 'completed' : 'running', b === total - 1 ? countsSentence() : tag + ': verdicts shown.');
+      say(tag + ' read. ' + count(S.results.size, 'verdict') + ' so far.');
+    }
+    if (!total) { setStatus('s5', 'completed', 'Nothing left to read.'); setStatus('s6', 'completed', 'Nothing left to read.'); setStatus('s7', 'completed', countsSentence()); }
+    grid.removeAttribute('data-reading');
+    $$('.tile').forEach((t) => t.removeAttribute('data-batch'));
+    S.phase = 'checked';
+    setRun('done');
+    $('#summary').textContent = summaryBase(n) + '.';
+    renderCounts(); renderSheetLine(); renderPlan();
+    say(summaryBase(n) + ': ' + countsSentence());
+  }
+
+  function applyVerdicts() {
+    S.view.forEach((img) => { S.results.set(img.id, judge(img)); const b = tileFor(img.id); if (b) updateTile(b, img, true); });
+  }
+
+  /* write plan */
+  const albumName = () => ['Share-ready', SETS[S.set].album, REF_DATE].join(' - ');
+  function renderPlan() {
+    const set = SETS[S.set];
+    const clear = S.view.filter((i) => S.results.get(i.id).verdict === 'Clear');
+    const keepNew = S.view.filter((i) => { const r = S.results.get(i.id); return r.verdict === 'Keep private' && !S.tagged.has(i.id); });
+    const name = albumName();
+    const opts = [];
+    if (!set.audit) opts.push({ key: 'a', step: 's9', title: 'Share-ready album', line: clear.length ? 'Create the album “' + name + '” with the ' + count(clear.length, 'Clear photo') + '.' : 'No Clear photos, so there is no album to create.', on: clear.length > 0, off: !clear.length });
+    opts.push({ key: 'b', step: 's10', title: 'Keep private tags', line: keepNew.length ? 'Tag ' + count(keepNew.length, 'photo') + ' Keep private so future public checks settle ' + (keepNew.length === 1 ? 'it' : 'them') + ' at once. The tag shows a photo is sensitive, never why.' : 'No new photos to tag.', on: keepNew.length > 0, off: !keepNew.length });
+    opts.push({ key: 'c', step: 's11', title: 'Official guidance', line: 'Show the official steps: ' + set.guidance + '. Read-only.', on: true });
+    S.plan = { clear, keepNew, name, opts, state: 'open' };
+    const list = $('#opts'); list.textContent = '';
+    opts.forEach((o) => {
+      const id = 'opt-' + o.key;
+      const input = h('input', { type: 'checkbox', id, name: id, 'data-opt': o.key });
+      input.checked = o.on; input.disabled = !!o.off;
+      const li = h('li', { class: o.off ? 'is-off' : null, value: String(o.key.charCodeAt(0) - 96) });
+      li.append(input, h('label', { for: id }, [h('b', {}, o.title), h('span', { class: 'opt__line' }, o.line)]));
+      list.append(li);
+    });
+    $('#plan-out').replaceChildren(h('p', { class: 'plan__wait' }, 'Nothing has been written. After you approve, the NAS asks its own approval for each write. That is expected.'));
+    $('#approve').disabled = false; $('#decline').disabled = false;
+    $('#plan').hidden = false;
+  }
+  function lockPlan() { $$('#opts input').forEach((i) => { i.disabled = true; }); $('#approve').disabled = true; $('#decline').disabled = true; }
+  function againBlock(tagged) {
+    const wrap = h('div', { class: 'plan__again' });
+    if (tagged) wrap.append(h('p', {}, 'Run it again for Public: tagged photos are settled at Step 2, with no new readings.'));
+    const again = h('button', { class: 'btn btn--small', type: 'button' }, [icon('again'), 'Run the check again']);
+    again.addEventListener('click', () => { $('#check').scrollIntoView({ behavior: RM.matches ? 'auto' : 'smooth', block: 'start' }); run(); });
+    const reset = h('button', { class: 'textbtn', type: 'button' }, 'Reset the demo');
+    reset.addEventListener('click', () => { S.tagged.clear(); renderIdle(); say('Demo reset. No photo carries Keep private.'); $('#run').focus(); });
+    wrap.append(again, reset);
+    return wrap;
+  }
+  async function approve() {
+    const p = S.plan;
+    if (!p || p.state !== 'open') return;
+    const token = S.token;
+    const chosen = $$('#opts input:checked').map((i) => i.getAttribute('data-opt'));
+    lockPlan();
+    const out = $('#plan-out'); out.textContent = '';
+    if (!chosen.length) { p.state = 'declined'; out.append(h('p', { class: 'plan__wait' }, 'Nothing was selected, so nothing was written.'), againBlock(false)); return; }
+    p.state = 'writing';
+    const w = $('#writes'); w.textContent = ''; w.hidden = false;
+    w.append(stepEl('s8'));
+    setStatus('s8', 'completed', 'You approved ' + listing(chosen) + '.');
+    const steps = p.opts.filter((o) => chosen.indexOf(o.key) > -1);
+    steps.forEach((o) => w.append(stepEl(o.step)));
+    for (const o of steps) {
+      if (o.key !== 'c') {
+        setStatus(o.step, 'waiting_approval', 'The NAS asks you to approve this write.');
+        say(STEP[o.step].name + ': waiting for your approval on the NAS.');
+        await sleep(900); if (token !== S.token) return;
+        setStatus(o.step, 'running', 'Approved on the NAS (simulated).');
+        await sleep(500); if (token !== S.token) return;
+      } else {
+        setStatus(o.step, 'running');
+        await sleep(500); if (token !== S.token) return;
+      }
+      if (o.key === 'a') {
+        const box = h('div', { class: 'album' });
+        box.append(h('p', { class: 'album__name' }, p.name), h('p', { class: 'album__meta' }, count(p.clear.length, 'photo') + ', only the Clear ones. Nothing was moved, edited or shared.'));
+        const ul = h('ul', { class: 'album__row', 'aria-label': 'Photos in the new album' });
+        p.clear.forEach((img) => ul.append(h('li', {}, frameEl(img, { alt: img.title }))));
+        box.append(ul);
+        out.append(box);
+        setStatus(o.step, 'completed', p.name + ', ' + count(p.clear.length, 'photo') + '.');
+      } else if (o.key === 'b') {
+        p.keepNew.forEach((img) => S.tagged.add(img.id));
+        out.append(h('p', { class: 'out__line' }, [icon('tag'), 'Keep private added to ' + listing(p.keepNew.map((i) => i.file)) + '.']));
+        setStatus(o.step, 'completed', 'Tag added to ' + count(p.keepNew.length, 'file') + '.');
+      } else {
+        out.append(h('p', { class: 'out__line' }, [icon('book'), 'In a real run, knowledge-agent answers ' + SETS[S.set].guidance + ' from official UGREEN NAS documentation, and says when a step is not covered.']));
+        setStatus(o.step, 'completed', 'Read-only answer, shown in the chat.');
+      }
+      say(STEP[o.step].name + ' completed.');
+    }
+    p.state = 'done';
+    out.append(againBlock(chosen.indexOf('b') > -1));
+    say('Every approved write completed.');
+  }
+  function decline() {
+    const p = S.plan;
+    if (!p || p.state !== 'open') return;
+    p.state = 'declined'; lockPlan();
+    $('#plan-out').replaceChildren(h('p', { class: 'plan__wait' }, 'Nothing was written. The report stays in the conversation.'), againBlock(false));
+    say('Plan declined. Nothing was written.');
+  }
+
+  /* detail dialog */
+  const dlg = $('#detail');
+  function boxFor(x) {
+    if (x.bbox) return x.bbox;
+    const p = (x.position || 'middle center').split(' ');
+    const Y = { top: 0.06, middle: 0.33, bottom: 0.6 }, X = { left: 0.05, center: 0.32, right: 0.6 };
+    return [X[p[1]] != null ? X[p[1]] : 0.32, Y[p[0]] != null ? Y[p[0]] : 0.33, 0.34, 0.32];
+  }
+  function boxEl(x, i) {
+    const b = boxFor(x);
+    const w = Math.min(b[2], 1 - b[0]), hh = Math.min(b[3], 1 - b[1]);
+    const el = h('span', { class: 'box' + (x.confirmed === false ? ' box--possible' : '') + (b[1] < 0.12 ? ' box--tag-in' : ''), style: 'left:' + (b[0] * 100).toFixed(2) + '%;top:' + (b[1] * 100).toFixed(2) + '%;width:' + (w * 100).toFixed(2) + '%;height:' + (hh * 100).toFixed(2) + '%;--i:' + i });
+    el.append(h('span', { class: 'box__tag' }, x.code));
+    return el;
+  }
+  function witnessEl(r) {
+    const mk = (name, saw) => { const s = h('span', { class: 'wit', 'data-saw': saw ? 'yes' : 'no' }); s.append(icon(saw ? 'check' : 'minus'), name + (saw ? '' : ': nothing')); return s; };
+    if (r === 'metadata') return h('span', { class: 'wit-list' }, mk('Metadata', true));
+    if (r === 'rule') return h('span', { class: 'wit-list' }, mk('Face recognition, Step 4', true));
+    return h('span', { class: 'wit-list' }, [mk('Text', r === 'text and vision' || r === 'text only'), mk('Vision', r === 'text and vision' || r === 'vision only')]);
+  }
+  const SEV_TEXT = { Red: 'Red', Amber: 'Amber', Info: 'Info, never changes the verdict' };
+  function openDetail(id) {
+    const img = IMG.get(id);
+    if (!img) return;
+    S.detail = id;
+    const r = S.results.get(id);
+    const phrase = AUD[S.aud].phrase;
+    const fr = frameEl(img, { alt: 'Specimen photo: ' + img.title });
+    if (r && !r.tagged) r.items.filter((x) => !(RISK[x.code] && RISK[x.code].meta) && x.code !== 'RUL').forEach((x, i) => fr.append(boxEl(x, i)));
+    $('#d-frame').replaceChildren(fr);
+    $('#d-file').textContent = img.file;
+    $('#d-title').textContent = img.title;
+    const v = $('#d-verdict'); v.textContent = '';
+    if (r) v.append(stampEl(r.verdict), h('span', {}, 'for ' + phrase)); else v.append(h('span', {}, 'Not checked yet'));
+    let why;
+    if (!r) why = 'Run the check to see what this photo gives away.';
+    else if (r.tagged) why = 'Marked by you earlier. Settled as Keep private, with no new readings.';
+    else if (r.verdict === 'Clear') why = 'Both readings and the metadata completed and found nothing that matters for ' + phrase + '.';
+    else if (r.verdict === 'Fix first') why = 'Share it only after the fix below.';
+    else if (r.verdict === 'Check this') why = 'One reading saw a possible leak. Look before you decide.';
+    else why = r.items.some((x) => x.code === 'RUL') ? 'Your personal rule matches this photo.' : 'A confirmed finding that matters for ' + phrase + '.';
+    $('#d-why').textContent = why;
+    const ul = $('#d-findings'); ul.textContent = '';
+    if (r && !r.tagged) {
+      if (r.taggedInfo) ul.append(h('li', { class: 'finding' }, [h('p', { class: 'finding__title' }, [h('code', { class: 'finding__code' }, 'tag'), h('span', {}, 'Keep private tag, listed as Info for Private')])]));
+      r.items.forEach((x) => {
+        const li = h('li', { class: 'finding' });
+        li.append(h('p', { class: 'finding__title' }, [h('code', { class: 'finding__code' }, x.code), h('span', {}, x.label)]));
+        const dl = h('dl');
+        const add = (k, val) => dl.append(h('dt', {}, k), h('dd', {}, val));
+        const meta = RISK[x.code] && RISK[x.code].meta;
+        add('Where', meta ? 'In the file, not in the picture' : (x.code === 'RUL' ? 'The person the rule names' : cap(x.position || 'position unknown')));
+        add('Seen by', witnessEl(x.readings));
+        add('Result', x.confirmed ? 'Confirmed' : 'Possible, one reading only');
+        add('Weight', SEV_TEXT[x.sev] + ' for ' + AUD[S.aud].name);
+        add('Fix', x.code === 'RUL' ? 'Leave the photo out.' : RISK[x.code].fix);
+        li.append(dl);
+        ul.append(li);
+      });
+      if (!r.items.length && !r.taggedInfo) ul.append(h('li', { class: 'finding' }, h('p', {}, 'Nothing found by text, vision or metadata.')));
+    }
+    const md = $('#d-meta'); md.textContent = '';
+    if (r && !r.tagged) {
+      md.append(h('dt', {}, 'GPS location'), h('dd', {}, img.exif.gps ? 'Stored in the file' : 'Not stored'));
+      md.append(h('dt', {}, 'Owner or serial'), h('dd', {}, (img.exif.owner || img.exif.serial) ? 'Fields filled' : 'Empty'));
+      md.hidden = false;
+    } else md.hidden = true;
+    const idx = S.view.findIndex((x) => x.id === id);
+    $('#d-prev').disabled = idx <= 0;
+    $('#d-next').disabled = idx < 0 || idx >= S.view.length - 1;
+    if (!dlg.open) { if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', ''); }
+  }
+  function step(d) {
+    const idx = S.view.findIndex((x) => x.id === S.detail);
+    const next = S.view[idx + d];
+    if (next) openDetail(next.id);
+  }
+  function closeDetail() { if (typeof dlg.close === 'function') dlg.close(); else { dlg.removeAttribute('open'); dlg.dispatchEvent(new Event('close')); } }
+
+  /* hero */
+  function updateHero() {
+    const img = IMG.get('B07');
+    if (!img) return;
+    const him = $('#hero-img');
+    if (him && him.getAttribute('src') !== BASE + img.file) { him.hidden = false; him.src = BASE + img.file; }
+    const x = img.findings.filter((y) => y.code === 'ADR')[0];
+    if (!x) return;
+    const b = boxFor(x), box = $('#hero-box');
+    box.style.left = (b[0] * 100).toFixed(2) + '%'; box.style.top = (b[1] * 100).toFixed(2) + '%';
+    box.style.width = (Math.min(b[2], 1 - b[0]) * 100).toFixed(2) + '%'; box.style.height = (Math.min(b[3], 1 - b[1]) * 100).toFixed(2) + '%';
+    box.classList.toggle('box--tag-in', b[1] < 0.12);
+    if (x.position) { $('#hero-pos').textContent = cap(x.position); $('#hero-fix').textContent = 'Crop the ' + x.position + ', or leave it out'; }
+  }
+
+  /* stats */
+  function renderStats() {
+    const list = (Array.isArray(STATS) ? STATS : []).filter((s) => s && typeof s.text === 'string' && s.text.trim());
+    if (!list.length) return;
+    const ul = $('#stats');
+    const wide = (4 - (list.length % 4)) % 4;
+    list.forEach((s, i) => {
+      const li = h('li', { class: 'stat' + (i < wide ? ' stat--wide' : '') });
+      if (typeof s.figure === 'string' && s.figure.trim()) li.append(h('p', { class: 'stat__figure', 'aria-hidden': 'true' }, s.figure));
+      li.append(h('p', { class: 'stat__text' }, s.text));
+      if (typeof s.source === 'string' && s.source.trim()) {
+        const src = h('p', { class: 'stat__src' });
+        if (typeof s.url === 'string' && /^https:\/\//.test(s.url)) src.append(h('a', { href: s.url, rel: 'noopener' }, s.source)); else src.append(s.source);
+        li.append(src);
+      }
+      ul.append(li);
+    });
+    $('#why').hidden = false;
+  }
+
+  /* wiring */
+  const tabs = $$('[role="tab"]');
+  function selectTab(t) {
+    tabs.forEach((x) => { const on = x === t; x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1; });
+    $('#bench').setAttribute('aria-labelledby', t.id);
+    const key = t.getAttribute('data-set');
+    if (S.set !== key) { S.set = key; renderIdle(); }
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => selectTab(t));
+    t.addEventListener('keydown', (e) => {
+      let j = null;
+      if (e.key === 'ArrowRight') j = (i + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft') j = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === 'Home') j = 0;
+      else if (e.key === 'End') j = tabs.length - 1;
+      if (j != null) { e.preventDefault(); tabs[j].focus(); selectTab(tabs[j]); }
+    });
+  });
+  function rejudge(why) {
+    if (S.phase !== 'checked') return;
+    S.token += 1;
+    applyVerdicts();
+    setStatus('s7', 'completed', countsSentence() + ' ' + why);
+    clearWrites();
+    $('#summary').textContent = summaryBase(S.view.length) + '.';
+    renderCounts(); renderSheetLine(); renderPlan();
+    say(summaryBase(S.view.length) + ': ' + countsSentence());
+  }
+  $$('input[name="aud"]').forEach((r) => r.addEventListener('change', () => {
+    if (!r.checked) return;
+    S.aud = r.value;
+    if (S.phase === 'checked') {
+      if (S.tagged.size) { run(); return; }
+      rejudge('Re-applied for ' + AUD[S.aud].name + ', same readings.');
+    }
+  }));
+  $('#rule').addEventListener('change', (e) => {
+    S.rule = e.target.checked;
+    if (S.phase === 'checked') run();
+  });
+  $('#run').addEventListener('click', run);
+  $('#approve').addEventListener('click', approve);
+  $('#decline').addEventListener('click', decline);
+  $('#grid').addEventListener('click', (e) => { const t = e.target.closest('.tile'); if (t) openDetail(t.getAttribute('data-id')); });
+  $('#d-close').addEventListener('click', closeDetail);
+  $('#d-prev').addEventListener('click', () => step(-1));
+  $('#d-next').addEventListener('click', () => step(1));
+  dlg.addEventListener('click', (e) => { if (e.target === dlg) closeDetail(); });
+  dlg.addEventListener('close', () => { const t = S.detail && tileFor(S.detail); if (t) t.focus(); });
+
+  const readout = $('#readout');
+  $$('.toggle button', readout).forEach((b) => b.addEventListener('click', () => {
+    const v = b.getAttribute('data-view');
+    readout.setAttribute('data-view', v);
+    $$('.toggle button', readout).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    ['#hero-rx', '#hero-box'].forEach((s) => { const el = $(s); if (v === 'see') el.setAttribute('aria-hidden', 'true'); else el.removeAttribute('aria-hidden'); });
+  }));
+
+  renderStats();
+  renderIdle();
+
+  fetch('assets/specimens/manifest.json', { cache: 'no-cache' })
+    .then((r) => (r.ok ? r.json() : null))
+    .then((m) => {
+      if (!m || !Array.isArray(m.images)) return;
+      let changed = 0;
+      m.images.forEach((raw) => {
+        if (!raw || typeof raw.id !== 'string') return;
+        const id = raw.id.trim();
+        if (!/^[BH]\d{2}$/.test(id)) return;
+        IMG.set(id, normalize(raw, FB.get(id)));
+        changed += 1;
+      });
+      if (!changed) return;
+      updateHero();
+      if (S.phase === 'idle') renderIdle();
+    })
+    .catch(() => {});
+})();
+</script>
+</body>
+</html>

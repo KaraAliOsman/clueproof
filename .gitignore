@@ -1,0 +1,10 @@
+node_modules/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+# local copy of the official kit (download it from the Starter Kit; not redistributed)
+uliya-skill-kit/
+# design-tool working state
+.hallmark/
+.claude/
