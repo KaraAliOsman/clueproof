@@ -1,88 +1,107 @@
 1
-00:00:00,050 --> 00:00:02,480
+00:00:00,850 --> 00:00:02,470
 This is a photo.
 
 2
-00:00:05,050 --> 00:00:11,480
-These are twelve. Shared with people
-you know... and people you don't.
+00:00:05,570 --> 00:00:07,010
+These are twelve.
 
 3
-00:00:13,050 --> 00:00:16,480
-To a stranger, every photo is a clue.
+00:00:08,120 --> 00:00:11,710
+Shared with people you know...
+and people you don't.
 
 4
-00:00:20,050 --> 00:00:25,480
-A house number. A school crest.
-A boarding pass.
+00:00:13,410 --> 00:00:16,510
+To a stranger, every photo is a clue.
 
 5
-00:00:27,050 --> 00:00:33,980
+00:00:20,600 --> 00:00:21,930
+A house number.
+
+6
+00:00:22,930 --> 00:00:24,290
+A school crest.
+
+7
+00:00:25,270 --> 00:00:26,680
+A boarding pass.
+
+8
+00:00:27,050 --> 00:00:32,620
 On their own, harmless. Together, they
 tell a story you never meant to share.
 
-6
-00:00:36,050 --> 00:00:38,480
+9
+00:00:36,300 --> 00:00:38,230
 Introducing Clueproof.
 
-7
-00:00:41,050 --> 00:00:45,980
+10
+00:00:41,400 --> 00:00:45,970
 It reads your photos the way a stranger
 would... before anyone else can.
 
-8
-00:00:48,050 --> 00:00:53,806
-And it runs entirely on your UGREEN
-AI NAS. Your photos never leave home.
+11
+00:00:48,650 --> 00:00:52,300
+And it runs entirely
+on your UGREEN AI NAS.
 
-9
-00:00:53,856 --> 00:00:55,980
+12
+00:00:52,550 --> 00:00:54,750
+Your photos never leave home.
+
+13
+00:00:55,010 --> 00:00:56,600
 Not even to be checked.
 
-10
-00:00:58,050 --> 00:01:00,980
+14
+00:00:57,990 --> 00:01:00,390
 Just ask: is this safe to post?
 
-11
-00:01:03,050 --> 00:01:09,980
+15
+00:01:02,430 --> 00:01:08,950
 Three lines. Six photos are ready to post.
 Four give clues away. Two need a fix.
 
-12
-00:01:12,050 --> 00:01:16,950
+16
+00:01:12,200 --> 00:01:17,130
 Every photo is read twice: once for text,
 once for what's in the picture.
 
-13
-00:01:17,000 --> 00:01:22,980
-It never calls a photo safe on a single
-look. And it never repeats what it found.
+17
+00:01:17,350 --> 00:01:20,530
+It never calls a photo
+safe on a single look.
 
-14
-00:01:25,050 --> 00:01:30,980
+18
+00:01:21,150 --> 00:01:23,390
+And it never repeats what it found.
+
+19
+00:01:25,990 --> 00:01:30,850
 Say yes, and your clean photos are
 ready to share. The rest are remembered.
 
-15
-00:01:33,050 --> 00:01:38,480
+20
+00:01:33,270 --> 00:01:37,690
 Then ask the bigger question.
 What could a stranger find out about us?
 
-16
-00:01:40,050 --> 00:01:45,832
+21
+00:01:40,070 --> 00:01:45,150
 Clueproof opens the Stranger's File.
 Eight pages a stranger would try to fill.
 
-17
-00:01:45,882 --> 00:01:50,480
+22
+00:01:45,300 --> 00:01:49,780
 Where you live. Your children.
 Your car. When you're away.
 
-18
-00:01:52,050 --> 00:01:55,480
+23
+00:01:52,300 --> 00:01:55,200
 And it shows you how to close every page.
 
-19
-00:01:57,050 --> 00:02:01,980
+24
+00:01:58,640 --> 00:02:01,790
 Clueproof. Share the moment.
 Not the clues.

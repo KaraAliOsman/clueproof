@@ -1,5 +1,6 @@
 // Clueproof launch film: build step.
-// Reads tools/narration.json, looks for the ElevenLabs clips in ../vo/L01.mp3 .. L16.mp3,
+// Reads tools/narration.json and the narration: either one ElevenLabs take with its cue sheet
+// (../vo/take-1.mp3 + ../vo/take-1.json, cut here phrase by phrase) or separate clips ../vo/L01.mp3 .. L16.mp3,
 // and regenerates three things so they always agree:
 //   1. the audio block in index.html (music edit, ducking under any voice clip, sound effects, voice clips)
 //   2. compositions/captions.html (kinetic captions, timed to the real clips when they exist)
@@ -7,7 +8,8 @@
 // Run from the project folder:  node tools/build.mjs
 import fs from "node:fs";
 import path from "node:path";
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
+import os from "node:os";
 import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -18,7 +20,9 @@ const data = JSON.parse(fs.readFileSync(path.join(here, "narration.json"), "utf8
 
 // Overall level of the music bed (1 = as mastered). Tuned so the music-only cut measures about -16 LUFS.
 const MUSIC_GAIN = Number(process.env.MUSIC_GAIN || 1.0);
-const DUCK = Math.pow(10, -8 / 20); // -8 dB under speech
+const DUCK_DB = Number(process.env.DUCK_DB || 10);
+const DUCK = Math.pow(10, -DUCK_DB / 20); // music under speech
+const VO_LUFS = Number(process.env.VO_LUFS || -18); // narration level before the mix (peaks limited to -1.5 dBFS)
 const VO_GAIN = Number(process.env.VO_GAIN || 1.0);
 
 function probe(file) {
@@ -47,11 +51,50 @@ for (const line of data.lines) {
     }
   }
 }
+// ---------- one take + cue sheet: cut, clean and level every phrase ----------
+// The take is cleaned once (rumble high-pass, light de-essing, gentle 2:1 compression), levelled to VO_LUFS
+// with a transparent peak limiter (-1.5 dBFS, 4x oversampled),
+// then cut on the silences listed in take-1.json, with short fades, into one clip per phrase.
+const takeJson = path.join(voSrcDir, "take-1.json");
+const cues = [];
+if (fs.existsSync(takeJson)) {
+  const sheet = JSON.parse(fs.readFileSync(takeJson, "utf8"));
+  const take = path.join(voSrcDir, sheet.take);
+  for (const f of fs.readdirSync(voDstDir)) if (/^L\d\d-\d+\.wav$/i.test(f)) fs.unlinkSync(path.join(voDstDir, f));
+  const clean = "highpass=f=70:poles=2,deesser=i=0.12:m=0.5:f=0.5,acompressor=threshold=-22dB:ratio=2:attack=8:release=120:knee=4";
+  const tmp = path.join(os.tmpdir(), "clueproof-take-clean.wav");
+  execFileSync("ffmpeg", ["-y", "-hide_banner", "-loglevel", "error", "-i", take, "-ac", "1", "-ar", "48000", "-af", clean, "-c:a", "pcm_f32le", tmp]);
+  const ebur = loudness(tmp);
+  const gain = VO_LUFS - ebur;
+  const lev = path.join(os.tmpdir(), "clueproof-take-level.wav");
+  execFileSync("ffmpeg", ["-y", "-hide_banner", "-loglevel", "error", "-i", tmp, "-af", `aresample=192000,volume=${gain.toFixed(2)}dB,alimiter=limit=0.84:attack=2:release=40:level=false,aresample=48000`, "-c:a", "pcm_f32le", lev]);
+  for (const c of sheet.cues) {
+    const dst = path.join(voDstDir, `${c.id}.wav`);
+    const len = c.src[1] - c.src[0];
+    const af = `afade=t=in:d=0.012,afade=t=out:st=${(len - 0.04).toFixed(3)}:d=0.04`;
+    execFileSync("ffmpeg", ["-y", "-hide_banner", "-loglevel", "error", "-ss", String(c.src[0]), "-t", len.toFixed(3), "-i", lev, "-af", af, "-c:a", "pcm_s16le", dst]);
+    cues.push({ ...c, file: `assets/vo/${c.id}.wav`, dur: probe(dst) ?? len });
+  }
+  console.log(`take ${sheet.take}: ${ebur.toFixed(1)} LUFS cleaned, ${gain >= 0 ? "+" : ""}${gain.toFixed(1)} dB, limited: ${loudness(lev).toFixed(1)} LUFS, ${cues.length} phrases cut`);
+  fs.unlinkSync(tmp);
+  fs.unlinkSync(lev);
+  for (const k of Object.keys(vo)) delete vo[k]; // the take wins over separate clips
+  for (const c of cues) (vo[c.line] ??= { cues: [] }).cues.push(c);
+}
+// integrated loudness (LUFS) measured with ffmpeg ebur128
+function loudness(file) {
+  const r = spawnSync("ffmpeg", ["-hide_banner", "-nostats", "-i", file, "-af", "ebur128", "-f", "null", "-"], { encoding: "utf8" });
+  const m = [...r.stderr.matchAll(/I:\s+(-?[\d.]+) LUFS/g)].at(-1);
+  if (!m) throw new Error("could not measure loudness of " + file);
+  return Number(m[1]);
+}
 const voCount = Object.keys(vo).length;
 
 // ---------- word timing model ----------
 const LEAD = 0.1, TAIL = 0.12, BREAK = 0.42, ELLIPSIS = 0.35, STOP = 0.22, COMMA = 0.1;
 function timeLine(line) {
+  // measured words from the take: one caption break at the end of every phrase
+  if (vo[line.id]?.cues) return vo[line.id].cues.flatMap((c) => c.words.map(([text, start, end], j) => ({ text, start, end, brk: j === c.words.length - 1 ? "hard" : undefined })));
   const dur = vo[line.id]?.dur ?? line.target;
   const raw = line.text.split(/\s+/).filter(Boolean);
   const items = [];
@@ -108,7 +151,7 @@ for (const line of data.lines) {
   };
   for (const g of groups) {
     const len = cue.flat().map((w) => w.text).join(" ").length + g.map((w) => w.text).join(" ").length;
-    if (cue.length && len > 80) flush();
+    if (cue.length && (len > 80 || g[0].start - cue.at(-1).at(-1).end > 0.8)) flush();
     cue.push(g);
   }
   flush();
@@ -214,15 +257,28 @@ const lerp = (pts, t) => {
   for (let i = 1; i < pts.length; i++) if (t <= pts[i][0]) { const [t0, v0] = pts[i - 1], [t1, v1] = pts[i]; return v0 + ((v1 - v0) * (t - t0)) / (t1 - t0); }
   return pts.at(-1)[1];
 };
-const duckWins = data.lines.filter((l) => vo[l.id]).map((l) => [l.start - 0.12, l.start + vo[l.id].dur + 0.25]);
+const duckWins = [];
+for (const l of data.lines) {
+  const v = vo[l.id];
+  if (!v) continue;
+  // a cue may ask for a deeper duck ("duck": dB) where the music is busy under short words
+  if (v.cues) for (const c of v.cues) duckWins.push([c.at - 0.06, c.at + c.dur + 0.2, Math.pow(10, -(c.duck ?? DUCK_DB) / 20)]);
+  else duckWins.push([l.start - 0.12, l.start + v.dur + 0.25, DUCK]);
+}
+// one duck across phrases less than 0.9 s apart, so the music does not bob up between them
+duckWins.sort((a, b) => a[0] - b[0]);
+for (let i = 0; i < duckWins.length - 1; ) {
+  if (duckWins[i + 1][0] - duckWins[i][1] < 0.9) { duckWins[i][1] = Math.max(duckWins[i][1], duckWins[i + 1][1]); duckWins[i][2] = Math.min(duckWins[i][2], duckWins[i + 1][2]); duckWins.splice(i + 1, 1); }
+  else i++;
+}
 const duckAt = (t) => {
   let g = 1;
-  for (const [a, b] of duckWins) {
+  for (const [a, b, D] of duckWins) {
     const r = 0.15;
     let k = 1;
-    if (t >= a && t <= b) k = DUCK;
-    else if (t > a - r && t < a) k = 1 - ((1 - DUCK) * (t - (a - r))) / r;
-    else if (t > b && t < b + r) k = DUCK + ((1 - DUCK) * (t - b)) / r;
+    if (t >= a && t <= b) k = D;
+    else if (t > a - r && t < a) k = 1 - ((1 - D) * (t - (a - r))) / r;
+    else if (t > b && t < b + r) k = D + ((1 - D) * (t - b)) / r;
     g = Math.min(g, k);
   }
   return g;
@@ -255,19 +311,24 @@ const sfx = [
   ["sfx-type2", "typing", 58.85, 0.42],
   ["sfx-send1", "click-soft", 60.4, 0.7],
   ["sfx-yes", "click", 86.6, 0.75],
-  ["sfx-stamp", "impact-bass-2", 88.7, 0.14],
+  ["sfx-stamp", "impact-bass-2", 89.25, 0.14],
   ["sfx-type3", "typing", 93.85, 0.42],
   ["sfx-type4", "typing", 95.0, 0.36],
   ["sfx-send2", "click-soft", 96.25, 0.7],
 ];
 const lines = [];
-lines.push(`<!-- AUDIO:BEGIN (generated by tools/build.mjs: ${voCount} voice clip${voCount === 1 ? "" : "s"} found${voCount ? ", music ducked 8 dB under speech" : ", music-only cut"}) -->`);
+lines.push(`<!-- AUDIO:BEGIN (generated by tools/build.mjs: ${voCount} voice clip${voCount === 1 ? "" : "s"} found${voCount ? `, music ducked ${DUCK_DB} dB under speech` : ", music-only cut"}) -->`);
 lines.push(`      <audio id="music-a" class="clip" data-timeline-role="music" src="audio/impact-allegretto.mp3" data-start="4" data-media-start="2" data-duration="16.03" data-track-index="20" data-volume="1" data-automation="${m1}"></audio>`);
 lines.push(`      <audio id="music-b" class="clip" src="audio/impact-allegretto.mp3" data-start="19.99" data-media-start="25.99" data-duration="84.61" data-track-index="21" data-volume="1" data-automation="${m2}"></audio>`);
 lines.push(`      <audio id="music-c" class="clip" src="audio/impact-allegretto.mp3" data-start="104" data-media-start="154" data-duration="27" data-track-index="22" data-volume="1" data-automation="${m3}"></audio>`);
 let ti = 30;
 for (const [id, file, t, v] of sfx) lines.push(`      <audio id="${id}" class="clip" src="assets/sfx/${file}.mp3" data-start="${t}" data-track-index="${ti++}" data-volume="${v}"></audio>`);
-for (const l of data.lines) if (vo[l.id]) lines.push(`      <audio id="vo-${l.id}" class="clip" src="${vo[l.id].file}" data-start="${l.start}" data-duration="${r3(vo[l.id].dur)}" data-track-index="10" data-volume="${VO_GAIN}"></audio>`);
+for (const l of data.lines) {
+  const v = vo[l.id];
+  if (!v) continue;
+  if (v.cues) for (const c of v.cues) lines.push(`      <audio id="vo-${c.id}" class="clip" src="${c.file}" data-start="${r3(c.at)}" data-duration="${r3(c.dur)}" data-track-index="10" data-volume="${VO_GAIN}"></audio>`);
+  else lines.push(`      <audio id="vo-${l.id}" class="clip" src="${v.file}" data-start="${l.start}" data-duration="${r3(v.dur)}" data-track-index="10" data-volume="${VO_GAIN}"></audio>`);
+}
 // NAS screen recordings for the two slots (script.md L9 and L13): ../nas/slot-a.mp4 and ../nas/slot-b.mp4
 const SLOTS = [
   { id: "slot-a", start: 58.0, dur: 5.0, from: Number(process.env.SLOT_A_FROM || 0) },
@@ -290,4 +351,9 @@ fs.writeFileSync(indexPath, index);
 
 console.log(`voice clips: ${voCount}/16${voCount ? " (" + Object.keys(vo).join(", ") + ")" : ""}`);
 console.log(`caption groups: ${allGroups.length}, srt cues: ${srt.length}`);
-for (const l of data.lines) if (vo[l.id] && vo[l.id].dur > l.end - l.start) console.log(`WARNING ${l.id} is ${vo[l.id].dur.toFixed(2)} s, longer than its ${l.end - l.start} s beat`);
+for (const l of data.lines) {
+  const v = vo[l.id];
+  if (v?.cues) { const c = v.cues.at(-1); if (c.at + c.dur > l.end + 0.3) console.log(`WARNING ${c.id} ends at ${(c.at + c.dur).toFixed(2)} s, after its ${l.end} s beat`); }
+  else if (v && v.dur > l.end - l.start) console.log(`WARNING ${l.id} is ${v.dur.toFixed(2)} s, longer than its ${l.end - l.start} s beat`);
+}
+console.log(`voice phrases: ${cues.length}, music ducked ${DUCK_DB} dB in ${duckWins.length} windows`);

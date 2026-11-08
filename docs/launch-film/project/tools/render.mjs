@@ -2,7 +2,7 @@
 //   node tools/render.mjs
 // 1. tools/build.mjs (voice clips from ../vo, music ducking, captions, ../clueproof-launch.srt)
 // 2. HyperFrames render (1920 x 1080, 30 fps, H.264 + AAC)
-// 3. loudness: measured with ffmpeg, then one gain to -16 LUFS integrated and a peak limiter at -1.7 dBFS
+// 3. loudness: measured with ffmpeg, then one gain to -16 LUFS integrated and a peak limiter at -2.6 dBFS (about -2.5 dBTP after AAC)
 // 4. ../poster.jpg (1280 x 720) from the reveal frame
 import { execFileSync, spawnSync } from "node:child_process";
 import fs from "node:fs";
@@ -30,7 +30,7 @@ const m = spawnSync("ffmpeg", ["-hide_banner", "-i", raw, "-af", "loudnorm=I=-16
 const j = JSON.parse(m.stderr.slice(m.stderr.lastIndexOf("{"), m.stderr.lastIndexOf("}") + 1));
 const gain = -16 - Number(j.input_i);
 console.log(`measured ${j.input_i} LUFS, true peak ${j.input_tp} dBTP: applying ${gain.toFixed(2)} dB`);
-const af = `aresample=192000,volume=${gain.toFixed(2)}dB,alimiter=limit=0.82:attack=4:release=60:level=false,aresample=48000`;
+const af = `aresample=192000,volume=${gain.toFixed(2)}dB,alimiter=limit=0.74:attack=3:release=60:level=false,aresample=48000`;
 run("ffmpeg", ["-y", "-hide_banner", "-loglevel", "error", "-i", raw, "-c:v", "copy", "-af", af, "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", final]);
 run("ffmpeg", ["-y", "-hide_banner", "-loglevel", "error", "-ss", POSTER_AT, "-i", final, "-frames:v", "1", "-vf", "scale=1280:720:flags=lanczos", "-q:v", "2", poster]);
 

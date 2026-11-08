@@ -55,4 +55,4 @@ For L03 with v3, you may prefix `[quietly]`. For L16, read the last two sentence
 - Each clip is within half a second of its target length; if a clip runs long, raise Speed to 1.0 rather than cutting words.
 - "UGREEN" is pronounced "you-green", and "Clueproof" as "clue-proof" with stress on "clue". If the model stumbles, write "you green" or "Clue-proof" in the text.
 - No background noise, no music in the clips; the film adds the music bed.
-- Put all 16 files in `docs/launch-film/vo/` and the film can be re-rendered with the narration mixed under the music, ducked by 8 dB during speech.
+- Put all 16 files in `docs/launch-film/vo/` and the film can be re-rendered with the narration mixed over the music, ducked by 10 dB during speech. A single take of all the lines also works: the film now uses one (`vo/take-1.mp3`, cut phrase by phrase; see `README.md`).
