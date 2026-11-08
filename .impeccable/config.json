@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "docs/index.html"
+        ],
+        "createdAt": "2026-11-08T03:33:56.595Z",
+        "reason": "Claude triage: flagged elements are hairline-ruled lists (.readings/.rows/.files li have 8-24px padding-block) and full-bleed section bands whose content sits in a padded container; verified in browser screenshots"
+      }
+    ]
+  }
+}
