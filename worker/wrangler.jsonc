@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "clueproof-live",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "observability": { "enabled": true },
+  // Cached readings, one per demo photo
+  "kv_namespaces": [
+    { "binding": "READINGS", "id": "544eafb0b1574bc6bd62a4584c9cf0a2" }
+  ]
+  // The Anthropic key is a secret, never in this file:
+  //   npx wrangler secret put ANTHROPIC_API_KEY
+}

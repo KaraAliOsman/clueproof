@@ -258,6 +258,16 @@ h3{font-size:1.375rem;line-height:1.15;font-weight:720;font-stretch:88%;letter-s
 .facts dd{margin:0;font-size:.9375rem;line-height:1.4}
 .facts .vbig{font:800 1.375rem/1 var(--f-sans);font-stretch:80%}
 .facts .vbig[data-v="Keep private"]{color:var(--accent-text)}
+.live{grid-column:1/-1;border-top:1px solid var(--line-soft);padding-top:14px;display:grid;gap:10px}
+.live-head{display:flex;align-items:center;gap:8px;margin:0;color:var(--ink-2)}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
+.live[data-state="reading"] .live-dot{animation:livePulse 1.1s ease-in-out infinite}
+@keyframes livePulse{50%{opacity:.25}}
+@media (prefers-reduced-motion: reduce){ .live[data-state="reading"] .live-dot{animation:none} }
+.live-body{margin:0;color:var(--ink-2);font-size:.9375rem}
+.live .facts .vsm{font-weight:700}
+.live .facts .vsm[data-v="Keep private"]{color:var(--accent-text)}
+.live-cmp{margin:0;color:var(--ink-3)}
 .console{display:flex;flex-direction:column;position:sticky;top:84px;max-height:calc(100vh - 104px);min-height:520px}
 .console-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px 12px 18px;border-bottom:1px solid var(--line-soft);flex-wrap:wrap}
 .console-head .mono{color:var(--ink-3)}
@@ -894,6 +904,7 @@ h3{font-size:1.375rem;line-height:1.15;font-weight:720;font-stretch:88%;letter-s
         Clueproof
       </a>
       <p>Not an official UGREEN product. Built for the UGREEN Hackathon 2026 on AI NAS.</p>
+      <p>The live reading on this page uses Claude Haiku 5.5 on the 20 public demo photos. On the NAS, Clueproof uses the NAS's own AI and your photos stay at home.</p>
     </div>
     <nav aria-label="Project links">
       <a href="https://github.com/KaraAliOsman/clueproof/raw/main/dist/clueproof.zip">Download the Skill</a>
@@ -951,6 +962,76 @@ const SEV = { // [public, private]
   TKT:['Red','Amber'], MAL:['Red','Info'], SCR:['Red','Amber'], COD:['Red','Red'], KEY:['Amber','Info'],
   SCH:['Red','Info'], MED:['Red','Amber'], FAC:['Amber','Info'], MET:['Info','Info']
 };
+/* Live reading: Claude Haiku 5.5 reads the selected photo through a Cloudflare Worker.
+   The API key lives only in the Worker; this page sends nothing but a demo photo ID. */
+const LIVE_URL = 'https://clueproof-live.aliosmankara111.workers.dev/reading?id=';
+const LIVE_LABEL = {ADR:'House number or address', MAL:'Mail or package label', SCH:'School crest or name label', PLT:'License plate',
+  TKT:'Ticket or boarding pass', IDD:'Identity document', PAY:'Payment card', SCR:'Open screen', COD:'Written code or password',
+  KEY:'Keys', MED:'Prescription label', FAC:'Bystander faces'};
+const RANK = ['Clear', 'Fix first', 'Check this', 'Keep private'];
+const LIVE = {};
+function liveFetch(id){
+  if (!LIVE[id]){
+    const ctl = new AbortController();
+    const t = setTimeout(() => ctl.abort(), 45000);
+    LIVE[id] = fetch(LIVE_URL + encodeURIComponent(id), {signal:ctl.signal})
+      .then(r => r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)))
+      .then(j => { if (!j || !Array.isArray(j.clues)) throw new Error('shape'); return j; })
+      .catch(e => { delete LIVE[id]; throw e; })
+      .finally(() => clearTimeout(t));
+  }
+  return LIVE[id];
+}
+function liveClues(j){
+  const seen = new Set(), out = [];
+  for (const c of j.clues){
+    const code = String(c && c.code);
+    if (!LIVE_LABEL[code] || seen.has(code)) continue;
+    seen.add(code);
+    out.push({code, position:String(c.position || 'position unknown'), sure:c.sure !== false});
+  }
+  return out;
+}
+// Same order as references/verdict-rules.md: confirmed Red, then anything unsure, then confirmed Amber
+function liveVerdict(id, clues, aud){
+  const ai = aud === 'public' ? 0 : 1;
+  let v = 0;
+  const bump = (sev, sure) => { const r = sev === 'Red' ? (sure ? 3 : 2) : sev === 'Amber' ? (sure ? 1 : 2) : 0; if (r > v) v = r; };
+  for (const c of clues) bump(SEV[c.code][ai], c.sure);
+  for (const f of IMGS[id].findings) if (f.readings === 'metadata' && SEV[f.code]) bump(SEV[f.code][ai], true);
+  return RANK[v];
+}
+function liveInto(card, id){
+  const aud = C.aud;
+  const head = h('p', {class:'live-head mono'}, h('span', {class:'live-dot', 'aria-hidden':'true'}), 'LIVE READING · CLAUDE HAIKU 5.5');
+  const box = h('div', {class:'live', 'data-state':'reading', 'aria-live':'polite'}, head, h('p', {class:'live-body'}, 'Reading this photo now…'));
+  card.append(box);
+  liveFetch(id).then(j => {
+    if (!box.isConnected) return;
+    const clues = liveClues(j);
+    const v = liveVerdict(id, clues, aud);
+    const exp = IMGS[id].verdict[aud];
+    const found = clues.length
+      ? clues.map(c => `${LIVE_LABEL[c.code]} (${c.code}), ${c.position}${c.sure ? '' : ', unsure'}`).join(' · ')
+      : 'No visible clue.';
+    const missed = IMGS[id].findings.filter(f => f.readings !== 'metadata' && !clues.some(c => c.code === f.code)).map(f => f.code);
+    const cmp = v === exp ? 'Same verdict as the expected result.'
+      : missed.some(c => c === 'PLT' || c === 'FAC')
+        ? `Expected: ${exp}. This demo file has the plate or faces pixelated, so the live reading sees less than the original photo.`
+        : `Expected: ${exp}. Live readings can differ; when unsure, Clueproof says Check this.`;
+    box.dataset.state = 'done';
+    box.replaceChildren(head,
+      h('dl', {class:'facts'},
+        h('dt', null, 'FOUND'), h('dd', null, found),
+        h('dt', null, aud === 'public' ? 'PUBLIC' : 'FAMILY'), h('dd', null, h('span', {class:'vsm', 'data-v':v}, v)),
+        h('dt', null, 'NOTE'), h('dd', null, String(j.note || '').slice(0, 300))),
+      h('p', {class:'live-cmp mono'}, cmp));
+  }).catch(() => {
+    if (!box.isConnected) return;
+    box.dataset.state = 'off';
+    box.replaceChildren(head, h('p', {class:'live-body'}, 'Live reading unavailable right now. The result above is the expected one.'));
+  });
+}
 const PAGE_OF = {ADR:1, MAL:1, SCH:2, PLT:3, LOC:4, TKT:4, IDD:5, PAY:5, KEY:6, COD:6, SCR:6, MED:7, FAC:8};
 const PAGES = [
   {t:'Where you live', learn:'The street or the door of your home', codes:'ADR house number or address · MAL mail or package label'},
@@ -1332,6 +1413,7 @@ function showExhibit(id, user){
       h('dt', null, 'FIX'), h('dd', null, 'Nothing to fix.'));
   }
   card.replaceChildren(h('span', {class:'frame'}, printEl(id, {stranger:true, eager:true})), facts);
+  liveInto(card, id);
   if (user) enter(card);
 }
 function logLine(list, node, cls){
